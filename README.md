@@ -25,6 +25,8 @@ Metai iš metų studentai maldavo jog galėtų dirbti su Windows'ais akademijos 
 
 ### Reikės dokerio
 
+[:video_camera: Diegimo pavyzdys](https://youtu.be/75b876HcTl8) 
+
 Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware.
  Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
  Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
@@ -37,11 +39,14 @@ Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitemat
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai
+
 * docker: `18.x-ce`
 * docker-compose: `1.23.2`
 
 
 ### Projekto paleidimas
+
+[:video_camera: Paleidimo pavyzdys](https://youtu.be/oaj0y_juMuo) 
 
 Pasileidžiant pirmą kartą būdavo įveliama daug klaidų, todėl padaryti _script'ai_ dažniausiems atvejams.
 
@@ -64,6 +69,8 @@ scripts/stop.sh
 ```
 
 ### Patogiai darbo aplinkai
+
+[:video_camera: Komandinės eilutės naudojimo pavyzdys](https://youtu.be/s4y5LOipr4U) 
 
 * _Development_ režimas (detalesnė informacija apie klaidas, automatiškai generuojami JavaScript/CSS):
 ```bash

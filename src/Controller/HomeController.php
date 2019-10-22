@@ -10,8 +10,8 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index()
-    {
+    public function index() {
+        // Something that violates Code style
         return $this->render('home/index.html.twig', [
             'someVariable' => 'NFQ Akademija',
         ]);

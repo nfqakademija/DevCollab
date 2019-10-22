@@ -8,27 +8,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-###> Infrastructure ###
-!/.docker/.gitkeep
-/.docker/*
-###< Infrastructure ###
-
-###> Local development environment settings files ###
-npm-debug.log
-.DS_Store
-Thumbs.db
+###> Temporary during migration ###
+OLD
 .idea/
-*~
-###< Infrastructure ###
-
-###> squizlabs/php_codesniffer ###
-/.phpcs-cache
-/phpcs.xml
-###< squizlabs/php_codesniffer ###
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
+###> Temporary during migration ###

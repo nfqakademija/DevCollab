@@ -8,6 +8,19 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+###> Infrastructure ###
+!/.docker/.gitkeep
+/.docker/*
+###< Infrastructure ###
+
+###> Local development environment settings files ###
+npm-debug.log
+.DS_Store
+Thumbs.db
+.idea/
+*~
+###< Infrastructure ###
+
 ###> Temporary during migration ###
 OLD
 .idea/

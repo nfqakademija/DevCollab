@@ -1,6 +1,8 @@
 name: Check PHP code style using phpcs
 
-on: [push]
+on:
+  - push
+  - pull_request
 
 jobs:
   build:

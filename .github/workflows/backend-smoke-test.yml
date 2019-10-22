@@ -19,7 +19,7 @@ jobs:
         run: composer --version
 
       - name: Install PHP dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --no-dev
+        run: APP_ENV=prod composer install --prefer-dist --no-progress --no-suggest --no-dev
 
       - name: Check code style (config from phpcs.xml.dist)
         run: bin/console -V

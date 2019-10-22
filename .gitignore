@@ -21,10 +21,6 @@ Thumbs.db
 *~
 ###< Infrastructure ###
 
-###> Temporary during migration ###
-OLD
-.idea/
-###> Temporary during migration ###
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/

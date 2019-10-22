@@ -1,0 +1,17 @@
+name: Check PHP code style using phpcs
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Check code style (config from phpcs.xml.dist)
+        run: vendor/bin/phpcs

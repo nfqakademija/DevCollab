@@ -10,10 +10,13 @@
 
     <rule ref="PSR2"/>
 
-    <file>bin/</file>
-    <file>config/</file>
-    <file>public/</file>
-    <file>src/</file>
-    <file>tests/</file>
+    <file>src</file> <!-- Your code is stored here -->
+    <file>public</file> <!-- Some of your code may be stored here -->
+    <file>config</file> <!-- Configuration files in PHP -->
 
+    <exclude-pattern>public/build/*</exclude-pattern> <!-- Exclude generated files -->
+
+    <exclude-pattern>public/index.php</exclude-pattern> <!-- Kernel provided by Symfony framework -->
+    <exclude-pattern>config/bootstrap.php</exclude-pattern> <!-- Bootstrap provided by Symfony framework -->
+    <exclude-pattern>src/Migrations/*.php</exclude-pattern> <!-- Generated files -->
 </ruleset>

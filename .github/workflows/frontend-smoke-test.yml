@@ -1,4 +1,4 @@
-name: Minimal check for Symfony Encore installation (Frontend/Node.js part)
+name: "Frontend/JavaScript smoke test: Minimal checks for Symfony Encore and assets building"
 
 on:
   - push

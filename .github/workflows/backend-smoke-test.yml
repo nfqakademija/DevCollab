@@ -1,4 +1,4 @@
-name: Minimal check for Symfony installation (Backend/PHP part)
+name: "Backend/PHP smoke test: Minimal checks for Symfony framework"
 
 on:
   - push
@@ -21,5 +21,5 @@ jobs:
       - name: Install PHP dependencies
         run: APP_ENV=prod composer install --prefer-dist --no-progress --no-suggest --no-dev
 
-      - name: Check code style (config from phpcs.xml.dist)
+      - name: Check symfony version
         run: APP_ENV=prod bin/console -V

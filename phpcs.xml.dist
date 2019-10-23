@@ -8,7 +8,7 @@
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR2"/> <!-- Despite PSR2 is depracted in favor of PSR12: Symfony had too much code to rewrite, so is still based on PSR2 -->
 
     <file>src</file> <!-- Your code is stored here -->
     <file>public</file> <!-- Some of your code may be stored here -->

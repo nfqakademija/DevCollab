@@ -35,7 +35,7 @@ Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/inst
 
 Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
-Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
+Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitematic/releases). Patartina naudoti [v0.17.7](https://github.com/docker/kitematic/releases/tag/v0.17.7), nes tai paskutinė stabili versija, palaikoma Ubuntu.
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai

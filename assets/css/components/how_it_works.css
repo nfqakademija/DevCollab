@@ -1,0 +1,45 @@
+
+/* HOW IT WORKS SECTION ON LANDING PAGE */
+
+.hiw-image-bg {
+    height: 250px;
+    background: linear-gradient(180deg, #5F7EFF 0%, rgba(95, 126, 255, 0) 100%);
+
+}
+
+.hiw-rounded-r {
+    border-radius: 0px 150px 150px 0px;
+}
+
+.hiw-rounded-l {
+    border-radius: 150px 0px 0px 150px;
+}
+
+
+/* sm */
+@media (min-width: 640px) {
+    .hiw-image-bg {
+        height: 350px;
+    }
+}
+
+/* md */
+@media (min-width: 768px) {
+    .hiw-image-bg {
+        height: 400px;
+    }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+    .hiw-image-bg {
+        height: 300px;
+    }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+    .hiw-image-bg {
+        height: 450px;
+    }
+}

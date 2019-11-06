@@ -10,6 +10,8 @@ module.exports = {
             xl: '1280px',
         },
         colors: {
+            csblue: "red",
+
             transparent: 'transparent',
 
             black: '#000',

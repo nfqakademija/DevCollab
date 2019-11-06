@@ -1,0 +1,20 @@
+:root {
+    /* COLORS
+    *******************/
+    
+    /* main */
+    --green: #37CFB1;
+    --coral: #FFB0B0;
+    --blue: #4259ED;
+    --dark-blue: #061387;
+
+    /* secondary - prefix sc*/
+    --sc-white: #F6F9FF;
+    --sc-gray-100: #DFE6F4;
+    --sc-gray-200: #A2AFCD;
+    --sc-gray-300: #6F7F9F;
+    --sc-blue-100: #4D5786;
+    --sc-blue-200: #2D3766;
+    --sc-blue-300: #2D3766;
+
+}

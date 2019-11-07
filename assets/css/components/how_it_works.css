@@ -1,0 +1,243 @@
+.hiw-image-bg {
+    height: 250px;
+    background: linear-gradient(180deg, #5F7EFF 0%, rgba(95, 126, 255, 0) 100%);
+    border: 0px 250px 0 0;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.bubble-green {
+    background: #37CFB1;
+}
+
+.bubble-blue {
+    background: rgba(17, 87, 226, 0.384);
+}
+
+.bubble-yellow {
+    background: rgba(254, 206, 47, 0.616);
+}
+
+.bubble-green-1{
+    width: 36px;
+    height: 36px;
+    left: 20%;
+    top: -18px;
+}
+
+.bubble-green-2 {
+    width: 36px;
+    height: 36px;
+    left: 60%;
+    top: 15%;
+}
+
+.bubble-green-3 {
+    width: 36px;
+    height: 36px;
+    left: 50%;
+    top: 80%;
+}
+
+.bubble-green-4 {
+    width: 20px;
+    height: 20px;
+    left: 5%;
+    top: 64%;
+}
+
+.bubble-green-5 {
+    width: 70px;
+    height: 70px;
+    left: 25%;
+    top: 37%;
+}
+
+.bubble-green-6 {
+    width: 36px;
+    height: 36px;
+    left: 20%;
+    top: -18px;
+}
+
+.bubble-green-7 {
+    width: 100px;
+    height: 100px;
+    left: 75%;
+    top: 60%;
+}
+
+.bubble-green-8 {
+    width: 16px;
+    height: 16px;
+    left: 58%;
+    top: 10%;
+}
+
+.bubble-green-8 {
+    width: 16px;
+    height: 16px;
+    left: 80%;
+    top: 4%;
+}
+
+.bubble-blue-1 {
+    width: 25px;
+    height: 25px;
+    left: 20%;
+    top: 30%;
+}
+
+.bubble-blue-2 {
+    width: 15px;
+    height: 15px;
+    left: 47%;
+    top: 28%;
+}
+
+.bubble-blue-3 {
+    width: 18px;
+    height: 18px;
+    left: 48%;
+    top: 20%;
+}
+
+.bubble-blue-4 {
+    width: 25px;
+    height: 25px;
+    left: 50%;
+    top: 75%;
+}
+
+.bubble-blue-5 {
+    width: 25px;
+    height: 25px;
+    left: 28%;
+    top: 32%;
+}
+
+.bubble-blue-6 {
+    width: 64px;
+    height: 64px;
+    left: 40%;
+    top: 12%;
+}
+
+.bubble-blue-7 {
+    width: 25px;
+    height: 25px;
+    left: 18%;
+    top: -8px;
+}
+
+.bubble-blue-8 {
+    width: 100px;
+    height: 100px;
+    left: 79%;
+    top: 10%;
+}
+
+.bubble-blue-9 {
+    width: 36px;
+    height: 36px;
+    left: 24%;
+    top: 15%;
+}
+
+.bubble-yellow-1 {
+    width: 20px;
+    height: 20px;
+    left: 40%;
+    top: 68%;
+}
+
+.bubble-yellow-2 {
+    width: 26px;
+    height: 26px;
+    left: 80%;
+    top: 96%;
+}
+
+.bubble-yellow-3 {
+    width: 100px;
+    height: 100px;
+    left: 18%;
+    top: 18%;
+}
+
+.bubble-yellow-4 {
+    width: 10px;
+    height: 10px;
+    left: 19%;
+    top: 32%;
+}
+
+.bubble-yellow-5 {
+    width: 32px;
+    height: 32px;
+    left: 46%;
+    top: 20%;
+}
+
+.bubble-yellow-6 {
+    width: 10px;
+    height: 10px;
+    left: 87%;
+    top: 36%;
+}
+
+.bubble-yellow-7 {
+    width: 20px;
+    height: 20px;
+    left: 25%;
+    top: 25%;
+}
+
+.bubble-yellow-8 {
+    width: 10px;
+    height: 10px;
+    left: 77%;
+    top: 33%;
+}
+
+.bubble-yellow-9 {
+    width: 85px;
+    height: 85px;
+    left: 47%;
+    top: 45%;
+}
+
+@media (min-width: 640px) {
+    .hiw-image-bg {
+        height: 350px;
+    }
+
+    .hiw-rounded-r {
+        border-radius: 0px 150px 150px 0px;
+    }
+    
+    .hiw-rounded-l {
+        border-radius: 150px 0px 0px 150px;
+    }
+}
+
+@media (min-width: 768px) {
+    .hiw-image-bg {
+        height: 400px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hiw-image-bg {
+        height: 300px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .hiw-image-bg {
+        height: 450px;
+    }
+}

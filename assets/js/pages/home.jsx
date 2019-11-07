@@ -5,8 +5,6 @@ import HIW2Img from '../../img/hiw2.png';
 import HIW3Img from '../../img/hiw3.png';
 import HIW4Img from '../../img/hiw4.png';
 
-
-
 const CLASSES = {
     main: "poppins w-full",
     hero: {
@@ -14,11 +12,11 @@ const CLASSES = {
         content: "hero-content w-full lg:w-2/5 text-center lg:text-left",
         title: "text-5xl xl:text-6xl font-bold tracking-tight leading-tight mb-2 lg:mb-4",
         subtitle: "text-md lg:text-xl mb-8 md:px-16 lg:px-0",
-        btn: "inline-block text-md lg:text-lg font-semibold bg-teal-500 rounded px-4 py-2 text-white my-2 mr-2 hover:bg-teal-600 cs-shadow-green",
+        btn: "inline-block text-md lg:text-lg font-semibold bg-teal-500 rounded px-4 py-2 text-white my-2 mr-2 hover:bg-teal-600 util-shadow-green",
         img: "w-full lg:w-3/5 h-auto"
     },
     hiw: {
-        section: "w-full landing-bg-gradient pt-8 lg:pt-16 pb-8 relative",
+        section: "w-full util-landing-bg-gradient pt-8 lg:pt-16 pb-8 relative",
         title: "text-center text-5xl font-bold tracking-tight mb-4 lg:mb-24",
         rowContainer: "flex w-full flex-col lg:flex-row mb-8 xl:mb-32 relative",
         imageLeft: "px-2 lg:px-0 hiw-image-bg hiw-rounded-r -ml-2 lg:ml-0 flex justify-center lg:justify-end items-center",
@@ -32,12 +30,10 @@ const CLASSES = {
 }
 
 const HomePage = () => {
-    // Nine bubbles per colour
     const bubbles = [1,2,3,4,5,6,7,8,9]
 
     return(
         <main className={CLASSES.main}>
-            {/* HERO SECTION */}
             <section className={CLASSES.hero.section}>
                 <div className={CLASSES.hero.content}>
                     <h1 className={CLASSES.hero.title}>
@@ -56,16 +52,11 @@ const HomePage = () => {
                 <img src={HeroImg} />
                 </div>
             </section>
-
-            {/* HOW IT WORKS SECTION */}
             <section className={CLASSES.hiw.section} id="about">
-                {bubbles.map(id => <span className={`greenBubble${id}`} />)}
-                {bubbles.map(id => <span className={`blueBubble${id}`} />)}
-                {bubbles.map(id => <span className={`yellowBubble${id}`} />)}
-
-
+                {bubbles.map(id => <span key={`bubble-green${id}`} className={`bubble bubble-green bubble-green-${id}`} />)}
+                {bubbles.map(id => <span key={`bubble-blue${id}`} className={`bubble bubble-blue bubble-blue-${id}`} />)}
+                {bubbles.map(id => <span key={`bubble-yellow${id}`} className={`bubble bubble-yellow bubble-yellow-${id}`} />)}
                 <h2 className={CLASSES.hiw.title}>How it works</h2>
-                {/* IT STARTS WITH YOU */}
                 <div className={CLASSES.hiw.rowContainer}>
                     <div className="w-full order-2 lg:order-1">
                         <div className={CLASSES.hiw.imageLeft}>
@@ -79,8 +70,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* TEAM HAS BEEN BUILT */}
                 <div className={CLASSES.hiw.rowContainer}>
                     <div className={CLASSES.hiw.contentLeft}>
                         <div className={CLASSES.hiw.content}>
@@ -94,8 +83,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* IT STARTS WITH YOU */}
                 <div className={CLASSES.hiw.rowContainer}>
                     <div className="w-full order-2 lg:order-1">
                         <div className={CLASSES.hiw.imageLeft}>
@@ -109,8 +96,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* COMPETING AGAINS OTHERS */}
                 <div className={CLASSES.hiw.rowContainer}>
                     <div className={CLASSES.hiw.contentLeft}>
                         <div className={CLASSES.hiw.content}>
@@ -124,7 +109,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-
             </section>
         </main>
     );

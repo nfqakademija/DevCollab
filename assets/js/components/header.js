@@ -7,17 +7,14 @@ const CLASSES = {
     btnSignUp: "text-md lg:text-lg font-semibold text-white border-2 border-teal-500 rounded px-2 lg:px-4 py-1 bg-teal-500 shadow-lg hover:bg-teal-600 hover:shadow-xl hover:border-teal-600 cursor-pointer"
 }
 
-const Header = () => {
-    
-    return (
-        <header className={CLASSES.header} >
-            <span className={CLASSES.logo}>DevCollab</span>
-            <nav role="navigation">
-                <a className={CLASSES.btnLogin}>Login</a>
-                <a className={CLASSES.btnSignUp}>Get Started</a>
-            </nav>
-        </header>
-    )
-}
+const Header = () => (
+    <header className={CLASSES.header} >
+        <span className={CLASSES.logo}>DevCollab</span>
+        <nav role="navigation">
+            <a className={CLASSES.btnLogin}>Login</a>
+            <a className={CLASSES.btnSignUp}>Get Started</a>
+        </nav>
+    </header>
+)
 
 export default Header;

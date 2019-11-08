@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import HeroImg from '../../img/hero.png';
 import HIW1Img from '../../img/hiw1.png';
 import HIW2Img from '../../img/hiw2.png';
@@ -45,7 +46,7 @@ const HomePage = () => {
                     </p>
                     <div>
                         <a className={CLASSES.hero.btn} href="#about">How it works</a>
-                        <a className={CLASSES.hero.btn} href="#">Join the challenge</a>
+                        <Link to="/register" className={CLASSES.hero.btn} href="#">Join the challenge</Link>
                     </div>
                 </div>
                 <div className={CLASSES.hero.img}>

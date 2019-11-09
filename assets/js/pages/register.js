@@ -10,8 +10,10 @@ const CLASSES = {
       divider: "mb-6",
       label: "block text-gray-900 text-md font-semibold mb-2",
       input: "shadow-md appearance-none border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:shadow-xl",
-      button: "bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-md hover:shadow-xl"
-    }
+      button: "bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-md hover:shadow-xl",
+      error: "text-xs text-red-500 mb-4",
+    },
+    loginLink: "ml-1 mr-16 inline-block align-baseline font-bold text-md text-teal-500 hover:text-teal-600"
 }
 
 const RegisterPage = ({ history, handleSuccesfulAuth }) => {
@@ -61,7 +63,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
     })
   }
 
-  const { main, container, form } = CLASSES; 
+  const { main, container, form, loginLink } = CLASSES; 
     return(
         <div className={main}>
         <div className={container} style={{zIndex: 2}}>
@@ -75,7 +77,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
               </label>
               <input
                 className={form.input}
-                id="username"
                 type="text"
                 name="username"
                 placeholder="Username"
@@ -92,7 +93,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
               </label>
               <input
                 className={form.input}
-                id="email"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -109,7 +109,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
               </label>
               <input
                 className={form.input}
-                id="password"
                 type="password"
                 name="password"
                 placeholder="******************"
@@ -126,7 +125,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
               </label>
               <input
                 className={form.input}
-                id="passwordConfirmation"
                 type="password"
                 name="passwordConfirmation"
                 placeholder="******************"
@@ -134,7 +132,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
                 value={passwordConfirmation}
               />
             </div>
-            {errors !== "" ? <p className="text-xs text-red-500 mb-4">{errors}</p> : null}
+            {errors !== "" ? <p className={form.error}>{errors}</p> : null}
             <div className="flex items-center justify-between">
               <button
                 className={form.button}
@@ -147,7 +145,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
           <div className="relative z-10 px-4">
             <p>Already have an account?
               <a
-                className="ml-1 mr-16 inline-block align-baseline font-bold text-md text-teal-500 hover:text-teal-600"
+                className={loginLink}
                 href="/login"
               >
                 Login here

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { HomePage, LoginPage, RegisterPage, UserHomepage} from './pages'
 import '../css/app.css';
 import { Route, Switch } from 'react-router-dom';
@@ -16,6 +17,9 @@ class App extends React.Component {
         this.handleMenu = this.handleMenu.bind(this);
         this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
     }
+
+    //TODO
+    // Check if user is looged in or not
 
     handleMenu() {
         this.setState({
@@ -54,7 +58,10 @@ class App extends React.Component {
                     <Route 
                         exact 
                         path="/login" 
-                        component={LoginPage} 
+                        render={props => <LoginPage 
+                            {...props} 
+                            handleSuccesfulAuth={this.handleSuccesfulAuth} />
+                        }
                         />
                     <Route 
                         exact 

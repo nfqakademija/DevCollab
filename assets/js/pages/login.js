@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Particles } from '../components';
 
 const CLASSES = {
@@ -9,30 +10,53 @@ const CLASSES = {
       divider: "mb-6",
       label: "block text-gray-900 text-md font-semibold mb-2",
       input: "shadow-md appearance-none border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:shadow-xl",
-      button: "bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-md hover:shadow-xl"
+      button: "bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-md hover:shadow-xl",
+      error: "text-xs text-red-500 mb-4",
+      forgotPasswordLink: "inline-block align-baseline font-bold text-md text-gray-600 hover:text-gray-700"
     }
 }
 
-const LoginPage = ({ handleUserLogin }) => {
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const [username, setUsername] = useState("");
+const LoginPage = ({ history, handleSuccesfulAuth }) => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState("");
+  const [forgotPassword, setForgotPassword] = useState(false);
 
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
+  const handleChange = (e) => {
+    switch(e.target.name) {
+      case "email":
+        setEmail(e.target.value);
+        break;
+      case "password":
+        setPassword(e.target.value);
+        break;
+    }
   }
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    axios.post("https://jsonplaceholder.typicode.com/posts", {
+      email,
+      password
+      
+    }, 
+    { withCredentials: true })
+    .then(res => {
+      if(res.status === 201) {
+        handleSuccesfulAuth(res.data);
+        history.push("/dashboard");
+      } else {
+        setErrors("There was a problem with login details. Try again.")
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
-  const handleSubmit = () => {
-    setUsername(username.toLowerCase())
-    console.log("Username: " + username);
-    console.log("Password: " + password);
-    handleUserLogin;
-  }
-
+  // TODO
+  // Add forgotPassword functions
   const handleForgotPassword = (e) => {
     e.preventDefault()
     setForgotPassword(!forgotPassword);
@@ -46,17 +70,17 @@ const LoginPage = ({ handleUserLogin }) => {
             <div className={form.divider}>
               <label
                 className={form.label}
-                htmlFor="username"
+                htmlFor="email"
               >
-                Username
+                Email
               </label>
               <input
                 className={form.input}
-                id="username"
-                type="text"
-                placeholder="Username"
-                onChange={handleUsername}
-                value={username}
+                type="email"
+                name="email"
+                placeholder="email"
+                onChange={handleChange}
+                value={email}
               />
             </div>
             <div className={form.divider}>
@@ -68,23 +92,24 @@ const LoginPage = ({ handleUserLogin }) => {
               </label>
               <input
                 className={form.input}
-                id="password"
                 type="password"
+                name="password"
                 placeholder="******************"
-                onChange={handlePassword}
+                onChange={handleChange}
                 value={password}
               />
             </div>
+            {errors !== "" ? <p className={form.error}>{errors}</p> : null}
             <div className="flex items-center justify-between">
               <button
                 className={form.button}
-                type="button"
+                type="submit"
                 onClick={handleSubmit}
               >
                 Sign In
               </button>
               <button
-                className="inline-block align-baseline font-bold text-md text-gray-600 hover:text-gray-700"
+                className={form.forgotPasswordLink}
                 onClick={handleForgotPassword}
               >
                 Forgot Password?

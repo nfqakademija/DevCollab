@@ -1,32 +1,73 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HomePage, LoginPage, RegisterPage, UserHomepage} from './pages'
 import '../css/app.css';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from './components';
+class App extends React.Component {
+    constructor() {
+        super();
 
-const App = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+        this.state = {
+            isMenuOpen: false,
+            isUserLoggedIn: false,
+            user: {}
+        }
 
-    const handleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+        this.handleMenu = this.handleMenu.bind(this);
+        this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
     }
 
-    const handleUserLogin = () => {
-       setIsUserLoggedIn(!isUserLoggedIn);
-       console.log(isUserLoggedIn);
+    handleMenu() {
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
+        })
     }
 
+    handleSuccesfulAuth(data) {
+        this.setState({
+            isUserLoggedIn: !this.state.isUserLoggedIn,
+            user: data
+        })
+    }
 
-    return(
-        <Layout isMenuOpen={isMenuOpen} handleMenu={handleMenu} isUserLoggedIn={isUserLoggedIn}>
-            <Switch >
-                <Route exact path="/" component={isUserLoggedIn ? UserHomepage: HomePage} />
-                <Route exact path="/login" component={LoginPage} handleUserLogin={handleUserLogin} />
-                <Route exact path="/register" component={RegisterPage} />
-            </Switch >
-        </Layout>
-    )
+    render() {
+        return(
+            <Layout 
+                isMenuOpen={this.state.isMenuOpen} 
+                handleMenu={this.handleMenu} 
+                isUserLoggedIn={this.state.isUserLoggedIn}>
+                <Switch >
+                    <Route 
+                        exact 
+                        path="/"
+                        component={HomePage}
+                        />
+                    <Route 
+                        exact 
+                        path="/dashboard"
+                        render={props => <UserHomepage 
+                            {...props} 
+                            isUserLoggedIn={this.state.isUserLoggedIn} 
+                            user={this.state.user} />
+                        }
+                        />
+                    <Route 
+                        exact 
+                        path="/login" 
+                        component={LoginPage} 
+                        />
+                    <Route 
+                        exact 
+                        path="/register" 
+                        render={props => <RegisterPage 
+                            {...props} 
+                            handleSuccesfulAuth={this.handleSuccesfulAuth}/>
+                        }
+                        />
+                </Switch >
+            </Layout>
+        )
+    }
 };
 
 export default App;

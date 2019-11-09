@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Particles } from '../components';
 
 const CLASSES = {
@@ -13,40 +14,58 @@ const CLASSES = {
     }
 }
 
-const RegisterPage = () => {
+const RegisterPage = ({ history, handleSuccesfulAuth }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState("");
 
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
+  const handleChange = (e) => {
+    switch(e.target.name) {
+      case "username":
+        setUsername(e.target.value);
+        break;
+      case "email": 
+        setEmail(e.target.value);
+        break;
+      case "password":
+        setPassword(e.target.value);
+        break;
+      case "passwordConfirmation":
+        setPasswordConfirmation(e.target.value);
+        break;
+    }
   }
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value)
-  }
-
-  const handleRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  }
-
-  const handleSubmit = () => {
-    setUsername(username.toLowerCase())
-    console.log("Username: " + username);
-    console.log("Password: " + password);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    axios.post("https://jsonplaceholder.typicode.com/posts", {
+      username,
+      email,
+      password,
+      passwordConfirmation
+    }, 
+    { withCredentials: true })
+    .then(res => {
+      if(res.status === 201) {
+        handleSuccesfulAuth(res.data);
+        history.push("/dashboard");
+      } else {
+        setErrors("There was a prolblem with your form. Please try again.")
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   const { main, container, form } = CLASSES; 
     return(
         <div className={main}>
         <div className={container} style={{zIndex: 2}}>
-          <form className={form.wrapper}>
+          <form className={form.wrapper} onSubmit={handleSubmit}>
             <div className={form.divider}>
               <label
                 className={form.label}
@@ -58,8 +77,9 @@ const RegisterPage = () => {
                 className={form.input}
                 id="username"
                 type="text"
+                name="username"
                 placeholder="Username"
-                onChange={handleUsername}
+                onChange={handleChange}
                 value={username}
               />
             </div>
@@ -73,9 +93,10 @@ const RegisterPage = () => {
               <input
                 className={form.input}
                 id="email"
-                type="text"
+                type="email"
+                name="email"
                 placeholder="Email"
-                onChange={handleEmail}
+                onChange={handleChange}
                 value={email}
               />
             </div>
@@ -90,32 +111,34 @@ const RegisterPage = () => {
                 className={form.input}
                 id="password"
                 type="password"
+                name="password"
                 placeholder="******************"
-                onChange={handlePassword}
+                onChange={handleChange}
                 value={password}
               />
             </div>
             <div className={form.divider}>
               <label
                 className={form.label}
-                htmlFor="repeatPassword"
+                htmlFor="passwordConfirmation"
               >
                 Re-enter password
               </label>
               <input
                 className={form.input}
-                id="repeatPassword"
+                id="passwordConfirmation"
                 type="password"
+                name="passwordConfirmation"
                 placeholder="******************"
-                onChange={handleRepeatPassword}
-                value={repeatPassword}
+                onChange={handleChange}
+                value={passwordConfirmation}
               />
             </div>
+            {errors !== "" ? <p className="text-xs text-red-500 mb-4">{errors}</p> : null}
             <div className="flex items-center justify-between">
               <button
                 className={form.button}
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
               >
                 Register
               </button>

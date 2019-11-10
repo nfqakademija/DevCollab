@@ -1,18 +1,5 @@
 easy_admin:
     site_name: 'DevCollab Admin'
-        menu:
-            - { label: 'Users' }
-            - { entity: 'Users' , css_class: 'menu--users', icon: 'user'}
-            - { entity: 'Skills', css_class: 'menu--product text-bold, icon: 'book' }
-            - { label: 'Teams' }
-            - { entity: 'Teamstasks', css_class: 'default', icon: 'tasks' }
-            - { entity: 'Teams', css_class: 'default', icon: 'group' }
-            - { label: 'Admin' }
-            - { entity: 'Skill', css_class: 'default', icon: 'cogs' }
-            - { entity: 'Teamspoints', css_class: 'default', icon: 'award' }
-            - { label: 'Project' }
-            - { entity: 'Projects', css_class: 'default', icon: 'code-branch' }
-            - { entity: 'Projectdetails', css_class: 'default', icon: 'code-branch' }
     user:
         display_name: true
         display_avatar: true
@@ -57,3 +44,16 @@ easy_admin:
 
     design:
         brand_color: '#1ABC9C'
+        menu:
+            - { label: 'Users' }
+            - { entity: 'Users', css_class: 'default', icon: 'user' }
+            - { entity: 'Skills', css_class: 'default', icon: 'book' }
+            - { label: 'Teams' }
+            - { entity: 'Teamstasks', css_class: 'default', icon: 'tasks' }
+            - { entity: 'Teams', css_class: 'default', icon: 'group' }
+            - { label: 'Admin' }
+            - { entity: 'Skill', css_class: 'default', icon: 'cogs' }
+            - { entity: 'Teamspoints', css_class: 'default', icon: 'award' }
+            - { label: 'Project' }
+            - { entity: 'Projects', css_class: 'default', icon: 'code-branch' }
+            - { entity: 'Projectdetails', css_class: 'default', icon: 'code-branch' }

@@ -19,6 +19,27 @@ easy_admin:
     entities:
         Users:
             class: App\Entity\Users
+            label: 'Users'
+            list:
+                filters: ['name','last_name','town']
+                title: "%%entity_label%% List"
+                max_results: 20
+                fields:
+                    - id
+                    - name
+                    - lastname
+                    - { property: 'email', type: 'email'}
+                    - town
+                    - { property: 'github_username',label: "GitHub" }
+            form:
+                fields:
+                    - { property: 'name', type: 'text', label: 'First Name', type_options: { required: true } }
+                    - { property: 'lastname', type: 'text', label: 'Last Name' }
+                    - { property: 'email', type: 'email', label: 'Email', type_options: { required: true } }
+                    - town
+                    - password
+                    - short_description
+                    - skills
         Skills:
             class: App\Entity\Skills
         Skill:
@@ -33,5 +54,6 @@ easy_admin:
             class: App\Entity\Projects
         Projectdetails:
             class: App\Entity\Projectdetails
+
     design:
         brand_color: '#1ABC9C'

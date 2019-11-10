@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import HeroImg from '../../img/hero.png';
-import HIW1Img from '../../img/hiw1.png';
-import HIW2Img from '../../img/hiw2.png';
-import HIW3Img from '../../img/hiw3.png';
-import HIW4Img from '../../img/hiw4.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import HeroImg from "../../img/hero.png";
+import HIW1Img from "../../img/hiw1.png";
+import HIW2Img from "../../img/hiw2.png";
+import HIW3Img from "../../img/hiw3.png";
+import HIW4Img from "../../img/hiw4.png";
 
 const CLASSES = {
   main: "poppins w-full",
@@ -41,88 +41,119 @@ const CLASSES = {
 const { main, hero, hiw } = CLASSES;
 
 const HomePage = () => {
-    const bubbles = [1,2,3,4,5,6,7,8,9]
+  const bubbles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    return(
-        <main className={main}>
-            <section className={hero.section}>
-                <div className={hero.content}>
-                    <h1 className={hero.title}>
-                        Let's build teamwork skills together
-                    </h1>
-                    <p className={hero.subtitle}>
-                        Coding skills are just part of what makes developer great. Let’s
-                        work on the other part together.
-                    </p>
-                    <div>
-                        <a className={hero.btn} href="#about">How it works</a>
-                        <Link to="/register" className={hero.btn} href="#">Join the challenge</Link>
-                    </div>
-                </div>
-                <div className={hero.img}>
-                <img src={HeroImg} />
-                </div>
-            </section>
-            <section className={hiw.section} id="about">
-                {bubbles.map(id => <span key={`bubble-green${id}`} className={`bubble bubble-green bubble-green-${id}`} />)}
-                {bubbles.map(id => <span key={`bubble-blue${id}`} className={`bubble bubble-blue bubble-blue-${id}`} />)}
-                {bubbles.map(id => <span key={`bubble-yellow${id}`} className={`bubble bubble-yellow bubble-yellow-${id}`} />)}
-                <h2 className={hiw.title}>How it works</h2>
-                <div className={hiw.rowContainer}>
-                    <div className="w-full order-2 lg:order-1">
-                        <div className={hiw.imageLeft}>
-                            <img src={HIW1Img} alt="" className="xl:-mr-8"/>
-                        </div>
-                    </div>
-                    <div className={hiw.contentRight}>
-                        <div className={hiw.content}>
-                            <h3 className={hiw.contentTitle}>It starts with you</h3>
-                            <p className={hiw.contentLead}>Once we’ve got information about you, our insanely smart AI will start cheking for other people you can team up with</p>
-                        </div>
-                    </div>
-                </div>
-                <div className={hiw.rowContainer}>
-                    <div className={hiw.contentLeft}>
-                        <div className={hiw.content}>
-                            <h3 className={hiw.contentTitle}>Team has been built</h3>
-                            <p className={hiw.contentLead}>After team building will be finished, you will get all the details to contact your teammates. Soon project details will be sent to all of you!</p>
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <div className={hiw.imageRight}>
-                            <img src={HIW2Img} alt="" className="xl:-ml-8"/>
-                        </div>
-                    </div>
-                </div>
-                <div className={hiw.rowContainer}>
-                    <div className="w-full order-2 lg:order-1">
-                        <div className={hiw.imageLeft}>
-                            <img src={HIW3Img} alt="" className="xl:-mr-8"/>
-                        </div>
-                    </div>
-                    <div className={hiw.contentRight}>
-                        <div className={hiw.content}>
-                            <h3 className={hiw.contentTitle}>Working together</h3>
-                            <p className={hiw.contentLead}>Your team will receive details about project and it will be up to all of you on how to make it real.</p>
-                        </div>
-                    </div>
-                </div>
-                <div className={hiw.rowContainer}>
-                    <div className={hiw.contentLeft}>
-                        <div className={hiw.content}>
-                            <h3 className={hiw.contentTitle}>Competing against others</h3>
-                            <p className={hiw.contentLead}>All teams will be making same project, but it will be up to them on how to make it. Our senior developers will be reviewing and scoring teams on code quality, complexity and other markers.</p>
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <div className={hiw.imageRight}>
-                            <img src={HIW4Img} alt="" className="xl:-ml-8"/>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    );
-}
+  return (
+    <main className={main}>
+      <section className={hero.section}>
+        <div className={hero.content}>
+          <h1 className={hero.title}>Let's build teamwork skills together</h1>
+          <p className={hero.subtitle}>
+            Coding skills are just part of what makes developer great. Let’s
+            work on the other part together.
+          </p>
+          <div>
+            <a className={hero.btn} href="#about">
+              How it works
+            </a>
+            <Link to="/register" className={hero.btn} href="#">
+              Join the challenge
+            </Link>
+          </div>
+        </div>
+        <div className={hero.img}>
+          <img src={HeroImg} />
+        </div>
+      </section>
+      <section className={hiw.section} id="about">
+        {bubbles.map(id => (
+          <span
+            key={`bubble-green${id}`}
+            className={`bubble bubble-green bubble-green-${id}`}
+          />
+        ))}
+        {bubbles.map(id => (
+          <span
+            key={`bubble-blue${id}`}
+            className={`bubble bubble-blue bubble-blue-${id}`}
+          />
+        ))}
+        {bubbles.map(id => (
+          <span
+            key={`bubble-yellow${id}`}
+            className={`bubble bubble-yellow bubble-yellow-${id}`}
+          />
+        ))}
+        <h2 className={hiw.title}>How it works</h2>
+        <div className={hiw.rowContainer}>
+          <div className="w-full order-2 lg:order-1">
+            <div className={hiw.imageLeft}>
+              <img src={HIW1Img} alt="" className="xl:-mr-8" />
+            </div>
+          </div>
+          <div className={hiw.contentRight}>
+            <div className={hiw.content}>
+              <h3 className={hiw.contentTitle}>It starts with you</h3>
+              <p className={hiw.contentLead}>
+                Once we’ve got information about you, our insanely smart AI will
+                start cheking for other people you can team up with
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className={hiw.rowContainer}>
+          <div className={hiw.contentLeft}>
+            <div className={hiw.content}>
+              <h3 className={hiw.contentTitle}>Team has been built</h3>
+              <p className={hiw.contentLead}>
+                After team building will be finished, you will get all the
+                details to contact your teammates. Soon project details will be
+                sent to all of you!
+              </p>
+            </div>
+          </div>
+          <div className="w-full">
+            <div className={hiw.imageRight}>
+              <img src={HIW2Img} alt="" className="xl:-ml-8" />
+            </div>
+          </div>
+        </div>
+        <div className={hiw.rowContainer}>
+          <div className="w-full order-2 lg:order-1">
+            <div className={hiw.imageLeft}>
+              <img src={HIW3Img} alt="" className="xl:-mr-8" />
+            </div>
+          </div>
+          <div className={hiw.contentRight}>
+            <div className={hiw.content}>
+              <h3 className={hiw.contentTitle}>Working together</h3>
+              <p className={hiw.contentLead}>
+                Your team will receive details about project and it will be up
+                to all of you on how to make it real.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className={hiw.rowContainer}>
+          <div className={hiw.contentLeft}>
+            <div className={hiw.content}>
+              <h3 className={hiw.contentTitle}>Competing against others</h3>
+              <p className={hiw.contentLead}>
+                All teams will be making same project, but it will be up to them
+                on how to make it. Our senior developers will be reviewing and
+                scoring teams on code quality, complexity and other markers.
+              </p>
+            </div>
+          </div>
+          <div className="w-full">
+            <div className={hiw.imageRight}>
+              <img src={HIW4Img} alt="" className="xl:-ml-8" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
 
 export default HomePage;

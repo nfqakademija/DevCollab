@@ -10,6 +10,7 @@ easy_admin:
             list:
                 filters: ['name','lastname','location']
                 title: "%%entity_label%% List"
+                actions: ['show']
                 max_results: 20
                 fields:
                     - id
@@ -30,6 +31,8 @@ easy_admin:
         Skills:
             class: App\Entity\Skills
             list:
+                actions: ['show']
+                title: "User %%entity_label%% List"
                 filters:
                     - { property: 'userfk', label: 'User'}
                     - { property: 'skillfk',label: "Skill" }
@@ -38,8 +41,12 @@ easy_admin:
                     - { property: 'skillfk',label: "Skill" }
         Skill:
             class: App\Entity\Skill
+            title: "%%entity_label%% List"
+            list:
+                actions: ['show']
         Teams:
             class: App\Entity\Teams
+            actions: ['show']
             list:
                 fields:
                     - { property: 'ID', label: 'ID'}
@@ -52,6 +59,7 @@ easy_admin:
             class: App\Entity\Teamtasks
         Projects:
             class: App\Entity\Projects
+            label: Project Listings
             list:
                 fields:
                     - { property: 'ID', label: 'ID'}
@@ -59,6 +67,7 @@ easy_admin:
                     - { property: 'teamfk', label: 'Team Name'}
         Projectdetails:
             class: App\Entity\Projectdetails
+            label: Project Details
             list:
                 fields:
                     - { property: 'projectfk', label: 'Project Name' }
@@ -69,6 +78,7 @@ easy_admin:
                     - { property: 'Sprint1Points', label: 'Reward'}
     design:
         brand_color: '#1ABC9C'
+
         menu:
             - { label: 'Users' }
             - { entity: 'Users', css_class: 'default', icon: 'user' }

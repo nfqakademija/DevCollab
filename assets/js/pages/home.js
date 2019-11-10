@@ -47,7 +47,7 @@ const HomePage = () => {
     <main className={main}>
       <section className={hero.section}>
         <div className={hero.content}>
-          <h1 className={hero.title}>Let's build teamwork skills together</h1>
+          <h1 className={hero.title}>Let`s build teamwork skills together</h1>
           <p className={hero.subtitle}>
             Coding skills are just part of what makes developer great. Let’s
             work on the other part together.
@@ -62,7 +62,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className={hero.img}>
-          <img src={HeroImg} />
+          <img alt={""} src={HeroImg} />
         </div>
       </section>
       <section className={hiw.section} id="about">

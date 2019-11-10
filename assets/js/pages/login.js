@@ -121,7 +121,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
         </form>
         <div className="flex justify-between relative z-10 px-4">
           <p>
-            Don't have an account?
+            Don`t have an account?
             <Link
               className="ml-1 mr-16 inline-block align-baseline font-bold text-md text-teal-500 hover:text-teal-600"
               to="/register"

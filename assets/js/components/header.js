@@ -12,10 +12,10 @@ const CLASSES = {
 
 const Header = () => (
   <header className={CLASSES.header}>
-        <span className={CLASSES.logo}>DevCollab</span>
+    <span className={CLASSES.logo}>DevCollab</span>
     <nav role="navigation">
-                        <a className={CLASSES.btnLogin}>Login</a>
-                                <a className={CLASSES.btnSignUp}>Get Started</a>
+      <a className={CLASSES.btnLogin}>Login</a>
+      <a className={CLASSES.btnSignUp}>Get Started</a>
     </nav>
   </header>
 );

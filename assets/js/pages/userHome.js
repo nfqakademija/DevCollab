@@ -1,10 +1,10 @@
 import React from 'react';
-
-const UserHomepage = ({ isUserLoggedIn, user }) => (
-    <div>
-        <h1>User logged in status: {isUserLoggedIn ? "SIGNED IN" : "NOT SIGNED IN"}</h1>
-        <h1>User is logged as <strong>{user.email}</strong></h1>
-    </div>
+import { LayoutUserDashboard } from '../components'
+ 
+const UserHomepage = ({ location, user, handleLogout }) => (
+    <LayoutUserDashboard handleLogout={handleLogout} location={location}>
+        <h1>USER HOMEPAGE of {user.email}</h1>
+    </LayoutUserDashboard>
 );
 
 export default UserHomepage;

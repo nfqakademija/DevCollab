@@ -21,7 +21,7 @@ const Header = ({ handleMenu, isMenuOpen }) => (
             { isMenuOpen ? (
                 <div className={CLASSES.mobileMenu}>
                     <Link to="/login" className={CLASSES.btnLogin} onClick={handleMenu}>Login</Link>
-                    <Link to="/register" className={CLASSES.btnSignUp}>Get Started</Link>
+                    <Link to="/register" className={CLASSES.btnSignUp} onClick={handleMenu}>Get Started</Link>
                 </div>
             ) : null}
         </nav>

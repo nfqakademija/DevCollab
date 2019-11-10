@@ -1,6 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-import { HomePage, LoginPage, RegisterPage, UserHomepage} from './pages'
+import { 
+    HomePage, 
+    LoginPage, 
+    RegisterPage, 
+    UserHomepage, 
+    ProfilePage, 
+    ScoreboardPage } from './pages'
 import '../css/app.css';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from './components';
@@ -10,12 +15,13 @@ class App extends React.Component {
 
         this.state = {
             isMenuOpen: false,
-            isUserLoggedIn: false,
-            user: {}
+            isUserLoggedIn: true,
+            user: {email: "demo@mail.com", name: "Jonas"}
         }
 
         this.handleMenu = this.handleMenu.bind(this);
         this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     //TODO
@@ -34,6 +40,12 @@ class App extends React.Component {
         })
     }
 
+    handleLogout() {
+        this.setState({
+            isUserLoggedIn: !this.state.isUserLoggedIn
+        })
+    }
+
     render() {
         return(
             <Layout 
@@ -41,20 +53,22 @@ class App extends React.Component {
                 handleMenu={this.handleMenu} 
                 isUserLoggedIn={this.state.isUserLoggedIn}>
                 <Switch >
+                    {!this.state.isUserLoggedIn ? (
                     <Route 
                         exact 
                         path="/"
                         component={HomePage}
-                        />
-                    <Route 
+                        />) : (
+                        <Route 
                         exact 
-                        path="/dashboard"
+                        path="/"
                         render={props => <UserHomepage 
                             {...props} 
                             isUserLoggedIn={this.state.isUserLoggedIn} 
-                            user={this.state.user} />
+                            user={this.state.user}
+                            handleLogout={this.handleLogout} />
                         }
-                        />
+                    />)}
                     <Route 
                         exact 
                         path="/login" 
@@ -62,7 +76,7 @@ class App extends React.Component {
                             {...props} 
                             handleSuccesfulAuth={this.handleSuccesfulAuth} />
                         }
-                        />
+                    />
                     <Route 
                         exact 
                         path="/register" 
@@ -70,7 +84,25 @@ class App extends React.Component {
                             {...props} 
                             handleSuccesfulAuth={this.handleSuccesfulAuth}/>
                         }
-                        />
+                    />
+                    <Route 
+                        exact 
+                        path="/profile" 
+                        render={props => <ProfilePage 
+                            {...props} 
+                            user={this.state.user}
+                            handleLogout={this.handleLogout}/>
+                        }
+                    />
+                    <Route 
+                        exact 
+                        path="/scoreboard" 
+                        render={props => <ScoreboardPage 
+                            {...props} 
+                            user={this.state.user}
+                            handleLogout={this.handleLogout}/>
+                        }
+                    />
                 </Switch >
             </Layout>
         )

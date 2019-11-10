@@ -16,6 +16,8 @@ const CLASSES = {
     }
 }
 
+const { main, container, form } = CLASSES; 
+
 const LoginPage = ({ history, handleSuccesfulAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +47,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
     .then(res => {
       if(res.status === 201) {
         handleSuccesfulAuth(res.data);
-        history.push("/dashboard");
+        history.push("/");
       } else {
         setErrors("There was a problem with login details. Try again.")
       }
@@ -62,7 +64,6 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
     setForgotPassword(!forgotPassword);
   }
 
-  const { main, container, form } = CLASSES; 
     return(
         <div className={main}>
         <div className={container} style={{zIndex: 2}}>
@@ -117,7 +118,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
             </div>
           </form>
           <div className="flex justify-between relative z-10 px-4">
-            <p>Don' have an account? 
+            <p>Don't have an account? 
               <a
                 className="ml-1 mr-16 inline-block align-baseline font-bold text-md text-teal-500 hover:text-teal-600"
                 href="/register"

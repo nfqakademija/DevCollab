@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Particles } from '../components';
 
@@ -15,6 +16,8 @@ const CLASSES = {
     },
     loginLink: "ml-1 mr-16 inline-block align-baseline font-bold text-md text-teal-500 hover:text-teal-600"
 }
+
+const { main, container, form, loginLink } = CLASSES; 
 
 const RegisterPage = ({ history, handleSuccesfulAuth }) => {
   const [username, setUsername] = useState("");
@@ -53,7 +56,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
     .then(res => {
       if(res.status === 201) {
         handleSuccesfulAuth(res.data);
-        history.push("/dashboard");
+        history.push("/");
       } else {
         setErrors("There was a prolblem with your form. Please try again.")
       }
@@ -63,7 +66,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
     })
   }
 
-  const { main, container, form, loginLink } = CLASSES; 
     return(
         <div className={main}>
         <div className={container} style={{zIndex: 2}}>
@@ -144,12 +146,12 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
           </form>
           <div className="relative z-10 px-4">
             <p>Already have an account?
-              <a
+              <Link
                 className={loginLink}
-                href="/login"
+                to="/login"
               >
                 Login here
-              </a>
+              </Link>
             </p>
           </div>
         </div>

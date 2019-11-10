@@ -10,7 +10,10 @@ easy_admin:
             list:
                 filters: ['name','lastname','location']
                 title: "%%entity_label%% List"
-                actions: ['show']
+                actions:
+                    - { name: edit, icon: pencil, label: ''}
+                    - { name: show, icon: eye, label: '' }
+                    - { name: delete, icon: eraser, label: '' }
                 max_results: 20
                 fields:
                     - id
@@ -31,7 +34,10 @@ easy_admin:
         Skills:
             class: App\Entity\Skills
             list:
-                actions: ['show']
+                actions:
+                    - { name: edit, icon: pencil, label: ''}
+                    - { name: show, icon: eye, label: '' }
+                    - { name: delete, icon: eraser, label: '' }
                 title: "User %%entity_label%% List"
                 filters:
                     - { property: 'userfk', label: 'User'}
@@ -43,11 +49,18 @@ easy_admin:
             class: App\Entity\Skill
             title: "%%entity_label%% List"
             list:
-                actions: ['show']
+                actions:
+                    - { name: edit, icon: pencil, label: ''}
+                    - { name: show, icon: eye, label: '' }
+                    - { name: delete, icon: eraser, label: '' }
         Teams:
             class: App\Entity\Teams
             actions: ['show']
             list:
+                actions:
+                    - { name: edit, icon: pencil, label: ''}
+                    - { name: show, icon: eye, label: '' }
+                    - { name: delete, icon: eraser, label: '' }
                 fields:
                     - { property: 'ID', label: 'ID'}
                     - { property: 'Name', label: 'Team Name'}
@@ -61,6 +74,10 @@ easy_admin:
             class: App\Entity\Projects
             label: Project Listings
             list:
+                actions:
+                    - { name: edit, icon: pencil, label: ''}
+                    - { name: show, icon: eye, label: '' }
+                    - { name: delete, icon: eraser, label: '' }
                 fields:
                     - { property: 'ID', label: 'ID'}
                     - { property: 'Title', label: 'Project Title'}
@@ -69,6 +86,10 @@ easy_admin:
             class: App\Entity\Projectdetails
             label: Project Details
             list:
+                actions:
+                    - { name: edit, icon: pencil, label: ''}
+                    - { name: show, icon: eye, label: '' }
+                    - { name: delete, icon: eraser, label: '' }
                 fields:
                     - { property: 'projectfk', label: 'Project Name' }
                     - { property: 'repository', label: 'Repository' }

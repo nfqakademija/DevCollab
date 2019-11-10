@@ -4,41 +4,34 @@
         "@symfony/webpack-encore": "^0.28.0",
         "autoprefixer": "^9.7.0",
         "core-js": "^3.0.0",
+        "husky": "^3.0.9",
         "node-sass": "^4.12.0",
         "popper.js": "^1.16.0",
+        "postcss-import": "^12.0.1",
+        "postcss-loader": "^3.0.0",
+        "prettier": "^1.18.2",
+        "pretty-quick": "^2.0.1",
         "prop-types": "^15.7.2",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "^7.0.1",
-        "tailwindcss": "^1.1.3",
-        "postcss-loader": "^3.0.0",
-        "postcss-import": "^12.0.1",
-        "webpack-notifier": "^1.6.0",
-        "babel-eslint": "^10.0.3",
-        "cross-env": "^6.0.3",
-        "eslint": "^6.5.1",
-        "eslint-config-prettier": "^6.4.0",
-        "eslint-plugin-import": "^2.18.2",
-        "eslint-plugin-jsx-a11y": "^6.2.3",
-        "eslint-plugin-react": "^7.16.0",
-        "eslint-plugin-react-hooks": "^2.1.2",
-        "prettier": "^1.18.2"
+        "tailwindcss": "^1.1.3"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
+        "format": "prettier --write \"assets/**/*.{js,jsx}\"",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress",
-        "format": "prettier --write \"src/**/*.{js,jsx}\"",
-        "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-transform-runtime": "^7.6.2",
         "react-router-dom": "^5.1.2"
-    }
+    },
+{ "husky": { "hooks": { "pre-commit": "pretty-quick --staged" } } }
+
 }

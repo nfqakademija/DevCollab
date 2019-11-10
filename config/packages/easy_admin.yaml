@@ -8,7 +8,7 @@ easy_admin:
             class: App\Entity\Users
             label: 'Users'
             list:
-                filters: ['name','last_name','town']
+                filters: ['name','lastname','location']
                 title: "%%entity_label%% List"
                 max_results: 20
                 fields:
@@ -16,17 +16,16 @@ easy_admin:
                     - name
                     - lastname
                     - { property: 'email', type: 'email'}
-                    - town
+                    - location
                     - { property: 'github_username',label: "GitHub" }
             form:
                 fields:
                     - { property: 'name', type: 'text', label: 'First Name', type_options: { required: true } }
                     - { property: 'lastname', type: 'text', label: 'Last Name' }
                     - { property: 'email', type: 'email', label: 'Email', type_options: { required: true } }
-                    - town
+                    - location
                     - password
                     - short_description
-                    - skills
         Skills:
             class: App\Entity\Skills
         Skill:
@@ -49,11 +48,9 @@ easy_admin:
             - { entity: 'Users', css_class: 'default', icon: 'user' }
             - { entity: 'Skills', css_class: 'default', icon: 'book' }
             - { label: 'Teams' }
-            - { entity: 'Teamstasks', css_class: 'default', icon: 'tasks' }
             - { entity: 'Teams', css_class: 'default', icon: 'group' }
             - { label: 'Admin' }
             - { entity: 'Skill', css_class: 'default', icon: 'cogs' }
-            - { entity: 'Teamspoints', css_class: 'default', icon: 'award' }
             - { label: 'Project' }
             - { entity: 'Projects', css_class: 'default', icon: 'code-branch' }
             - { entity: 'Projectdetails', css_class: 'default', icon: 'code-branch' }

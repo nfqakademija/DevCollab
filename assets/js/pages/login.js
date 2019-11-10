@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Particles } from '../components';
 
 const CLASSES = {
@@ -119,12 +120,12 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
           </form>
           <div className="flex justify-between relative z-10 px-4">
             <p>Don't have an account? 
-              <a
+              <Link
                 className="ml-1 mr-16 inline-block align-baseline font-bold text-md text-teal-500 hover:text-teal-600"
-                href="/register"
+                to="/register"
               >
                 Register here
-              </a>
+              </Link>
             </p>
           </div>
         </div>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import '../css/app.css';
 import { 
     HomePage, 
     LoginPage, 
@@ -6,9 +8,8 @@ import {
     UserHomepage, 
     ProfilePage, 
     ScoreboardPage } from './pages'
-import '../css/app.css';
-import { Route, Switch } from 'react-router-dom';
 import { Layout } from './components';
+
 class App extends React.Component {
     constructor() {
         super();

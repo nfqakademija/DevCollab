@@ -18,12 +18,12 @@ const Header = ({ handleMenu, isMenuOpen }) => (
             <Link to="/login" className={`${CLASSES.btnLogin} hidden sm:inline-block`}>Login</Link>
             <Link to="/register" className={`${CLASSES.btnSignUp} hidden sm:inline-block`}>Get Started</Link>
             <button className={CLASSES.btnMenu} onClick={handleMenu}>Menu</button>
-            { isMenuOpen ? (
+            { isMenuOpen && (
                 <div className={CLASSES.mobileMenu}>
                     <Link to="/login" className={CLASSES.btnLogin} onClick={handleMenu}>Login</Link>
                     <Link to="/register" className={CLASSES.btnSignUp} onClick={handleMenu}>Get Started</Link>
                 </div>
-            ) : null}
+            )}
         </nav>
     </header>
 )

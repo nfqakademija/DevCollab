@@ -17,8 +17,8 @@ easy_admin:
                 max_results: 20
                 fields:
                     - id
-                    - name
-                    - lastname
+                    - { property: 'name', label: 'First Name'}
+                    - { property: 'lastname', label: 'Last Name'}
                     - { property: 'email', type: 'email'}
                     - location
                     - { property: 'github_username',label: "GitHub" }
@@ -31,6 +31,7 @@ easy_admin:
                     - password
                     - { property: 'github_username', type: 'text', label: 'GitHub Username' }
                     - short_description
+                    - { property: 'teamfk', type: 'text', label: 'Team Name' }
         Skills:
             class: App\Entity\Skills
             list:
@@ -64,7 +65,7 @@ easy_admin:
                 fields:
                     - { property: 'ID', label: 'ID'}
                     - { property: 'Name', label: 'Team Name'}
-                    - { property: 'GitHub', label: 'GitHub Repoeixr'}
+                    - { property: 'github_repo', type: 'url', label: 'GitHub Repo'}
                     - { property: 'Teampoints', label: 'Team Points'}
         Teampoints:
             class: App\Entity\Teampoints

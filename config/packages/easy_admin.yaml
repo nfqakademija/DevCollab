@@ -25,22 +25,48 @@ easy_admin:
                     - { property: 'email', type: 'email', label: 'Email', type_options: { required: true } }
                     - location
                     - password
+                    - { property: 'github_username', type: 'text', label: 'GitHub Username' }
                     - short_description
         Skills:
             class: App\Entity\Skills
+            list:
+                filters:
+                    - { property: 'userfk', label: 'User'}
+                    - { property: 'skillfk',label: "Skill" }
+                fields:
+                    - { property: 'userfk', label: 'User'}
+                    - { property: 'skillfk',label: "Skill" }
         Skill:
             class: App\Entity\Skill
         Teams:
             class: App\Entity\Teams
+            list:
+                fields:
+                    - { property: 'ID', label: 'ID'}
+                    - { property: 'Name', label: 'Team Name'}
+                    - { property: 'GitHub', label: 'GitHub Repoeixr'}
+                    - { property: 'Teampoints', label: 'Team Points'}
         Teampoints:
             class: App\Entity\Teampoints
         Teamtasks:
             class: App\Entity\Teamtasks
         Projects:
             class: App\Entity\Projects
+            list:
+                fields:
+                    - { property: 'ID', label: 'ID'}
+                    - { property: 'Title', label: 'Project Title'}
+                    - { property: 'teamfk', label: 'Team Name'}
         Projectdetails:
             class: App\Entity\Projectdetails
-
+            list:
+                fields:
+                    - { property: 'projectfk', label: 'Project Name' }
+                    - { property: 'repository', label: 'Repository' }
+                    - { property: 'Created', label: 'Started at' }
+                    - { property: 'Deadline', label: 'Finishes at' }
+                    - { property: 'Sprint1', label: 'Sprint Name'}
+                    - { property: 'Sprint1Points', label: 'Reward'}
     design:
         brand_color: '#1ABC9C'
         menu:

@@ -14,7 +14,6 @@ easy_admin:
                     - { name: edit, icon: pencil, label: ''}
                     - { name: show, icon: eye, label: '' }
                     - { name: delete, icon: eraser, label: '' }
-                max_results: 20
                 fields:
                     - id
                     - { property: 'name', label: 'First Name'}
@@ -23,6 +22,7 @@ easy_admin:
                     - location
                     - { property: 'github_username',label: "GitHub" }
             form:
+                title: "Create User"
                 fields:
                     - { property: 'name', type: 'text', label: 'First Name', type_options: { required: true } }
                     - { property: 'lastname', type: 'text', label: 'Last Name' }
@@ -68,9 +68,9 @@ easy_admin:
                     - { property: 'github_repo', type: 'url', label: 'GitHub Repo'}
                     - { property: 'Teampoints', label: 'Team Points'}
         Teampoints:
-            class: App\Entity\Teampoints
+            class: App\Entity\TeamPoints
         Teamtasks:
-            class: App\Entity\Teamtasks
+            class: App\Entity\TeamTasks
         Projects:
             class: App\Entity\Projects
             label: Project Listings
@@ -84,7 +84,7 @@ easy_admin:
                     - { property: 'Title', label: 'Project Title'}
                     - { property: 'teamfk', label: 'Team Name'}
         Projectdetails:
-            class: App\Entity\Projectdetails
+            class: App\Entity\ProjectDetails
             label: Project Details
             list:
                 actions:
@@ -100,15 +100,16 @@ easy_admin:
                     - { property: 'Sprint1Points', label: 'Reward'}
     design:
         brand_color: '#1ABC9C'
-
         menu:
             - { label: 'Users' }
             - { entity: 'Users', css_class: 'default', icon: 'user' }
             - { entity: 'Skills', css_class: 'default', icon: 'book' }
             - { label: 'Teams' }
             - { entity: 'Teams', css_class: 'default', icon: 'group' }
+            - { entity: 'Teamtasks', css_class: 'default', icon: 'group' }
             - { label: 'Admin' }
-            - { entity: 'Skill', css_class: 'default', icon: 'cogs' }
+            - { entity: 'Teampoints', css_class: 'default', icon: 'group' }
+            - { entity: 'Skill', css_class: 'default', label: 'Skill List', icon: 'cogs' }
             - { label: 'Project' }
             - { entity: 'Projects', css_class: 'default', icon: 'code-branch' }
             - { entity: 'Projectdetails', css_class: 'default', icon: 'code-branch' }

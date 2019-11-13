@@ -19,22 +19,22 @@ class Users
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -44,12 +44,12 @@ class Users
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $shortDescription;
+    private $short_description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $githubUsername;
+    private $github_username;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -59,30 +59,6 @@ class Users
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -109,6 +85,30 @@ class Users
         return $this;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     public function getLocation(): ?string
     {
         return $this->location;
@@ -123,24 +123,24 @@ class Users
 
     public function getShortDescription(): ?string
     {
-        return $this->shortDescription;
+        return $this->short_description;
     }
 
-    public function setShortDescription(?string $shortDescription): self
+    public function setShortDescription(?string $short_description): self
     {
-        $this->shortDescription = $shortDescription;
+        $this->short_description = $short_description;
 
         return $this;
     }
 
     public function getGithubUsername(): ?string
     {
-        return $this->githubUsername;
+        return $this->github_username;
     }
 
-    public function setGithubUsername(?string $githubUsername): self
+    public function setGithubUsername(?string $github_username): self
     {
-        $this->githubUsername = $githubUsername;
+        $this->github_username = $github_username;
 
         return $this;
     }
@@ -155,9 +155,5 @@ class Users
         $this->teamfk = $teamfk;
 
         return $this;
-    }
-    public function __toString()
-    {
-        return (string) $this->getName() ? $this->$this->getName() : $this->getEmail();
     }
 }

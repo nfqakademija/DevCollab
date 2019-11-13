@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TeamtasksRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TeamTasksRepository")
  */
-class Teamtasks
+class TeamTasks
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,7 @@ class Teamtasks
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $teamfk;
 
@@ -27,12 +27,12 @@ class Teamtasks
     private $task;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $createdby;
+    private $createBy;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $status;
 
@@ -46,7 +46,7 @@ class Teamtasks
         return $this->teamfk;
     }
 
-    public function setTeamfk(?int $teamfk): self
+    public function setTeamfk(int $teamfk): self
     {
         $this->teamfk = $teamfk;
 
@@ -65,14 +65,14 @@ class Teamtasks
         return $this;
     }
 
-    public function getCreatedby(): ?int
+    public function getCreateBy(): ?int
     {
-        return $this->createdby;
+        return $this->createBy;
     }
 
-    public function setCreatedby(int $createdby): self
+    public function setCreateBy(?int $createBy): self
     {
-        $this->createdby = $createdby;
+        $this->createBy = $createBy;
 
         return $this;
     }
@@ -82,7 +82,7 @@ class Teamtasks
         return $this->status;
     }
 
-    public function setStatus(bool $status): self
+    public function setStatus(?bool $status): self
     {
         $this->status = $status;
 

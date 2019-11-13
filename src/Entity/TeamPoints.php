@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TeampointsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TeamPointsRepository")
  */
-class Teampoints
+class TeamPoints
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,7 @@ class Teampoints
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $teamfk;
 
@@ -36,7 +36,7 @@ class Teampoints
         return $this->teamfk;
     }
 
-    public function setTeamfk(?int $teamfk): self
+    public function setTeamfk(int $teamfk): self
     {
         $this->teamfk = $teamfk;
 

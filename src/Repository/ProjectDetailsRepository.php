@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Projectdetails;
+use App\Entity\ProjectDetails;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Projectdetails|null find($id, $lockMode = null, $lockVersion = null)
- * @method Projectdetails|null findOneBy(array $criteria, array $orderBy = null)
- * @method Projectdetails[]    findAll()
- * @method Projectdetails[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProjectDetails|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProjectDetails|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProjectDetails[]    findAll()
+ * @method ProjectDetails[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProjectdetailsRepository extends ServiceEntityRepository
+class ProjectDetailsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Projectdetails::class);
+        parent::__construct($registry, ProjectDetails::class);
     }
 
     // /**
-    //  * @return Projectdetails[] Returns an array of Projectdetails objects
+    //  * @return ProjectDetails[] Returns an array of ProjectDetails objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ProjectdetailsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Projectdetails
+    public function findOneBySomeField($value): ?ProjectDetails
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

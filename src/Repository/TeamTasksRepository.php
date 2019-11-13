@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Teamtasks;
+use App\Entity\TeamTasks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Teamtasks|null find($id, $lockMode = null, $lockVersion = null)
- * @method Teamtasks|null findOneBy(array $criteria, array $orderBy = null)
- * @method Teamtasks[]    findAll()
- * @method Teamtasks[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TeamTasks|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TeamTasks|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TeamTasks[]    findAll()
+ * @method TeamTasks[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TeamtasksRepository extends ServiceEntityRepository
+class TeamTasksRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Teamtasks::class);
+        parent::__construct($registry, TeamTasks::class);
     }
 
     // /**
-    //  * @return Teamtasks[] Returns an array of Teamtasks objects
+    //  * @return TeamTasks[] Returns an array of TeamTasks objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TeamtasksRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Teamtasks
+    public function findOneBySomeField($value): ?TeamTasks
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

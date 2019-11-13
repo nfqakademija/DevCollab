@@ -24,12 +24,7 @@ class Teams
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $githubRepo;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $teampoints;
+    private $github_repo;
 
     public function getId(): ?int
     {
@@ -50,24 +45,12 @@ class Teams
 
     public function getGithubRepo(): ?string
     {
-        return $this->githubRepo;
+        return $this->github_repo;
     }
 
-    public function setGithubRepo(?string $githubRepo): self
+    public function setGithubRepo(?string $github_repo): self
     {
-        $this->githubRepo = $githubRepo;
-
-        return $this;
-    }
-
-    public function getTeampoints(): ?int
-    {
-        return $this->teampoints;
-    }
-
-    public function setTeampoints(?int $teampoints): self
-    {
-        $this->teampoints = $teampoints;
+        $this->github_repo = $github_repo;
 
         return $this;
     }

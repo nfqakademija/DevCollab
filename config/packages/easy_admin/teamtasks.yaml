@@ -1,0 +1,4 @@
+easy_admin:
+  entities:
+    Teamtasks:
+      class: App\Entity\TeamTasks

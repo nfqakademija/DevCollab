@@ -1,0 +1,17 @@
+easy_admin:
+  entities:
+    Projectdetails:
+      class: App\Entity\ProjectDetails
+      label: Project Details
+      list:
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        fields:
+          - { property: 'projectfk', label: 'Project Name' }
+          - { property: 'repository', label: 'Repository' }
+          - { property: 'Created', label: 'Started at' }
+          - { property: 'Deadline', label: 'Finishes at' }
+          - { property: 'Sprint1', label: 'Sprint Name'}
+          - { property: 'Sprint1Points', label: 'Reward'}

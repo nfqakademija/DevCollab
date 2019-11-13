@@ -1,0 +1,15 @@
+easy_admin:
+  entities:
+    Teams:
+      class: App\Entity\Teams
+      actions: ['show']
+      list:
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        fields:
+          - { property: 'ID', label: 'ID'}
+          - { property: 'Name', label: 'Team Name'}
+          - { property: 'github_repo', type: 'url', label: 'GitHub Repo'}
+          - { property: 'Teampoints', label: 'Team Points'}

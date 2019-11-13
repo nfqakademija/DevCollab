@@ -1,0 +1,14 @@
+easy_admin:
+  entities:
+    Projects:
+      class: App\Entity\Projects
+      label: Project Listings
+      list:
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        fields:
+          - { property: 'ID', label: 'ID'}
+          - { property: 'Title', label: 'Project Title'}
+          - { property: 'teamfk', label: 'Team Name'}

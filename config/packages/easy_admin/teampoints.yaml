@@ -1,0 +1,4 @@
+easy_admin:
+  entities:
+    Teampoints:
+      class: App\Entity\TeamPoints

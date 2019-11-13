@@ -1,0 +1,10 @@
+easy_admin:
+  entities:
+    Skill:
+      class: App\Entity\Skill
+      title: "%%entity_label%% List"
+      list:
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }

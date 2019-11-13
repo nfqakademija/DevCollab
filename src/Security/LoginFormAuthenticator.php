@@ -7,9 +7,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator
 
-class LoginFormAuthenticator extends AbstractGuardAuthenticator
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     public function supports(Request $request)
     {

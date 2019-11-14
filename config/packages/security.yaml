@@ -1,7 +1,7 @@
 security:
-    encoders:
-        App\Entity\User:
-            algorithm: auto
+#    encoders:
+#        App\Entity\User:
+#            algorithm: bcrypt
     providers:
         app_user_provider:
             entity:
@@ -19,5 +19,5 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
     access_control:
-#        - { path: ^/admin, roles: ROLE_ADMIN }
-#        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }

@@ -11,6 +11,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Tests\Encoder\BasePasswordEncoderTest;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -25,7 +26,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return $request->attributes->get('_route') === 'app_login'
+        return $request->attributes->get('_route') === 'login'
             && $request->isMethod('POST');
     }
 
@@ -35,6 +36,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
         ];
+    }
+
+    public function isPasswordValid(UserInterface $user, $post_password)
+    {
+        return $user->getPassword() == $post_password;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -55,7 +61,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new RedirectResponse($this->router->generate('home'));
+//        return new RedirectResponse($this->router->generate('admin'));
+        return new RedirectResponse('admin');
+        //return $this->redirect('admin');
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
@@ -72,4 +80,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
 
     }
+
+/*    private function isPasswordValid(UserInterface $user, $password)
+    {
+    }*/
 }

@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ProjectDetails
 {
     /**
-     * @ORM\Id()
      * @var int
+     * @ORM\Id()
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */

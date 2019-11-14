@@ -11,8 +11,9 @@ class Skill
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @var int
      * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 

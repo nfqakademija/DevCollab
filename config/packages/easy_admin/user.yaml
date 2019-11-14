@@ -1,0 +1,5 @@
+#easy_admin:
+#  entities:
+#    Users:
+#      class: App\Entity\User
+#      label: 'User-admin'

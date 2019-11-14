@@ -30,7 +30,8 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string"
+     * )
      */
     private $password;
 
@@ -90,7 +91,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -103,7 +104,10 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt(){}
+    public function getSalt()
+    {
+
+    }
 
     /**
      * @see UserInterface

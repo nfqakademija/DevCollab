@@ -27,7 +27,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $request->attributes->get('_route') === 'app_login'
             && $request->isMethod('POST');
-
     }
 
     public function getCredentials(Request $request)
@@ -45,8 +44,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-       return true;
-       //if using API this will only require return true
+        return $this->isPasswordValid($user, $credentials['password']);
+         //if using API this will only require return true
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

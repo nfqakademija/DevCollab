@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Particles } from "../components";
+import { fetchUsers } from "../API";
 
 const CLASSES = {
   main:
@@ -28,6 +28,13 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
   const [forgotPassword, setForgotPassword] = useState(false);
+  // TODO -> delete on once backend is ready
+  const [users, setUsers] = useState("");
+
+  // TODO -> delete once backend is ready
+  useEffect(() => {
+    fetchUsers(setUsers);
+  }, []);
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -37,32 +44,23 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
       case "password":
         setPassword(e.target.value);
         break;
+      default:
+        break;
     }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    axios
-      .post(
-        "https://jsonplaceholder.typicode.com/posts",
-        {
-          email,
-          password
-        },
-        { withCredentials: true }
-      )
-      .then(res => {
-        if (res.status === 201) {
-          handleSuccesfulAuth(res.data);
-          history.push("/");
-        } else {
-          setErrors("There was a problem with login details. Try again.");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    //TODO -> delete once backend api is ready
+    users.map(user => {
+      if (user.email === email && user.password === password) {
+        handleSuccesfulAuth(user);
+        history.push("/");
+      } else {
+        setErrors("There was a problem with login details. Try again");
+      }
+    });
   };
 
   // TODO

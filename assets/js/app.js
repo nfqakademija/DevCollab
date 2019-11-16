@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import AppProvider from "./context";
 import "../css/app.css";
 import {
   HomePage,
@@ -14,108 +15,69 @@ import { Layout } from "./components";
 class App extends React.Component {
   constructor() {
     super();
-
     this.state = {
-      isMenuOpen: false,
-      isUserLoggedIn: true,
-      user: { email: "demo@mail.com", name: "Jonas" }
+      isUserLoggedIn: localStorage.getItem("isLoggedIn")
     };
 
-    this.handleMenu = this.handleMenu.bind(this);
     this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  //TODO
-  // Check if user is looged in or not
-
-  handleMenu() {
-    this.setState({
-      isMenuOpen: !this.state.isMenuOpen
-    });
   }
 
   handleSuccesfulAuth(data) {
     this.setState({
-      isUserLoggedIn: !this.state.isUserLoggedIn,
-      user: data
+      isUserLoggedIn: true
     });
-  }
-
-  handleLogout() {
-    this.setState({
-      isUserLoggedIn: !this.state.isUserLoggedIn
-    });
+    // TODO -> store jwt token
+    localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem("user", JSON.stringify(data));
   }
 
   render() {
     return (
-      <Layout
-        isMenuOpen={this.state.isMenuOpen}
-        handleMenu={this.handleMenu}
-        isUserLoggedIn={this.state.isUserLoggedIn}
-      >
-        <Switch>
-          {!this.state.isUserLoggedIn ? (
-            <Route exact path="/" component={HomePage} />
-          ) : (
+      <AppProvider>
+        <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
+          <Switch>
+            {!this.state.isUserLoggedIn ? (
+              <Route exact path="/" component={HomePage} />
+            ) : (
+              <Route
+                exact
+                path="/"
+                render={props => <UserHomepage {...props} />}
+              />
+            )}
             <Route
               exact
-              path="/"
+              path="/login"
               render={props => (
-                <UserHomepage
+                <LoginPage
                   {...props}
-                  isUserLoggedIn={this.state.isUserLoggedIn}
-                  user={this.state.user}
-                  handleLogout={this.handleLogout}
+                  handleSuccesfulAuth={this.handleSuccesfulAuth}
                 />
               )}
             />
-          )}
-          <Route
-            exact
-            path="/login"
-            render={props => (
-              <LoginPage
-                {...props}
-                handleSuccesfulAuth={this.handleSuccesfulAuth}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/register"
-            render={props => (
-              <RegisterPage
-                {...props}
-                handleSuccesfulAuth={this.handleSuccesfulAuth}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/profile"
-            render={props => (
-              <ProfilePage
-                {...props}
-                user={this.state.user}
-                handleLogout={this.handleLogout}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/scoreboard"
-            render={props => (
-              <ScoreboardPage
-                {...props}
-                user={this.state.user}
-                handleLogout={this.handleLogout}
-              />
-            )}
-          />
-        </Switch>
-      </Layout>
+            <Route
+              exact
+              path="/register"
+              render={props => (
+                <RegisterPage
+                  {...props}
+                  handleSuccesfulAuth={this.handleSuccesfulAuth}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/profile"
+              render={props => <ProfilePage {...props} />}
+            />
+            <Route
+              exact
+              path="/scoreboard"
+              render={props => <ScoreboardPage {...props} />}
+            />
+          </Switch>
+        </Layout>
+      </AppProvider>
     );
   }
 }

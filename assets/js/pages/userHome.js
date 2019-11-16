@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { LayoutUserDashboard } from "../components";
+import { MyContext } from "../context";
 
-const UserHomepage = ({ location, user, handleLogout }) => (
-  <LayoutUserDashboard handleLogout={handleLogout} location={location}>
-    <h1>USER HOMEPAGE of {user.email}</h1>
-  </LayoutUserDashboard>
-);
+const UserHomepage = ({ history, location }) => {
+  const [, user] = useContext(MyContext);
+
+  return (
+    <LayoutUserDashboard location={location} history={history}>
+      <h1>USER HOMEPAGE of {user.email}</h1>
+    </LayoutUserDashboard>
+  );
+};
 
 export default UserHomepage;

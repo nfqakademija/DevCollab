@@ -15,6 +15,7 @@ const AppProvider = ({ children }) => {
     Object.keys(user).length !== 0
   ) {
     setUser({});
+    setIsUserLoggedIn(false);
   }
 
   return (

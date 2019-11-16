@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { MyContext } from "../context";
 import { LayoutUserDashboard } from "../components";
-import { dynamicSort, capitalize, checkIfLoggedIn } from "../utils";
+import { dynamicSort, capitalize } from "../utils";
 import GithubIcon from "../../img/icons/github.png";
 import { fetchTeams } from "../API";
 
@@ -22,7 +22,7 @@ const CLASSES = {
 const { scoreboard } = CLASSES;
 
 const ScoreboardPage = ({ history, location }) => {
-  const [isUserLoggedIn, user] = useContext(MyContext);
+  const [, user] = useContext(MyContext);
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {

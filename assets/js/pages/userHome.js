@@ -3,7 +3,7 @@ import { LayoutUserDashboard } from "../components";
 import { MyContext } from "../context";
 
 const UserHomepage = ({ history, location }) => {
-  const [isUserLoggedIn, user] = useContext(MyContext);
+  const [, user] = useContext(MyContext);
 
   return (
     <LayoutUserDashboard location={location} history={history}>

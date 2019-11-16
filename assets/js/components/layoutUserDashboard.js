@@ -30,7 +30,7 @@ const CLASSES = {
 const { container, header, mainContent, navigation } = CLASSES;
 
 const LayoutUserDashboard = ({ history, location, children }) => {
-  const [isUserLoggedIn, user] = useContext(MyContext);
+  const [, user] = useContext(MyContext);
 
   const handleLogout = () => {
     localStorage.clear();

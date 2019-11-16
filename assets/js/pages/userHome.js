@@ -4,8 +4,7 @@ import { MyContext } from '../context';
   
 const UserHomepage = ({ history, location }) => {
     const [isUserLoggedIn, user] = useContext(MyContext);
-
-    console.table(user);
+    
     return (
         <LayoutUserDashboard location={location} history={history}>
             <h1>USER HOMEPAGE of {user.email}</h1>

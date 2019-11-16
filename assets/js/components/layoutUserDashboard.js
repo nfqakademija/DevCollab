@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { MyContext } from '../context';
 import IconProfile from "../../img/icons/avatar.png";
 import IconTeam from "../../img/icons/team.png";
 import IconScoreboard from "../../img/icons/scoreboard.png";
@@ -13,7 +14,7 @@ const CLASSES = {
     },
     mainContent: "flex-1 bg-gray-100 py-16 xl:w-10/12 xl:ml-auto",
     navigation: {
-        container: "w-full h-16 border-t border-gray-400 flex justify-around px-2 items-center text-sm fixed bottom-0 z-10 bg-white text-center xl:w-2/12 xl:justify-start xl:items-start xl:pt-32 xl:h-screen xl:flex-col",
+        container: "w-full h-16 border-t border-gray-400 flex justify-around px-2 items-center text-sm fixed bottom-0 z-10 bg-white text-center xl:w-2/12 xl:justify-start xl:items-start xl:pt-20 xl:h-screen xl:flex-col xl:px-4",
         links: " xl:hover:shadow-lg xl:hover:text-black xl:hover:pointer-cursor xl:hover:border xl:hover:border-gray-200 xl:hover:rounded-lg p-3 xl:flex xl:flex-row xl:items-center xl:justify-start xl:text-lg xl:my-3 xl:w-full xl:mx-auto xl:px-4 ",
         linksActive: "text-black font-semibold pont xl:bg-white xl:shadow-lg xl:border xl:border-gray-100 xl:rounded-lg",
         greenDot: "hidden xl:inline-block h-2 w-2 mr-2 bg-green-500 rounded-full"
@@ -23,11 +24,12 @@ const CLASSES = {
 const { container, header, mainContent, navigation } = CLASSES;
 
 const LayoutUserDashboard = ({ history, location, children }) => {
+    const [isUserLoggedIn, user] = useContext(MyContext);
+
     const handleLogout = () => {
-        localStorage.clear();
-        
+        localStorage.clear(); 
         history.push("/");
-        window.location.reload();
+        window.location.reload();     
     }
 
     return (
@@ -40,8 +42,17 @@ const LayoutUserDashboard = ({ history, location, children }) => {
                 <div className="p-2 lg:p-8">
                 {children}
                 </div>
-            </div> 
+            </div>  
             <div className={navigation.container}>
+                <div className="w-full h-auto my-8 items-center hidden xl:flex">
+                    <div className="bg-blue-500 h-12 w-12 rounded-full flex justify-center items-center">
+                        <span className="text-white text-2xl font-semibold">{user.name.split("")[0]}</span>
+                    </div>
+                    <div className="ml-2 text-left text-lg font-semibold">
+                        <p>{user.name}</p>
+                        <p className="text-xs text-gray-600 font-medium">{user.email}</p>
+                    </div>
+                </div>
                 <NavLink 
                     exact
                     to="/" 

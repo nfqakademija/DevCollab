@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Particles } from '../components';
+import { fetchUsers } from '../API';
 
 const CLASSES = {
     main: "poppins container h-auto w-full mx-auto flex justify-center items-center mt-4 md:mt-24",
@@ -29,10 +29,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
 
   // TODO -> delete once backend is ready
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/users")
-      .then(res => setUsers(res.data))
-      .catch(err => console.log(err))
+    fetchUsers(setUsers)
   }, [])
 
 

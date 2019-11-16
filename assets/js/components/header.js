@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import { MyContext }from '../context';
 
 const CLASSES = {
     header: "container mx-auto h-24 flex justify-between items-center poppins px-2 lg:px-0 relative z-10",
@@ -11,21 +12,29 @@ const CLASSES = {
     mobileMenu: "absolute top-0 mt-10 h-32 w-48 right-0 bg-white rounded-lg shadow-xl flex flex-col justify-around p-4 z-30"
 }
 
-const Header = ({ handleMenu, isMenuOpen }) => (
-    <header className={CLASSES.header} >
-        <Link to="/" className={CLASSES.logo}>DevCollab</Link>
-        <nav role="navigation" className={CLASSES.nav}>
-            <Link to="/login" className={`${CLASSES.btnLogin} hidden sm:inline-block`}>Login</Link>
-            <Link to="/register" className={`${CLASSES.btnSignUp} hidden sm:inline-block`}>Get Started</Link>
-            <button className={CLASSES.btnMenu} onClick={handleMenu}>Menu</button>
-            { isMenuOpen && (
-                <div className={CLASSES.mobileMenu}>
-                    <Link to="/login" className={CLASSES.btnLogin} onClick={handleMenu}>Login</Link>
-                    <Link to="/register" className={CLASSES.btnSignUp} onClick={handleMenu}>Get Started</Link>
-                </div>
-            )}
-        </nav>
-    </header>
-)
+const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
+
+    return (
+        <header className={CLASSES.header} >
+            <Link to="/" className={CLASSES.logo}>DevCollab</Link>
+            <nav role="navigation" className={CLASSES.nav}>
+                <Link to="/login" className={`${CLASSES.btnLogin} hidden sm:inline-block`}>Login</Link>
+                <Link to="/register" className={`${CLASSES.btnSignUp} hidden sm:inline-block`}>Get Started</Link>
+                <button className={CLASSES.btnMenu} onClick={handleMenu}>Menu</button>
+                { isMenuOpen && (
+                    <div className={CLASSES.mobileMenu}>
+                        <Link to="/login" className={CLASSES.btnLogin} onClick={handleMenu}>Login</Link>
+                        <Link to="/register" className={CLASSES.btnSignUp} onClick={handleMenu}>Get Started</Link>
+                    </div>
+                )}
+            </nav>
+        </header>
+    )
+}
 
 export default Header;

@@ -1,6 +1,7 @@
 import React from "react";
 import Particles from "react-particles-js";
 
+// eslint-disable-next-line react/display-name
 export default () => (
   <div
     style={{
@@ -17,7 +18,7 @@ export default () => (
       params={{
         particles: {
           number: {
-            value: 10,
+            value: 10
           },
           color: {
             value: ["#37CFB1", "#1157e2", "#fece2f"]
@@ -27,7 +28,7 @@ export default () => (
             stroke: {
               width: 0,
               color: "#000000"
-            },
+            }
           },
           opacity: {
             value: 0.4008530152163807,
@@ -56,7 +57,7 @@ export default () => (
             random: true,
             straight: false,
             out_mode: "out",
-            bounce: false,
+            bounce: false
           }
         },
         interactivity: {

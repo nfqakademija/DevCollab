@@ -26,7 +26,7 @@ const ScoreboardPage = ({ history, location }) => {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    fetchTeams(teams, setTeams);
+    fetchTeams(setTeams);
   }, []);
 
   const sortedTeams = teams.sort(dynamicSort("points", "desc"));
@@ -41,6 +41,9 @@ const ScoreboardPage = ({ history, location }) => {
           <span>Team name</span>
           <span className="px-4 w-20 text-center">Points</span>
         </div>
+        {teams.length === 0 && (
+          <h1 className="text-center mt-16">Loading...</h1>
+        )}
         {sortedTeams.map(team => {
           return (
             <div

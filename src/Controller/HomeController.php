@@ -16,4 +16,3 @@ class HomeController extends AbstractController
         return $this->render('home/login.html.twig');
     }
 }
-

@@ -78,7 +78,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-
+        //todo
     }
 
 /*    private function isPasswordValid(UserInterface $user, $password)

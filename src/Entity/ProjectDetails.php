@@ -88,4 +88,5 @@ class ProjectDetails
 
         return $this;
     }
+
 }

@@ -8,11 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/{reactRouting}", name="home")
      *
      */
     public function index()
     {
-        return $this->render('home/login.html.twig');
+//        return $this->render('home/index.html.twig');
+          return 1;
     }
 }

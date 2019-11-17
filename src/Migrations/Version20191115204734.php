@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191113100104 extends AbstractMigration
+final class Version20191115204734 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,10 +22,11 @@ final class Version20191113100104 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE project_details (id INT AUTO_INCREMENT NOT NULL, projectfk INT NOT NULL, repository VARCHAR(255) NOT NULL, created DATE NOT NULL, deadline DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE project_details (id INT AUTO_INCREMENT NOT NULL, projectfk INT NOT NULL, repository VARCHAR(255) DEFAULT NULL, created DATETIME NOT NULL, deadline DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE team_points CHANGE points points INT DEFAULT NULL');
         $this->addSql('ALTER TABLE team_tasks CHANGE create_by create_by INT DEFAULT NULL, CHANGE status status TINYINT(1) DEFAULT NULL');
         $this->addSql('ALTER TABLE teams CHANGE github_repo github_repo VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE user CHANGE roles roles VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE users CHANGE lastname lastname VARCHAR(255) DEFAULT NULL, CHANGE location location VARCHAR(255) DEFAULT NULL, CHANGE github_username github_username VARCHAR(255) DEFAULT NULL, CHANGE teamfk teamfk INT DEFAULT NULL');
     }
 
@@ -38,6 +39,7 @@ final class Version20191113100104 extends AbstractMigration
         $this->addSql('ALTER TABLE team_points CHANGE points points INT DEFAULT NULL');
         $this->addSql('ALTER TABLE team_tasks CHANGE create_by create_by INT DEFAULT NULL, CHANGE status status TINYINT(1) DEFAULT \'NULL\'');
         $this->addSql('ALTER TABLE teams CHANGE github_repo github_repo VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE user CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
         $this->addSql('ALTER TABLE users CHANGE lastname lastname VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE location location VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE github_username github_username VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE teamfk teamfk INT DEFAULT NULL');
     }
 }

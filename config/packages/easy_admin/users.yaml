@@ -1,4 +1,7 @@
 easy_admin:
+  user:
+    display_name: true
+    display_avatar: true
   entities:
     Users:
       class: App\Entity\Users

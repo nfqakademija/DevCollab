@@ -11,7 +11,8 @@ easy_admin:
         fields:
           - { property: 'projectfk', label: 'Project Name' }
           - { property: 'repository', label: 'Repository' }
-          - { property: 'Created', label: 'Started at' }
-          - { property: 'Deadline', label: 'Finishes at' }
+          - { property: 'Created', type: 'date', label: 'Started at' }
+          - { property: 'Deadline', type: 'date', label: 'Finishes at' }
           - { property: 'Sprint1', label: 'Sprint Name'}
           - { property: 'Sprint1Points', label: 'Reward'}
+

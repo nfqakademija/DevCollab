@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Entity;
 
@@ -10,10 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 class ProjectDetails
 {
     /**
-     * @var int
      * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -23,17 +22,17 @@ class ProjectDetails
     private $projectfk;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $repository;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $created;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $deadline;
 
@@ -59,7 +58,7 @@ class ProjectDetails
         return $this->repository;
     }
 
-    public function setRepository(string $repository): self
+    public function setRepository(?string $repository): self
     {
         $this->repository = $repository;
 

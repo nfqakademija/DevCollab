@@ -1,24 +1,85 @@
-import React, { useState } from 'react';
-import { HomePage} from './pages'
-import '../css/app.css';
-import { Route, Switch } from 'react-router-dom';
-import { Header } from './components';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import AppProvider from "./context";
+import "../css/app.css";
+import {
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  UserHomepage,
+  ProfilePage,
+  ScoreboardPage
+} from "./pages";
+import { Layout } from "./components";
 
-const App = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isUserLoggedIn: localStorage.getItem("isLoggedIn")
+    };
 
-    const handleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    }
+    this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
+  }
 
-    return(
-        <>
-            <Header handleMenu={handleMenu} isMenuOpen={isMenuOpen}/>
-            <Switch >
-                <Route exact path="/" component={HomePage} />
-            </Switch >
-        </>
-    )
-};
+  handleSuccesfulAuth(data) {
+    this.setState({
+      isUserLoggedIn: true
+    });
+    // TODO -> store jwt token
+    localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem("user", JSON.stringify(data));
+  }
+
+  render() {
+    return (
+      <AppProvider>
+        <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
+          <Switch>
+            {!this.state.isUserLoggedIn ? (
+              <Route exact path="/" component={HomePage} />
+            ) : (
+              <Route
+                exact
+                path="/"
+                render={props => <UserHomepage {...props} />}
+              />
+            )}
+            <Route
+              exact
+              path="/login"
+              render={props => (
+                <LoginPage
+                  {...props}
+                  handleSuccesfulAuth={this.handleSuccesfulAuth}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/register"
+              render={props => (
+                <RegisterPage
+                  {...props}
+                  handleSuccesfulAuth={this.handleSuccesfulAuth}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/profile"
+              render={props => <ProfilePage {...props} />}
+            />
+            <Route
+              exact
+              path="/scoreboard"
+              render={props => <ScoreboardPage {...props} />}
+            />
+          </Switch>
+        </Layout>
+      </AppProvider>
+    );
+  }
+}
 
 export default App;

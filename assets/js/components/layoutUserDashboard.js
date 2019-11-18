@@ -20,9 +20,9 @@ const CLASSES = {
     container:
       "w-full h-16 border-t border-gray-400 flex justify-around px-2 items-center text-sm fixed bottom-0 z-10 bg-white text-center xl:w-2/12 xl:justify-start xl:items-start xl:pt-20 xl:h-screen xl:flex-col xl:px-4",
     links:
-      " xl:hover:shadow-lg xl:hover:text-black xl:hover:pointer-cursor xl:hover:border xl:hover:border-gray-200 xl:hover:rounded-lg p-3 xl:flex xl:flex-row xl:items-center xl:justify-start xl:text-lg xl:my-3 xl:w-full xl:mx-auto xl:px-4 ",
+      "xl:hover:shadow-lg xl:hover:text-black xl:hover:pointer-cursor xl:hover:border xl:hover:border-gray-200 xl:hover:rounded-lg p-3 xl:flex xl:flex-row xl:items-center xl:justify-start xl:text-lg xl:my-3 xl:w-full xl:mx-auto xl:px-4 ",
     linksActive:
-      "text-black font-semibold pont xl:bg-white xl:shadow-lg xl:border xl:border-gray-100 xl:rounded-lg",
+      "text-black font-semibold xl:bg-white xl:shadow-lg xl:border xl:border-gray-100 xl:rounded-lg",
     greenDot: "hidden xl:inline-block h-2 w-2 mr-2 bg-green-500 rounded-full"
   }
 };

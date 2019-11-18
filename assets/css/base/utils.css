@@ -1,0 +1,15 @@
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+.util-shadow-green {
+    box-shadow: 0px 8px 16px rgba(55, 207, 177, 0.25);
+}
+
+.util-shadow-green:hover {
+    box-shadow: 0px 8px 32px rgba(55, 207, 177, 0.25);
+}
+
+.util-landing-bg-gradient {
+    background: linear-gradient(180deg, rgb(243, 245, 253) 0%, rgb(220, 224, 243) 100%);
+}

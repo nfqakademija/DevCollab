@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'base/variables.css';
+@import 'base/utils.css';
+
+@import 'components/how_it_works.css';

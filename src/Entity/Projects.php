@@ -28,6 +28,12 @@ class Projects
      */
     private $project_details;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Teams", inversedBy="projects", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $team;
+
     public function __construct()
     {
         $this->project_details = new ArrayCollection();
@@ -77,6 +83,18 @@ class Projects
                 $projectDetail->setProjects(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTeam(): ?Teams
+    {
+        return $this->team;
+    }
+
+    public function setTeam(Teams $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

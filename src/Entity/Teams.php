@@ -48,6 +48,11 @@ class Teams
      */
     private $teamTasks;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Projects", mappedBy="team", cascade={"persist", "remove"})
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->team_points = new ArrayCollection();
@@ -189,6 +194,23 @@ class Teams
             if ($teamTask->getTeam() === $this) {
                 $teamTask->setTeam(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getProjects(): ?Projects
+    {
+        return $this->projects;
+    }
+
+    public function setProjects(Projects $projects): self
+    {
+        $this->projects = $projects;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $projects->getTeam()) {
+            $projects->setTeam($this);
         }
 
         return $this;

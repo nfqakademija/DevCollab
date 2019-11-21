@@ -31,6 +31,12 @@ class TeamTasks
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="teamTasks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $team;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +74,18 @@ class TeamTasks
     public function setStatus(?bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Teams
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Teams $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

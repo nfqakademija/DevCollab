@@ -43,10 +43,16 @@ class Teams
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TeamTasks", mappedBy="team", orphanRemoval=true)
+     */
+    private $teamTasks;
+
     public function __construct()
     {
         $this->team_points = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->teamTasks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,6 +157,37 @@ class Teams
             // set the owning side to null (unless already changed)
             if ($user->getTeam() === $this) {
                 $user->setTeam(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TeamTasks[]
+     */
+    public function getTeamTasks(): Collection
+    {
+        return $this->teamTasks;
+    }
+
+    public function addTeamTask(TeamTasks $teamTask): self
+    {
+        if (!$this->teamTasks->contains($teamTask)) {
+            $this->teamTasks[] = $teamTask;
+            $teamTask->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeamTask(TeamTasks $teamTask): self
+    {
+        if ($this->teamTasks->contains($teamTask)) {
+            $this->teamTasks->removeElement($teamTask);
+            // set the owning side to null (unless already changed)
+            if ($teamTask->getTeam() === $this) {
+                $teamTask->setTeam(null);
             }
         }
 

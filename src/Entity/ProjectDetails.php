@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class ProjectDetails
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $deadline;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sprints", mappedBy="projects")
+     */
+    private $sprints;
+
+    public function __construct()
+    {
+        $this->sprints = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +80,37 @@ class ProjectDetails
     public function setDeadline(?\DateTimeInterface $deadline): self
     {
         $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sprints[]
+     */
+    public function getSprints(): Collection
+    {
+        return $this->sprints;
+    }
+
+    public function addSprint(Sprints $sprint): self
+    {
+        if (!$this->sprints->contains($sprint)) {
+            $this->sprints[] = $sprint;
+            $sprint->setProjects($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSprint(Sprints $sprint): self
+    {
+        if ($this->sprints->contains($sprint)) {
+            $this->sprints->removeElement($sprint);
+            // set the owning side to null (unless already changed)
+            if ($sprint->getProjects() === $this) {
+                $sprint->setProjects(null);
+            }
+        }
 
         return $this;
     }

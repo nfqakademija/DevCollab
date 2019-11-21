@@ -11,15 +11,16 @@ class ProjectsFixtures extends Fixture implements DependentFixtureInterface
 {
     public const PROJECT_REFERENCE = 'admin-project';
 
-    public function load (ObjectManager $manager){
+    public function load(ObjectManager $manager)
+    {
         for ($i = 1; $i < 2; $i++) {
             $projects = new Projects();
-            $projects->setTitle('Project Name'.$i);
+            $projects->setTitle('Project Name-'.$i);
             $projects->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
             $manager->persist($projects);
         }
         $manager->flush();
-        $this->addReference(self::PROJECT_REFERENCE,$projects);
+        $this->addReference(self::PROJECT_REFERENCE, $projects);
     }
     public function getDependencies()
     {

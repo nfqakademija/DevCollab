@@ -13,7 +13,8 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i < 20; $i++)
+        {
             $users = new Users();
             $users->setName('firstname-'.$i);
             $users->setLastname('lastname-'.$i);
@@ -23,7 +24,7 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($users);
         }
         $manager->flush();
-        $this->addReference(self::USERS_REFERENCE,$users);
+        $this->addReference(self::USERS_REFERENCE, $users);
     }
     public function getDependencies()
     {
@@ -31,6 +32,4 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
            TeamsFixtures::class,
            );
     }
-
 }
-

@@ -23,14 +23,14 @@ class ProjectDetailsFixtures extends Fixture implements DependentFixtureInterfac
         $date_start = new \DateTime('2019-10-11');
         $date_end = new \DateTime('2019-12-19');
 
-        for ($i = 1; $i<10; $i++)
-        {
+        for ($i = 1; $i < 10; $i++) {
             $projectDetails = new ProjectDetails();
-            $projectDetails->setRepository('Repository-'.$this->getReference(TeamsFixtures::TEAM_REFERENCE));
+            $projectDetails->setRepository('Repository-' . $this->getReference(TeamsFixtures::TEAM_REFERENCE));
             $projectDetails->setCreated($this->randomDate($date_start, $date_end));
             $projectDetails->setDeadline($this->randomDate($date_start, $date_end));
         }
     }
+
     public function getDependencies()
     {
         return array(

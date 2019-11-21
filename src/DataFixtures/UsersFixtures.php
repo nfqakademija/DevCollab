@@ -13,12 +13,11 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i < 20; $i++)
-        {
+        for ($i = 1; $i < 20; $i++) {
             $users = new Users();
-            $users->setName('firstname-'.$i);
-            $users->setLastname('lastname-'.$i);
-            $users->setEmail('email'.$i.'@gmail.com');
+            $users->setName('firstname-' . $i);
+            $users->setLastname('lastname-' . $i);
+            $users->setEmail('email' . $i . '@gmail.com');
             $users->setPassword(mt_rand(10, 10000000));
             $users->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
             $manager->persist($users);
@@ -26,9 +25,10 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
         $this->addReference(self::USERS_REFERENCE, $users);
     }
+
     public function getDependencies()
     {
-        return array (
+        return array(
             TeamsFixtures::class,
         );
     }

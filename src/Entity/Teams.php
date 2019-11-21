@@ -38,9 +38,15 @@ class Teams
      */
     private $sprints;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="team")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->team_points = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,6 +121,37 @@ class Teams
         // set the owning side of the relation if necessary
         if ($this !== $sprints->getTeam()) {
             $sprints->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Users[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getTeam() === $this) {
+                $user->setTeam(null);
+            }
         }
 
         return $this;

@@ -58,6 +58,11 @@ class Users
      */
     private $skills;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="users")
+     */
+    private $team;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -174,6 +179,18 @@ class Users
         if ($this->skills->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
+        return $this;
+    }
+
+    public function getTeam(): ?Teams
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Teams $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

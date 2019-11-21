@@ -38,6 +38,11 @@ class ProjectDetails
      */
     private $sprints;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Projects", inversedBy="project_details")
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->sprints = new ArrayCollection();
@@ -111,6 +116,18 @@ class ProjectDetails
                 $sprint->setProjects(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProjects(): ?Projects
+    {
+        return $this->projects;
+    }
+
+    public function setProjects(?Projects $projects): self
+    {
+        $this->projects = $projects;
 
         return $this;
     }

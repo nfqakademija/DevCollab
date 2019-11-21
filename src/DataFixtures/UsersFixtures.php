@@ -30,6 +30,6 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
     {
        return array (
            TeamsFixtures::class,
-           );
+       );
     }
 }

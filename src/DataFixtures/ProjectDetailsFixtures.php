@@ -20,8 +20,8 @@ class ProjectDetailsFixtures extends Fixture implements DependentFixtureInterfac
 
     public function load(ObjectManager $manager)
     {
-        $date_start = new \DateTime('2019-10-11' );
-        $date_end = new \DateTime('2019-12-19' );
+        $date_start = new \DateTime('2019-10-11');
+        $date_end = new \DateTime('2019-12-19');
 
         for ($i = 1; $i<10; $i++)
         {

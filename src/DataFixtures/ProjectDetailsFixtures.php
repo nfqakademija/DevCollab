@@ -19,8 +19,8 @@ class ProjectDetailsFixtures extends Fixture implements DependentFixtureInterfac
         for ($i = 1; $i < 10; $i++) {
             $projectDetails = new ProjectDetails();
             $projectDetails->setRepository('Repository-'.$i);
-            $projectDetails->setCreated($this->randomDate($date_start_created,  $date_end_created));
-            $projectDetails->setDeadline($this->randomDate($date_start_deadline,  $date_end_deadline));
+            $projectDetails->setCreated($this->randomDate($date_start_created, $date_end_created));
+            $projectDetails->setDeadline($this->randomDate($date_start_deadline, $date_end_deadline));
             $projectDetails->setProjects($this->getReference(ProjectsFixtures::PROJECT_REFERENCE));
             $manager->persist($projectDetails);
         }

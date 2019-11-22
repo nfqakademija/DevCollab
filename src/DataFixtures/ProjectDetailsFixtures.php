@@ -9,14 +9,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class ProjectDetailsFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function randomDate(\DateTime $start, \DateTime $end)
-    {
-        $randomTimestamp = mt_rand($start->getTimestamp(), $end->getTimestamp());
-        $randomDate = new \DateTime();
-        $randomDate->setTimestamp($randomTimestamp);
-        return $randomDate;
-    }
-
     public function load(ObjectManager $manager)
     {
         $date_start_created = new \DateTime('2019-10-11');
@@ -33,6 +25,14 @@ class ProjectDetailsFixtures extends Fixture implements DependentFixtureInterfac
             $manager->persist($projectDetails);
         }
         $manager->flush();
+    }
+
+    public function randomDate(\DateTime $start, \DateTime $end)
+    {
+        $randomTimestamp = mt_rand($start->getTimestamp(), $end->getTimestamp());
+        $randomDate = new \DateTime();
+        $randomDate->setTimestamp($randomTimestamp);
+        return $randomDate;
     }
 
     public function getDependencies()

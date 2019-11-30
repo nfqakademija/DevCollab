@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
 class Users
@@ -24,7 +24,7 @@ class Users
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
@@ -46,27 +46,27 @@ class Users
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $github_username;
+    private $githubUsername;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $short_description;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Skills", inversedBy="users")
-     */
-    private $skills;
+    private $shortDescription;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="users")
      */
     private $team;
 
-    public function __construct()
-    {
-        $this->skills = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $roles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Skills", inversedBy="users")
+     */
+    private $skills;
 
     public function getId(): ?int
     {
@@ -90,7 +90,7 @@ class Users
         return $this->lastname;
     }
 
-    public function setLastname(?string $lastname): self
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -135,50 +135,24 @@ class Users
 
     public function getGithubUsername(): ?string
     {
-        return $this->github_username;
+        return $this->githubUsername;
     }
 
-    public function setGithubUsername(?string $github_username): self
+    public function setGithubUsername(?string $githubUsername): self
     {
-        $this->github_username = $github_username;
+        $this->githubUsername = $githubUsername;
 
         return $this;
     }
 
     public function getShortDescription(): ?string
     {
-        return $this->short_description;
+        return $this->shortDescription;
     }
 
-    public function setShortDescription(?string $short_description): self
+    public function setShortDescription(?string $shortDescription): self
     {
-        $this->short_description = $short_description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Skills[]
-     */
-    public function getSkills(): Collection
-    {
-        return $this->skills;
-    }
-
-    public function addSkill(Skills $skill): self
-    {
-        if (!$this->skills->contains($skill)) {
-            $this->skills[] = $skill;
-        }
-
-        return $this;
-    }
-
-    public function removeSkill(Skills $skill): self
-    {
-        if ($this->skills->contains($skill)) {
-            $this->skills->removeElement($skill);
-        }
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
@@ -191,6 +165,30 @@ class Users
     public function setTeam(?Teams $team): self
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    public function getRoles(): ?string
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSkills(): ?Skills
+    {
+        return $this->skills;
+    }
+
+    public function setSkills(?Skills $skills): self
+    {
+        $this->skills = $skills;
 
         return $this;
     }

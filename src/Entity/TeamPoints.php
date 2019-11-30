@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\TeamPointsRepository")
  */
 class TeamPoints
@@ -17,13 +19,12 @@ class TeamPoints
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $points;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="team_points")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="teamPoints")
      */
     private $team;
 
@@ -37,7 +38,7 @@ class TeamPoints
         return $this->points;
     }
 
-    public function setPoints(?int $points): self
+    public function setPoints(int $points): self
     {
         $this->points = $points;
 

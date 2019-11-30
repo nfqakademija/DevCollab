@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ApiResource()
+ * @ORM\Entity(repositoryClass="App\Repository\AdminRepository")
  */
-class User implements UserInterface
+class Admin
 {
     /**
      * @ORM\Id()
@@ -18,18 +19,17 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="text")
      */
-    private $roles = [];
+    private $roles;
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
@@ -51,12 +51,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $short_description;
+    private $shortDescription;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $github_username;
+    private $githubUsername;
 
     public function getId(): ?int
     {
@@ -75,41 +75,21 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
+    public function getRoles(): ?string
     {
-        return (string) $this->email;
+        return $this->roles;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
+    public function setRoles(string $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -117,23 +97,6 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     public function getName(): ?string
@@ -174,24 +137,24 @@ class User implements UserInterface
 
     public function getShortDescription(): ?string
     {
-        return $this->short_description;
+        return $this->shortDescription;
     }
 
-    public function setShortDescription(?string $short_description): self
+    public function setShortDescription(?string $shortDescription): self
     {
-        $this->short_description = $short_description;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
     public function getGithubUsername(): ?string
     {
-        return $this->github_username;
+        return $this->githubUsername;
     }
 
-    public function setGithubUsername(?string $github_username): self
+    public function setGithubUsername(?string $githubUsername): self
     {
-        $this->github_username = $github_username;
+        $this->githubUsername = $githubUsername;
 
         return $this;
     }

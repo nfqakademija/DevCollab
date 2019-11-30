@@ -52,7 +52,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
 
     axios
       .post(
-        "https://jsonplaceholder.typicode.com/posts",
+        "/api/users",
         {
           username,
           email,

@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\SkillsRepository")
  */
 class Skills
@@ -21,10 +23,10 @@ class Skills
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $skills;
+    private $skill;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Users", mappedBy="skills")
+     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="skills")
      */
     private $users;
 
@@ -38,14 +40,14 @@ class Skills
         return $this->id;
     }
 
-    public function getSkills(): ?string
+    public function getSkill(): ?string
     {
-        return $this->skills;
+        return $this->skill;
     }
 
-    public function setSkills(string $skills): self
+    public function setSkill(string $skill): self
     {
-        $this->skills = $skills;
+        $this->skill = $skill;
 
         return $this;
     }
@@ -62,7 +64,7 @@ class Skills
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addSkill($this);
+            $user->setSkills($this);
         }
 
         return $this;
@@ -72,7 +74,10 @@ class Skills
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeSkill($this);
+            // set the owning side to null (unless already changed)
+            if ($user->getSkills() === $this) {
+                $user->setSkills(null);
+            }
         }
 
         return $this;

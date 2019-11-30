@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\ProjectsRepository")
  */
 class Projects
@@ -24,20 +24,24 @@ class Projects
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectDetails", mappedBy="projects")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $project_details;
+    private $repository;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Teams", inversedBy="projects", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deadline;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="projects")
      */
     private $team;
-
-    public function __construct()
-    {
-        $this->project_details = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -56,33 +60,38 @@ class Projects
         return $this;
     }
 
-    /**
-     * @return Collection|ProjectDetails[]
-     */
-    public function getProjectDetails(): Collection
+    public function getRepository(): ?string
     {
-        return $this->project_details;
+        return $this->repository;
     }
 
-    public function addProjectDetail(ProjectDetails $projectDetail): self
+    public function setRepository(?string $repository): self
     {
-        if (!$this->project_details->contains($projectDetail)) {
-            $this->project_details[] = $projectDetail;
-            $projectDetail->setProjects($this);
-        }
+        $this->repository = $repository;
 
         return $this;
     }
 
-    public function removeProjectDetail(ProjectDetails $projectDetail): self
+    public function getCreated(): ?\DateTimeInterface
     {
-        if ($this->project_details->contains($projectDetail)) {
-            $this->project_details->removeElement($projectDetail);
-            // set the owning side to null (unless already changed)
-            if ($projectDetail->getProjects() === $this) {
-                $projectDetail->setProjects(null);
-            }
-        }
+        return $this->created;
+    }
+
+    public function setCreated(?\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?\DateTimeInterface
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(?\DateTimeInterface $deadline): self
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }
@@ -92,7 +101,7 @@ class Projects
         return $this->team;
     }
 
-    public function setTeam(Teams $team): self
+    public function setTeam(?Teams $team): self
     {
         $this->team = $team;
 

@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -38,12 +39,18 @@ class TeamPoints
         return $this->points;
     }
 
-    public function setPoints(int $points): self
+    /**
+     * @param mixed $points
+     * @return TeamPoints
+     */
+    public function setPoints($points): TeamPoints
     {
         $this->points = $points;
 
         return $this;
     }
+
+
 
     public function getTeam(): ?Teams
     {

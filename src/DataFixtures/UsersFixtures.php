@@ -19,10 +19,11 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
             $users->setLastname('lastname-' . $i);
             $users->setEmail('email' . $i . '@gmail.com');
             $users->setPassword(mt_rand(10, 10000000));
+            $users->setRoles('["ROLE_ADMIN"]');
             $users->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
-            $manager->persist($users);
+            $manager->persist($users); // use when creating NEW object (unnecessary when updating)
         }
-        $manager->flush();
+        $manager->flush(); // Insert to DB
         $this->addReference(self::USERS_REFERENCE, $users);
     }
 

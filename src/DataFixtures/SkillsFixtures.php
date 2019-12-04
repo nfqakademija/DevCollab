@@ -12,7 +12,7 @@ class SkillsFixtures extends Fixture
     {
         for ($i = 1; $i < 150; $i++) {
             $skills = new Skills();
-            $skills->setSkills('amazing skill-'.$i);
+            $skills->setSkill('amazing skill-'.$i);
             $manager->persist($skills);
         }
         $manager->flush();

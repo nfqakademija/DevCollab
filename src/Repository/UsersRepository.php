@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use http\Client\Curl\User;
 
 /**
  * @method Users|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,10 +22,15 @@ class UsersRepository extends ServiceEntityRepository
         parent::__construct($registry, Users::class);
     }
 
-    // /**
-    //  * @return Users[] Returns an array of Users objects
-    //  */
-    /*
+    public function findAllUsers()
+    {
+        return 'Atsidaryk UserRepository, as esu metodas, kuri aprasei 26 eilutej';
+    }
+
+    /**
+     * @return Users[] Returns an array of Users objects
+     */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('u')
@@ -31,12 +39,9 @@ class UsersRepository extends ServiceEntityRepository
             ->orderBy('u.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
     public function findOneBySomeField($value): ?Users
     {
         return $this->createQueryBuilder('u')
@@ -46,5 +51,4 @@ class UsersRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }

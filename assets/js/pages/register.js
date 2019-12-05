@@ -50,19 +50,21 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    axios
-      .post(
-        "https://jsonplaceholder.typicode.com/posts",
-        {
+    let userJson = {
+      security: {
+        credentials: {
           username,
           email,
           password,
           passwordConfirmation
-        },
-        { withCredentials: true }
-      )
+        }
+      }
+    };
+
+    axios
+      .post("/user/register",userJson)
       .then(res => {
-        if (res.status === 201) {
+        if (res.status === 201 && res.statusText === "CREATED") {
           handleSuccesfulAuth(res.data);
           history.push("/");
         } else {
@@ -70,6 +72,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
         }
       })
       .catch(err => {
+        setErrors("There was a prolblem with your form. Please try again.");
         console.log(err);
       });
   };

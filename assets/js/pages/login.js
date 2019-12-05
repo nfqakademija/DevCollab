@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Particles } from "../components";
 import axios from "axios";
@@ -62,6 +62,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
         }
       })
       .catch(err => {
+        console.log(err);
         setErrors("There was a problem with login details. Try again");
       });
   };

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// TODO
+// Delete once backend is ready
 export const fetchTeams = async setTeams => {
   await axios
     .get("https://peaceful-plateau-57622.herokuapp.com/teams")
@@ -33,7 +35,6 @@ export const fetchTeamGithubRepoEvents = async (url, setGithubEvents) => {
   await axios
     .get(`${url}`)
     .then(res => {
-      console.log(url);
       setGithubEvents(res.data);
     })
     .catch(err => console.error(err));

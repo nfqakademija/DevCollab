@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Particles } from "../components";
-import { fetchUsers } from "../API";
+import axios from "axios";
 
 const CLASSES = {
   main:
@@ -27,14 +27,6 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
-  const [forgotPassword, setForgotPassword] = useState(false);
-  // TODO -> delete on once backend is ready
-  const [users, setUsers] = useState("");
-
-  // TODO -> delete once backend is ready
-  useEffect(() => {
-    fetchUsers(setUsers);
-  }, []);
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -52,22 +44,26 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    //TODO -> delete once backend api is ready
-    users.map(user => {
-      if (user.email === email && user.password === password) {
-        handleSuccesfulAuth(user);
-        history.push("/");
-      } else {
-        setErrors("There was a problem with login details. Try again");
+    let userJson = {
+      security: {
+        credentials: {
+          email: email,
+          password: password
+        }
       }
-    });
-  };
+    };
 
-  // TODO
-  // Add forgotPassword functions
-  const handleForgotPassword = e => {
-    e.preventDefault();
-    setForgotPassword(!forgotPassword);
+    axios
+      .post("api/security/login", userJson)
+      .then(res => {
+        if (res.status === 200 && res.statusText === "OK") {
+          handleSuccesfulAuth(res.data);
+          history.push("/");
+        }
+      })
+      .catch(err => {
+        setErrors("There was a problem with login details. Try again");
+      });
   };
 
   return (
@@ -108,12 +104,6 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
               onClick={handleSubmit}
             >
               Sign In
-            </button>
-            <button
-              className={form.forgotPasswordLink}
-              onClick={handleForgotPassword}
-            >
-              Forgot Password?
             </button>
           </div>
         </form>

@@ -11,6 +11,7 @@ import {
   fetchTeamGithubRepo,
   fetchTeamGithubRepoEvents
 } from "../API";
+import axios from "axios";
 
 const UserHomepage = ({ history, location }) => {
   const [, user] = useContext(MyContext);
@@ -23,7 +24,17 @@ const UserHomepage = ({ history, location }) => {
   useEffect(() => {
     fetchUsers(setUsers);
     fetchTeams(setTeams);
+    fetchTeamss();
   }, []);
+
+  const fetchTeamss = () => {
+    axios
+      .get("http://127.0.0.1:8000/api/teams")
+      .then(res => {
+        console.log("Results: " + res);
+      })
+      .catch(err => console.error(err));
+  };
 
   const userTeam = teams.filter(team => team.id === user.team_id);
 

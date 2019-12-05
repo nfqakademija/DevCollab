@@ -63,8 +63,9 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
       )
       .then(res => {
         if (res.status === 201) {
-          handleSuccesfulAuth(res.data);
-          history.push("/");
+          // handleSuccesfulAuth(res.data);
+          // history.push("/");
+          setErrors("There was a prolblem with your form. Please try again.");
         } else {
           setErrors("There was a prolblem with your form. Please try again.");
         }

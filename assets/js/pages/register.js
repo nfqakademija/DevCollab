@@ -62,7 +62,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
     };
 
     axios
-      .post("/user/register",userJson)
+      .post("/user/register", userJson)
       .then(res => {
         if (res.status === 201 && res.statusText === "CREATED") {
           handleSuccesfulAuth(res.data);

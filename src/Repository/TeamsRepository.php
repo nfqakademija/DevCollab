@@ -6,6 +6,8 @@ use App\Entity\Teams;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
+
+
 /**
  * @method Teams|null find($id, $lockMode = null, $lockVersion = null)
  * @method Teams|null findOneBy(array $criteria, array $orderBy = null)
@@ -17,6 +19,19 @@ class TeamsRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Teams::class);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTeams(): array
+    {
+        $qb = $this->createQueryBuilder('teams');
+        $qb
+            ->select(
+                'teams'
+            );
+        return $qb->getQuery()->getArrayResult();
     }
 
     // /**

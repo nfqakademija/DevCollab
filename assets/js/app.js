@@ -32,6 +32,7 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <AppProvider>
         <Layout isUserLoggedIn={this.state.isUserLoggedIn}>

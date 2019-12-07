@@ -11,6 +11,7 @@ import {
   fetchTeamGithubRepo,
   fetchTeamGithubRepoEvents
 } from "../API";
+import axios from "axios";
 
 const UserHomepage = ({ history, location }) => {
   const [, user] = useContext(MyContext);
@@ -23,15 +24,25 @@ const UserHomepage = ({ history, location }) => {
   useEffect(() => {
     fetchUsers(setUsers);
     fetchTeams(setTeams);
+    fetchTeamss();
   }, []);
+
+  const fetchTeamss = () => {
+    axios
+        .get("http://127.0.0.1:8000/api/teams")
+        .then(res => {
+          console.log("Results: " + res);
+        })
+        .catch(err => console.error(err));
+  };
 
   const userTeam = teams.filter(team => team.id === user.team_id);
 
   if (users.length > 0 && myTeammates.length === 0) {
     setMyTeammates(
-      users.filter(
-        teammate => teammate.team_id === user.team_id && teammate.id !== user.id
-      )
+        users.filter(
+            teammate => teammate.team_id === user.team_id && teammate.id !== user.id
+        )
     );
   }
 
@@ -44,12 +55,12 @@ const UserHomepage = ({ history, location }) => {
   }
 
   return (
-    <LayoutUserDashboard location={location} history={history}>
-      <div className="flex flex-wrap">
-        <TableMyTeammates myTeammates={myTeammates} />
-        <TableTeamRepo teamGithub={teamGithub} githubEvents={githubEvents} />
-      </div>
-    </LayoutUserDashboard>
+      <LayoutUserDashboard location={location} history={history}>
+        <div className="flex flex-wrap">
+          <TableMyTeammates myTeammates={myTeammates} />
+          <TableTeamRepo teamGithub={teamGithub} githubEvents={githubEvents} />
+        </div>
+      </LayoutUserDashboard>
   );
 };
 

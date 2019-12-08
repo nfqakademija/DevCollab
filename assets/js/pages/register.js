@@ -52,7 +52,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
 
     axios
       .post(
-        "/api/users",
+        "/registration",
         {
           username,
           email,

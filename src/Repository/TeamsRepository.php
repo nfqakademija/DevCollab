@@ -36,15 +36,19 @@ class TeamsRepository extends ServiceEntityRepository
 
 
 
-    public function getTeam()
+    public function getTeamById($id)
     {
         $query = $this->createQueryBuilder('teams');
         $query
             ->select(
                 'teams'
-            );
+            )
+            ->where($query->expr()->orX($query->expr()->eq('teams.id', $id)));
+
         return $query->getQuery()->getArrayResult();
     }
+
+
 
 
     // /**

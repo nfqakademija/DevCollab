@@ -21,7 +21,6 @@ class TeamController extends AbstractFOSRestController
      * @return Response
      */
 
-
     public function showTeams()
     {
         $repository = $this->getDoctrine()->getRepository(Teams::class);
@@ -41,6 +40,7 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
+
     public function createTeam(Request $request): Response
     {
         $team = new Teams();
@@ -58,6 +58,23 @@ class TeamController extends AbstractFOSRestController
 
         return $this->handleView($this->view($form->getErrors()));
         //return new Response($form);
+    }
+
+    /**
+     * List all Teams
+     * @Rest\Get("/teams/{id}", name="get_teamsbyid")
+     *
+     * @return Response
+     */
+
+    public function showTeamById(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Teams::class);
+        $teams = $repository->getTeamById($id);
+
+        return $this->handleView($this->view($teams));
+
+//        return $this->json($id);
     }
 }
 

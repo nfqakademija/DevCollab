@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Form\Type;
+namespace App\Controller\Form;
 
 use App\Entity\Teams;
 use Symfony\Component\Form\AbstractType;
@@ -14,7 +14,7 @@ class TeamType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('github', TextType::class);
+            ->add('githubRepo', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

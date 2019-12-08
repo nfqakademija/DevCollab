@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api;
 
-use App\Controller\Form\Type\TeamType;
+use App\Controller\Form\TeamType;
 use App\Entity\Teams;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,9 +27,11 @@ class TeamController extends AbstractFOSRestController
         $repository = $this->getDoctrine()->getRepository(Teams::class);
 
         $teams = $repository->getTeams();
-        $teams = json_encode($teams);
+//        $teams = json_encode($teams);
+//
+//        return new Response($teams);
 
-        return new Response($teams);
+        return $this->handleView($this->view($teams));
     }
 
     /**
@@ -51,9 +53,11 @@ class TeamController extends AbstractFOSRestController
             $em->flush();
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
+
         }
 
         return $this->handleView($this->view($form->getErrors()));
+        //return new Response($form);
     }
 }
 

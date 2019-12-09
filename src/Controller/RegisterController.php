@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Users;
-use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -18,16 +17,14 @@ use Symfony\Component\Serializer\Serializer;
 class RegisterController extends AbstractController
 {
     /**
-     * @Route("/registration", name="registration", methods="POST")
+     * @Route("/user/registration", name="registration", methods="POST")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response $response
      */
     public function registration(
         Request $request,
-        EntityManagerInterface $entityManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        EntityManagerInterface $entityManager
     ): Response {
         $user = new Users();
         $data = json_decode($request->getContent(), true);
@@ -67,22 +64,13 @@ class RegisterController extends AbstractController
         $response = new Response();
         if (isset($error)) {
             $response->setContent($error);
+            $response->setStatusCode(Response::HTTP_OK);
         } else {
+            $response->headers->setCookie(Cookie::create('name', $data['username']));
             $response->setContent($user);
+            $response->setStatusCode(Response::HTTP_CREATED);
         }
         $response->headers->set('Content-Type', 'text/plain');
         $response->send();
-    //
-    //        $repository = $this->getDoctrine()->getRepository(Users::class);
-    //        $users = $repository->findAll();
-//            $encoders = [new XmlEncoder(), new JsonEncoder()];
-//            $normalizers = [new ObjectNormalizer()];
-//            $serializer = new Serializer($normalizers, $encoders);
-//            $user = $serializer->serialize($user, 'json');
-//          $response = new Response(
-//              $user,
-//              Response::HTTP_OK,
-//              ['content-type' => 'text/html']
-//          );
     }
 }

@@ -3,12 +3,14 @@
 namespace App\Controller\Api;
 
 use App\Controller\Form\TeamType;
+use App\Entity\Projects;
 use App\Entity\Teams;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\TeamsRepository;
+use App\Repository\ProjectsRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
@@ -24,11 +26,7 @@ class TeamController extends AbstractFOSRestController
     public function showTeams()
     {
         $repository = $this->getDoctrine()->getRepository(Teams::class);
-
         $teams = $repository->getTeams();
-//        $teams = json_encode($teams);
-//
-//        return new Response($teams);
 
         return $this->handleView($this->view($teams));
     }
@@ -53,11 +51,9 @@ class TeamController extends AbstractFOSRestController
             $em->flush();
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
-
         }
 
         return $this->handleView($this->view($form->getErrors()));
-        //return new Response($form);
     }
 
     /**
@@ -69,13 +65,42 @@ class TeamController extends AbstractFOSRestController
 
     public function showTeamById(int $id)
     {
-        $repository = $this->getDoctrine()->getRepository(Teams::class);
-        $teams = $repository->getTeamById($id);
+        // $repository = $this->getDoctrine()->getRepository(Teams::class);
+        //$teams = $repository->getTeamById($id);
 
-        return $this->handleView($this->view($teams));
+//        $repository = $this->getDoctrine()->getRepository(Projects::class);
+//        $projects = $repository->getProjectsByTeamId($id);
 
-//        return $this->json($id);
+        //get team name of that project
+//        $projects = $this->getDoctrine()
+//            ->getRepository(Projects::class)
+//            ->find($id);
+//
+//        $team = $projects->getTeam()->getName();
+//
+//        $teamData = $this->handleView($this->view($team));
+
+        //try to get other way round: projects that below to the team:
+        $teams = $this->getDoctrine()
+            ->getRepository(Teams::class)
+            ->find($id);
+        $projects = $teams->getProjects();
+
+        $teamData = $this->handleView($this->view($projects));
+
+        return $teamData;
     }
+
+//    public function show($id)
+//    {
+//        $projects = $this->getDoctrine()
+//            ->getRepository(Projects::class)
+//            ->find($id);
+//        $team = $projects->getTeam()->getName();
+//        $teamData = $this->handleView($this->view($team));
+//
+//        return $teamData;
+//    }
 }
 
 

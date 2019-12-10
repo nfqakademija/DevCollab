@@ -73,12 +73,11 @@ class TeamController extends AbstractFOSRestController
             ->getRepository(Teams::class)
             ->find($id);
 
-        $array= array(
-            'id'=>$teams->getId(),
-            'name'=>$teams->getName(),
-            'githubRepo'=>$teams->getGithubRepo()
+        $array = array(
+            'id' => $teams->getId(),
+            'name' => $teams->getName(),
+            'githubRepo' => $teams->getGithubRepo()
         );
-        //$array=array('team' => $teaminfo);
 
         $users = $teams->getUsers();
         $projectsArray = [];
@@ -88,11 +87,11 @@ class TeamController extends AbstractFOSRestController
             array_push($tempArray, $user->getName());
             array_push($tempArray, $user->getLastname());
             array_push($tempArray, $user->getEmail());
-            array_push($projectsArray,$tempArray);
+            array_push($projectsArray, $tempArray);
         }
 
-        $setKey = array('users'=>$projectsArray);
-        $array = array_merge($array,$setKey);
+        $setKey = array('users' => $projectsArray);
+        $array = array_merge($array, $setKey);
 
 
         $projects = $teams->getProjects();
@@ -101,11 +100,11 @@ class TeamController extends AbstractFOSRestController
             $tempArray = [];
             array_push($tempArray, $project->getId());
             array_push($tempArray, $project->getTitle());
-            array_push($projectsArray,$tempArray);
+            array_push($projectsArray, $tempArray);
         }
 
-        $setKey = array('projects'=>$projectsArray);
-        $array = array_merge($array,$setKey);
+        $setKey = array('projects' => $projectsArray);
+        $array = array_merge($array, $setKey);
 
         $projects = $teams->getTeamPoints();
         $projectsArray = [];
@@ -113,8 +112,8 @@ class TeamController extends AbstractFOSRestController
             array_push($projectsArray, $project->getPoints());
         }
 
-        $setKey = array('teamPoints'=>$projectsArray);
-        $array = array_merge($array,$setKey);
+        $setKey = array('teamPoints' => $projectsArray);
+        $array = array_merge($array, $setKey);
 
         $projects = $teams->getTeamTasks();
         $projectsArray = [];
@@ -122,8 +121,8 @@ class TeamController extends AbstractFOSRestController
             array_push($projectsArray, $project->getTask());
         }
 
-        $setKey = array('teamTasks'=>$projectsArray);
-        $array = array_merge($array,$setKey);
+        $setKey = array('teamTasks' => $projectsArray);
+        $array = array_merge($array, $setKey);
 
         return $this->handleView($this->view($array));
     }

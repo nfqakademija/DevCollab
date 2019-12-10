@@ -7,8 +7,6 @@ use App\Entity\Teams;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-
-
 /**
  * @method Teams|null find($id, $lockMode = null, $lockVersion = null)
  * @method Teams|null findOneBy(array $criteria, array $orderBy = null)
@@ -55,26 +53,17 @@ class TeamsRepository extends ServiceEntityRepository
      * @return array
      */
 
-    public function getProjectsByTeamId (int $teamId):array
-    {
-        $qb = $this->createQueryBuilder('team');
-        $qb
-            ->select('team.name')
-            ->innerJoin('team.projects','projects')
-            ->where($qb->expr()->eq('team.id',':team_id'))
-            ->setParameter('team_id',$teamId)
-        ;
-
-
-        return $qb->getQuery()->getArrayResult();
-    }
-
-
-
-
-
-
-
+//    public function getProjectsByTeamId(int $teamId): array
+//    {
+//        $qb = $this->createQueryBuilder('team');
+//        $qb
+//            ->select('team.name')
+//            ->innerJoin('team.projects', 'projects')
+//            ->where($qb->expr()->eq('team.id', ':team_id'))
+//            ->setParameter('team_id', $teamId);
+//
+//        return $qb->getQuery()->getArrayResult();
+//    }
 
     // /**
     //  * @return Teams[] Returns an array of Teams objects

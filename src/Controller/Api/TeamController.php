@@ -127,5 +127,3 @@ class TeamController extends AbstractFOSRestController
         return $this->handleView($this->view($array));
     }
 }
-
-

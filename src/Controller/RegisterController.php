@@ -37,7 +37,7 @@ class RegisterController extends AbstractController
                     'email' => $data['email']
                 ]);
 
-        if ($data['password'] != $data['passwordConfirmation']) {
+        if ($data['password'] !== $data['passwordConfirmation']) {
             $error = "Passwords are not the same!";
         } elseif (strlen($data['password']) < 6) {
             $error = "Your password is to short. Please, try again.";
@@ -60,7 +60,6 @@ class RegisterController extends AbstractController
             $user = $serializer->serialize($user, 'json');
         }
 
-        // Response -------------------------------------------------------
         $response = new Response();
         if (isset($error)) {
             $response->setContent($error);

@@ -8,6 +8,8 @@ use App\Controller\Form\TeamType;
 use App\Entity\Projects;
 use App\Entity\Teams;
 use App\Entity\Users;
+use App\Factory\TeamsFactory;
+use App\Request\TeamsRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +30,7 @@ class TeamController extends AbstractFOSRestController
      * @return Response
      */
 
-    public function showTeams()
+    public function showTeams(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Teams::class);
         $teams = $repository->getTeams();
@@ -43,22 +45,21 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
-
     public function createTeam(Request $request): Response
     {
-        $team = new Teams();
-        $form = $this->createForm(TeamType::class, $team);
+        $teamsRequest = new TeamsRequest();
+        $form = $this->createForm(TeamType::class, $teamsRequest);
         $data = json_decode($request->getContent(), true);
         $form->submit($data);
         if ($form->isSubmitted() && $form->isValid()) {
+            $teams = TeamsFactory::create($teamsRequest->getName(), $teamsRequest->getGithubRepo());
             $em = $this->getDoctrine()->getManager();
-            $em->persist($team);
+            $em->persist($teams);
             $em->flush();
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
         }
-
-        return $this->handleView($this->view($form->getErrors()));
+        return $this->handleView($this->view($form->getErrors(), Response::HTTP_BAD_REQUEST));
     }
 
     /**
@@ -67,7 +68,7 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function getUsersByTeamId(int $id)
+    public function getUsersByTeamId(int $id): Response
     {
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
@@ -92,7 +93,6 @@ class TeamController extends AbstractFOSRestController
 
         $setKey = array('users' => $projectsArray);
         $array = array_merge($array, $setKey);
-
 
         $projects = $teams->getProjects();
         $projectsArray = [];

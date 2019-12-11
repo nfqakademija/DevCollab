@@ -30,6 +30,7 @@ class TeamsRepository extends ServiceEntityRepository
             ->select(
                 'teams'
             );
+
         return $query->getQuery()->getArrayResult();
     }
 
@@ -47,23 +48,6 @@ class TeamsRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getArrayResult();
     }
-
-    /**
-     * @param int $teamId
-     * @return array
-     */
-
-//    public function getProjectsByTeamId(int $teamId): array
-//    {
-//        $qb = $this->createQueryBuilder('team');
-//        $qb
-//            ->select('team.name')
-//            ->innerJoin('team.projects', 'projects')
-//            ->where($qb->expr()->eq('team.id', ':team_id'))
-//            ->setParameter('team_id', $teamId);
-//
-//        return $qb->getQuery()->getArrayResult();
-//    }
 
     // /**
     //  * @return Teams[] Returns an array of Teams objects

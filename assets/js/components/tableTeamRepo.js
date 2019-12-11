@@ -23,7 +23,12 @@ const TableTeamRepository = ({ teamGithub, githubEvents }) => (
           <div className={section.halfSize}>
             <div className={section.inner}>
               <p className={section.title}>Repository</p>
-              <a href={teamGithub.html_url} target="_blank" without rel="noopener noreferrer">
+              <a
+                href={teamGithub.html_url}
+                target="_blank"
+                without
+                rel="noopener noreferrer"
+              >
                 <img src={GithubIcon} alt="" className="mx-auto" />
               </a>
             </div>

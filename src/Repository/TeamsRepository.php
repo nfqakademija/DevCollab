@@ -39,7 +39,7 @@ class TeamsRepository extends ServiceEntityRepository
      * @return array
      */
 
-    public function getTeamById(int $id)
+    public function getTeamById(int $id): array
     {
         $query = $this->createQueryBuilder('teams');
         $query

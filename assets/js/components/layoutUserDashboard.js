@@ -55,7 +55,7 @@ const username = localStorage.getItem("user");
         <div className="w-full h-auto my-8 items-center hidden xl:flex">
           <div className="bg-blue-500 h-12 w-12 rounded-full flex justify-center items-center">
             <span className="text-white text-2xl font-semibold">
-              kazkas
+              {username}
             </span>
           </div>
           <div className="ml-2 text-left text-lg font-semibold">

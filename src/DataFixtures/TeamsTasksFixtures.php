@@ -15,7 +15,6 @@ class TeamsTasksFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i < 10; $i++) {
             $teamTasks = new TeamTasks();
             $teamTasks->setTask('task-'.$i);
-            $teamTasks->setCreatedBy(null);
             $teamTasks->setStatus(mt_rand(0, 1));
             $teamTasks->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
             $manager->persist($teamTasks);

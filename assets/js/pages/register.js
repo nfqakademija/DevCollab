@@ -49,7 +49,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-
         axios
         .post(
             "/user/registration",
@@ -76,7 +75,6 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
             console.log(err);
         });
     };
-
     return (
     <div className={main}>
       <div className={container} style={{ zIndex: 2 }}>

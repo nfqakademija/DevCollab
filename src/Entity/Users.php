@@ -18,12 +18,12 @@ class Users
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
@@ -58,7 +58,7 @@ class Users
     private $team;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $roles;
 
@@ -66,6 +66,11 @@ class Users
      * @ORM\ManyToOne(targetEntity="App\Entity\Skills", inversedBy="users")
      */
     private $skills;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $username;
 
     public function getId(): ?int
     {
@@ -188,6 +193,18 @@ class Users
     public function setSkills(?Skills $skills): self
     {
         $this->skills = $skills;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

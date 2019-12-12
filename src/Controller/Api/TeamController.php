@@ -173,8 +173,8 @@ class TeamController extends AbstractFOSRestController
 //            ->getRepository(Users::class)
 //            ->find(20);
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $product = $entityManager->getRepository(Users::class)->find(20);
+//        $entityManager = $this->getDoctrine()->getManager();
+//        $product = $entityManager->getRepository(Users::class)->find(20);
 
 //        if (!$product) {
 //            throw $this->createNotFoundException(
@@ -182,8 +182,8 @@ class TeamController extends AbstractFOSRestController
 //            );
 //        }
 
-        $product->setTeam(76);
-        $entityManager->flush();
+//        $product->setTeam(76);
+//        $entityManager->flush();
 
 //        return $this->redirectToRoute('product_show', [
 //            'id' => $product->getId()
@@ -191,20 +191,12 @@ class TeamController extends AbstractFOSRestController
 
 //        $teams1->setTeam(76);
 
-        dd($teams1);
-        return $this->handleView($this->view($teams));
-   }
 
+//        return $this->handleView($this->view($teams));
 
-
-    /**
-     * @Route("/users/edit/{id}")
-     */
-    public function update($id)
-    {
         $entityManager = $this->getDoctrine()->getManager();
-        $teams = $entityManager->getRepository(Teams::class)->find($id);
-        $user = $entityManager->getRepository(Users::class)->find(20);
+        $teams = $entityManager->getRepository(Teams::class)->find(65);
+        $user = $entityManager->getRepository(Users::class)->find(21);
 
         if (!$teams) {
             throw $this->createNotFoundException(
@@ -215,11 +207,8 @@ class TeamController extends AbstractFOSRestController
         $teams->addUser($user);
 //        $teams->setTeam(66);
         $entityManager->flush();
-
-        return $this->redirectToRoute('product_show', [
-            'id' => $teams->getId()
-        ]);
-    }
+        dd($teams,$user);
+   }
 
 }
 

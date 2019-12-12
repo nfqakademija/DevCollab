@@ -158,15 +158,14 @@ class TeamController extends AbstractFOSRestController
         $TeamstoArray = json_decode($TeamArray, true);
         $UsersArray = $this->showUsers()->getContent();
         $UserstoArray = json_decode($UsersArray, true);
-        foreach ($UserstoArray as $key=>$user){
-            //$var = $UserstoArray[1]['name'];
+//        foreach ($UserstoArray as $key=>$user){
+//            $var = $UserstoArray[4]['name'];
             $randomTeam = array_rand($TeamstoArray, 1);
-            $teams[$randomTeam][] = $user;
-        }
+        $user = $UserstoArray[3]['name'];;
+        $teams[$randomTeam][] = $user;
+//        }
         dd($teams);
 
         return $this->handleView($this->view($teams));
     }
-
-
 }

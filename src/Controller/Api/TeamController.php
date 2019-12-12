@@ -21,6 +21,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Serializer\Serializer;
 
+
 class TeamController extends AbstractFOSRestController
 {
     /**
@@ -161,11 +162,64 @@ class TeamController extends AbstractFOSRestController
 //        foreach ($UserstoArray as $key=>$user){
 //            $var = $UserstoArray[4]['name'];
             $randomTeam = array_rand($TeamstoArray, 1);
-        $user = $UserstoArray[3]['name'];;
+        $user = $UserstoArray[19]['name'];;
         $teams[$randomTeam][] = $user;
 //        }
-        dd($teams);
+//        dd($TeamArray);
+//        $users = new Users();
+//        $users->setTeam(60);
 
+//        $teams1 = $this->getDoctrine()
+//            ->getRepository(Users::class)
+//            ->find(20);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $product = $entityManager->getRepository(Users::class)->find(20);
+
+//        if (!$product) {
+//            throw $this->createNotFoundException(
+//                'No product found for id '.$id
+//            );
+//        }
+
+        $product->setTeam(76);
+        $entityManager->flush();
+
+//        return $this->redirectToRoute('product_show', [
+//            'id' => $product->getId()
+//        ]);
+
+//        $teams1->setTeam(76);
+
+        dd($teams1);
         return $this->handleView($this->view($teams));
+   }
+
+
+
+    /**
+     * @Route("/users/edit/{id}")
+     */
+    public function update($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $teams = $entityManager->getRepository(Teams::class)->find($id);
+        $user = $entityManager->getRepository(Users::class)->find(20);
+
+        if (!$teams) {
+            throw $this->createNotFoundException(
+                'No temas found for id '.$id
+            );
+        }
+
+        $teams->addUser($user);
+//        $teams->setTeam(66);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('product_show', [
+            'id' => $teams->getId()
+        ]);
     }
+
 }
+

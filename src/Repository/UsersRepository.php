@@ -18,6 +18,18 @@ class UsersRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Users::class);
     }
+
+    public function getUsersData(string $username)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.username, p.name, p.lastname, p.location, p.githubUsername, p.shortDescription')
+            ->where('p.username = :user')
+            ->setParameter('user', $username);
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
     // /**
     //  * @return Users[] Returns an array of Users objects
     //  */

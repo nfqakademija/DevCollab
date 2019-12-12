@@ -28,7 +28,20 @@ class TeamsRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('teams');
         $query
             ->select(
-                'teams'
+                'teams.name'
+            );
+        return $query->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers(): array
+    {
+        $query = $this->createQueryBuilder('users');
+        $query
+            ->select(
+                'users.name'
             );
         return $query->getQuery()->getArrayResult();
     }

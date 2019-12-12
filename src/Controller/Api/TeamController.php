@@ -29,13 +29,26 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
-
     public function showTeams()
     {
         $repository = $this->getDoctrine()->getRepository(Teams::class);
         $teams = $repository->getTeams();
 
         return $this->handleView($this->view($teams));
+    }
+
+    /**
+     * List all Users
+     * @Rest\Get("/users", name="get_users")
+     *
+     * @return Response
+     */
+    public function showUsers()
+    {
+        $repository = $this->getDoctrine()->getRepository(Users::class);
+        $users = $repository->getUsers();
+
+        return $this->handleView($this->view($users));
     }
 
     /**
@@ -74,7 +87,9 @@ class TeamController extends AbstractFOSRestController
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
             ->getProjectsByTeamId($id);
-        dd($teams);
+
+
+
 
 //        $array = array(
 //            'id' => $teams->getId(),
@@ -130,4 +145,28 @@ class TeamController extends AbstractFOSRestController
 //        return $this->handleView($this->view($array));//        return $this->handleView($this->view($array));
 
     }
+
+    /**
+     * Join a Team
+     * @Rest\Get("/jointeam", name="get_jointeam")
+     *
+     * @return Response
+     */
+    public function teamSorter()
+    {
+        $TeamArray = $this->showTeams()->getContent();
+        $TeamstoArray = json_decode($TeamArray, true);
+        $UsersArray = $this->showUsers()->getContent();
+        $UserstoArray = json_decode($UsersArray, true);
+        foreach ($UserstoArray as $key=>$user){
+            //$var = $UserstoArray[1]['name'];
+            $randomTeam = array_rand($TeamstoArray, 1);
+            $teams[$randomTeam][] = $user;
+        }
+        dd($teams);
+
+        return $this->handleView($this->view($teams));
+    }
+
+
 }

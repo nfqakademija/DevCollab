@@ -140,7 +140,6 @@ class TeamController extends AbstractFOSRestController
         $array = array_merge($array, $setKey);
 
         return $this->handleView($this->view($array));
-
     }
 
     /**

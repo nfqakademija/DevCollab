@@ -71,7 +71,7 @@ class TeamsRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('team');
         $qb
-            ->select('team.name','projects.title')
+            ->select('team.name', 'projects.title')
             ->innerJoin('team.projects', 'projects')
             ->where($qb->expr()->eq('team.id', ':team_id'))
             ->setParameter('team_id', $teamId);

@@ -126,4 +126,45 @@ class TeamController extends AbstractFOSRestController
 
         return $this->handleView($this->view($array));
     }
+
+    //perkelt i UsersController (AT)
+
+    /**
+     * List all users
+     * @Rest\Get("/users", name="get_users")
+     * @return Response
+     */
+    public function showUsers(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Users::class);
+        $users = $repository->getUsers();
+        return $this->handleView($this->view($users));
+    }
+
+    /**
+     * Join a Team
+     * @Rest\Post("/jointeam", name="get_jointeam")
+     * @param Request $request
+     * @return Response
+     */
+    public function teamSorter(Request $request): Response
+    {
+        $userId = json_decode($request->getContent());
+        $userId = $userId[0];
+
+        $teamsArray = $this->showTeams()->getContent();
+        $teamstoArray = json_decode($teamsArray, true);
+        $randomTeam = array_rand($teamstoArray, 1);
+        $firstTeamId = $teamstoArray[0]['id'];
+        $randomTeamConverted = $firstTeamId + $randomTeam;
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
+        $user = $entityManager->getRepository(Users::class)->find($userId);
+
+        $team->addUser($user);
+        $entityManager->flush();
+
+        return $this->handleView($this->view($team->getId()));
+    }
 }

@@ -27,7 +27,7 @@ class UsersRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('users');
         $query
             ->select(
-                'users.name'
+                'users'
             );
         return $query->getQuery()->getArrayResult();
     }

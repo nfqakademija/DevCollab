@@ -67,14 +67,14 @@ class TeamController extends AbstractFOSRestController
         $data = json_decode($request->getContent(), true);
         $form->submit($data);
         if ($form->isSubmitted() && $form->isValid()) {
-            $teams=TeamsFactory::create($teamsRequest->getName(), $teamsRequest->getGithubRepo());
+            $teams = TeamsFactory::create($teamsRequest->getName(), $teamsRequest->getGithubRepo());
             $em = $this->getDoctrine()->getManager();
             $em->persist($teams);
             $em->flush();
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
         }
-        return $this->handleView($this->view($form->getErrors(),Response::HTTP_BAD_REQUEST));
+        return $this->handleView($this->view($form->getErrors(), Response::HTTP_BAD_REQUEST));
     }
 
     /**
@@ -88,8 +88,6 @@ class TeamController extends AbstractFOSRestController
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
             ->getProjectsByTeamId($id);
-
-
 
 
 //        $array = array(
@@ -149,66 +147,26 @@ class TeamController extends AbstractFOSRestController
 
     /**
      * Join a Team
-     * @Rest\Get("/jointeam", name="get_jointeam")
+     * @Rest\Post("/jointeam", name="get_jointeam")
      *
      * @return Response
      */
-    public function teamSorter()
+    public function teamSorter(Request $request)
     {
-        $TeamArray = $this->showTeams()->getContent();
-        $TeamstoArray = json_decode($TeamArray, true);
-        $UsersArray = $this->showUsers()->getContent();
-        $UserstoArray = json_decode($UsersArray, true);
-//        foreach ($UserstoArray as $key=>$user){
-//            $var = $UserstoArray[4]['name'];
-            $randomTeam = array_rand($TeamstoArray, 1);
-        $user = $UserstoArray[19]['name'];;
-        $teams[$randomTeam][] = $user;
-//        }
-//        dd($TeamArray);
-//        $users = new Users();
-//        $users->setTeam(60);
+        $userId = json_decode($request->getContent());
+        $userId = $userId[0];
 
-//        $teams1 = $this->getDoctrine()
-//            ->getRepository(Users::class)
-//            ->find(20);
-
-//        $entityManager = $this->getDoctrine()->getManager();
-//        $product = $entityManager->getRepository(Users::class)->find(20);
-
-//        if (!$product) {
-//            throw $this->createNotFoundException(
-//                'No product found for id '.$id
-//            );
-//        }
-
-//        $product->setTeam(76);
-//        $entityManager->flush();
-
-//        return $this->redirectToRoute('product_show', [
-//            'id' => $product->getId()
-//        ]);
-
-//        $teams1->setTeam(76);
-
-
-//        return $this->handleView($this->view($teams));
-
+        $teamsArray = $this->showTeams()->getContent();
+        $teamstoArray = json_decode($teamsArray, true);
+        $randomTeam = array_rand($teamstoArray, 1);
+        $firstTeamId = $teamstoArray[0]['id'];
+        $randomTeamConverted = $firstTeamId + $randomTeam;
         $entityManager = $this->getDoctrine()->getManager();
-        $teams = $entityManager->getRepository(Teams::class)->find(65);
-        $user = $entityManager->getRepository(Users::class)->find(21);
-
-        if (!$teams) {
-            throw $this->createNotFoundException(
-                'No temas found for id '.$id
-            );
-        }
-
-        $teams->addUser($user);
-//        $teams->setTeam(66);
+        $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
+        $user = $entityManager->getRepository(Users::class)->find($userId);
+        $team->addUser($user);
         $entityManager->flush();
-        dd($teams,$user);
-   }
 
+        return $this->handleView($this->view($team->getId()));
+    }
 }
-

@@ -21,7 +21,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Serializer\Serializer;
 
-
 class TeamController extends AbstractFOSRestController
 {
     /**
@@ -30,7 +29,8 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function showTeams()
+
+    public function showTeams(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Teams::class);
         $teams = $repository->getTeams();
@@ -61,7 +61,6 @@ class TeamController extends AbstractFOSRestController
      */
     public function createTeam(Request $request): Response
     {
-        //should be teamsRequest request
         $teamsRequest = new TeamsRequest();
         $form = $this->createForm(TeamType::class, $teamsRequest);
         $data = json_decode($request->getContent(), true);
@@ -74,6 +73,7 @@ class TeamController extends AbstractFOSRestController
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
         }
+
         return $this->handleView($this->view($form->getErrors(), Response::HTTP_BAD_REQUEST));
     }
 
@@ -83,12 +83,11 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function getUsersByTeamId(int $id)
+    public function getUsersByTeamId(int $id): Response
     {
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
             ->find($id);
-
 
         $array = array(
             'id' => $teams->getId(),
@@ -109,7 +108,6 @@ class TeamController extends AbstractFOSRestController
 
         $setKey = array('users' => $projectsArray);
         $array = array_merge($array, $setKey);
-
 
         $projects = $teams->getProjects();
         $projectsArray = [];

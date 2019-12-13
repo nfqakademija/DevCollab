@@ -30,6 +30,7 @@ class TeamsRepository extends ServiceEntityRepository
             ->select(
                 'teams'
             );
+
         return $query->getQuery()->getArrayResult();
     }
 
@@ -41,7 +42,7 @@ class TeamsRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('users');
         $query
             ->select(
-                'users.name'
+                'users'
             );
         return $query->getQuery()->getArrayResult();
     }
@@ -51,7 +52,7 @@ class TeamsRepository extends ServiceEntityRepository
      * @return array
      */
 
-    public function getTeamById(int $id)
+    public function getTeamById(int $id): array
     {
         $query = $this->createQueryBuilder('teams');
         $query

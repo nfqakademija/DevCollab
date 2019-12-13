@@ -15,10 +15,12 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
     {
         for ($i = 1; $i < 20; $i++) {
             $users = new Users();
+            $users->setUsername('username-' . $i);
             $users->setName('firstname-' . $i);
             $users->setLastname('lastname-' . $i);
             $users->setEmail('email' . $i . '@gmail.com');
             $users->setPassword(mt_rand(10, 10000000));
+            $users->setRoles('ROLES_USER');
             $users->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
             $users->setRoles('["ROLES_USER"]');
             $manager->persist($users);

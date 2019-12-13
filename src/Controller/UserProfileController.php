@@ -10,10 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use App\Service\SerializerFunction;
+use App\Service\UserProfileUpdate;
 
 class UserProfileController extends AbstractController
 {
@@ -21,10 +19,14 @@ class UserProfileController extends AbstractController
      * @Route("/user/profile", name="get_data_profile", methods="GET")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param SerializerFunction $ser
      * @return Response $response
      */
-    public function getUserData(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function getUserData(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SerializerFunction $ser
+    ): Response {
         $data = $request->query->get('username');
         $repository = $this->getDoctrine()->getRepository(Users::class);
         $username = $repository->findOneBy([
@@ -32,7 +34,7 @@ class UserProfileController extends AbstractController
         ]);
         if ($username !== null) {
             $username = $repository->getUsersData($data);
-            $username = $this->serializeris($username);
+            $username = $ser->serializeris($username);
         } else {
             $username = "User do not exists.";
         }
@@ -47,44 +49,29 @@ class UserProfileController extends AbstractController
      * @Route("/user/profile", name="update_data_profile", methods="POST")
      * @param Request $request
      * @param EntityManagerInterface $em
+     * @param SerializerFunction $ser
+     * @param UserProfileUpdate $usr
      * @return Response $response
      */
-    public function updateUserData(Request $request, EntityManagerInterface $em): Response
-    {
-//        $form = $this->createForm(UserProfileType::class);
+    public function updateUserData(
+        Request $request,
+        EntityManagerInterface $em,
+        SerializerFunction $ser,
+        UserProfileUpdate $usr
+    ): Response {
         $data = $request->request->all();
-
-        $repository = $this->getDoctrine()
-            ->getRepository(Users::class)
-            ->findOneBy(['username' => $data['username']]);
-        if ($repository === null) {
-            $user = "nerado";
+        $form = $this->createForm(UserProfileType::class);
+        $form->handleRequest($request);
+        $form->submit($request->request->all());
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $usr->updateUserProfileData($data);
         } else {
-//            $user = new Users();
-            $em = $this->getDoctrine()->getManager();
-            $repository->setName($data['name']);
-            $repository->setLastname($data['lastname']);
-            $repository->setLocation($data['location']);
-            $repository->setGithubUsername($data['githubUsername']);
-            $repository->setShortDescription($data['shortDescription']);
-            $em->flush();
-            $data = "all good";
+            $data = "Something went wrong, please try again.";
         }
-        $data = $this->serializeris($data);
+        $data = $ser->serializeris($data);
         $response = new Response();
         $response->setContent($data);
         $response->setStatusCode(Response::HTTP_OK);
-        $response->headers->set('Content-Type', 'text/plain');
         $response->send();
-    }
-
-    private function serializeris($objektas)
-    {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-        $objektas = $serializer->serialize($objektas, 'json');
-
-        return $objektas;
     }
 }

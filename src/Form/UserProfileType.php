@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,10 +13,12 @@ class UserProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('lastname')
-            ->add('email')
-            ->add('username')
+            ->add('username', TextType::class)
+            ->add('name', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('location', TextType::class)
+            ->add('githubUsername', TextType::class)
+            ->add('shortDescription', TextType::class)
         ;
     }
 
@@ -23,6 +26,7 @@ class UserProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Users::class,
+            'csrf_protection' => false
         ]);
     }
 }

@@ -147,10 +147,14 @@ class TeamController extends AbstractFOSRestController
         $entityManager = $this->getDoctrine()->getManager();
         $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
         $user = $entityManager->getRepository(Users::class)->find($userId);
-        dd($user);
         $team->addUser($user);
         $entityManager->flush();
+        $user = $entityManager->getRepository(Users::class)->getUserById($userId);
 
-        return $this->handleView($this->view($team->getId()));
+        $user['user'] = $user[0];
+        unset($user[0]);
+        $user['teamId'] = $randomTeamConverted;
+
+        return $this->handleView($this->view($user));
     }
 }

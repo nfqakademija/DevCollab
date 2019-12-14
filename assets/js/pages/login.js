@@ -63,6 +63,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
       })
       .catch(err => {
         setErrors("There was a problem with login details. Try again");
+        console.err(err);
       });
   };
 

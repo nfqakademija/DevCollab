@@ -22,12 +22,12 @@ export const fetchUsers = async setUsers => {
 
 // TODO -> Update once backend is ready to send something back
 export const fetchTeam = async (teamId, setTeam) => {
-    await axios
-        .get(`/api/teams/${teamId}`)
-        .then(res => {
-            setTeam(res.data);
-        })
-        .catch(err => console.error(err));
+  await axios
+    .get(`/api/teams/${teamId}`)
+    .then(res => {
+      setTeam(res.data);
+    })
+    .catch(err => console.error(err));
 };
 
 // TODO -> update once backend is working
@@ -49,5 +49,3 @@ export const fetchTeamGithubRepoEvents = async (url, setGithubEvents) => {
     })
     .catch(err => console.error(err));
 };
-
-

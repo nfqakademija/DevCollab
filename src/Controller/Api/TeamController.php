@@ -7,6 +7,7 @@ use ApiPlatform\Core\Serializer\JsonEncoder;
 use App\Controller\Form\TeamType;
 use App\Entity\Projects;
 use App\Entity\Teams;
+use App\Entity\User;
 use App\Entity\Users;
 use App\Factory\TeamsFactory;
 use App\Request\TeamsRequest;
@@ -44,9 +45,9 @@ class TeamController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function showUsers()
+    public function showUser()
     {
-        $repository = $this->getDoctrine()->getRepository(Users::class);
+        $repository = $this->getDoctrine()->getRepository(User::class);
         $users = $repository->getUsers();
 
         return $this->handleView($this->view($users));
@@ -78,24 +79,23 @@ class TeamController extends AbstractFOSRestController
     }
 
     /**
-     * List all Teams
+     * @param $id
      * @Rest\Get("/teams/{id}", name="get_teamsbyid")
-     *
      * @return Response
      */
-    public function getUsersByTeamId(int $id): Response
+    public function getUsersByTeamId($id): Response
     {
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
             ->find($id);
-
         $array = array(
             'id' => $teams->getId(),
             'name' => $teams->getName(),
             'githubRepo' => $teams->getGithubRepo()
         );
-
         $users = $teams->getUsers();
+        dd($users);
+
         $projectsArray = [];
         foreach ($users as $user) {
             $tempArray = [];
@@ -159,7 +159,7 @@ class TeamController extends AbstractFOSRestController
         $randomTeamConverted = $firstTeamId + $randomTeam;
         $entityManager = $this->getDoctrine()->getManager();
         $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
-        $user = $entityManager->getRepository(Users::class)->find($userId);
+        $user = $entityManager->getRepository(User::class)->find($userId);
 
         $team->addUser($user);
         $entityManager->flush();

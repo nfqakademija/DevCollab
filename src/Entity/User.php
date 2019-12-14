@@ -59,19 +59,19 @@ class User
     private $short_description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $roles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="users")
+     */
+    private $team;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Skills", mappedBy="user")
      */
     private $skills;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="User")
-     */
-    private $team;
 
     public function __construct()
     {
@@ -191,6 +191,18 @@ class User
         return $this;
     }
 
+    public function getTeam(): ?Teams
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Teams $team): self
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Skills[]
      */
@@ -218,18 +230,6 @@ class User
                 $skill->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getTeam(): ?Teams
-    {
-        return $this->team;
-    }
-
-    public function setTeam(?Teams $team): self
-    {
-        $this->team = $team;
 
         return $this;
     }

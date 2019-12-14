@@ -2,19 +2,20 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class UsersFixtures extends Fixture implements DependentFixtureInterface
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public const USERS_REFERENCE = 'admin-users';
 
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i < 20; $i++) {
-            $users = new Users();
+            $users = new User();
             $users->setUsername('username-' . $i);
             $users->setName('firstname-' . $i);
             $users->setLastname('lastname-' . $i);

@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Projects;
 use App\Entity\Teams;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -35,19 +34,6 @@ class TeamsRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array
-     */
-    public function getUsers(): array
-    {
-        $query = $this->createQueryBuilder('users');
-        $query
-            ->select(
-                'users'
-            );
-        return $query->getQuery()->getArrayResult();
-    }
-
-    /**
      * @param int $id
      * @return array
      */
@@ -60,23 +46,6 @@ class TeamsRepository extends ServiceEntityRepository
             ->where($query->expr()->orX($query->expr()->eq('teams.id', $id)));
 
         return $query->getQuery()->getArrayResult();
-    }
-
-    /**
-     * @param int $teamId
-     * @return array
-     */
-
-    public function getProjectsByTeamId(int $teamId): array
-    {
-        $qb = $this->createQueryBuilder('team');
-        $qb
-            ->select('team.name', 'projects.title')
-            ->innerJoin('team.projects', 'projects')
-            ->where($qb->expr()->eq('team.id', ':team_id'))
-            ->setParameter('team_id', $teamId);
-
-        return $qb->getQuery()->getArrayResult();
     }
 
     // /**

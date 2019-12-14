@@ -24,12 +24,11 @@ class UserRepository extends ServiceEntityRepository
      */
     public function getUsers(): array
     {
-        $query = $this->createQueryBuilder('user');
+        $query = $this->createQueryBuilder('users');
         $query
             ->select(
-                'user'
+                'users'
             );
-
         return $query->getQuery()->getArrayResult();
     }
 

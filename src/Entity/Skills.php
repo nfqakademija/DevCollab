@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,19 +22,9 @@ class Skills
     private $skill;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="skills")
-     */
-    private $users;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="skills")
      */
     private $user;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -52,37 +39,6 @@ class Skills
     public function setSkill(string $skill): self
     {
         $this->skill = $skill;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Users[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(Users $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setSkills($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Users $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getSkills() === $this) {
-                $user->setSkills(null);
-            }
-        }
 
         return $this;
     }

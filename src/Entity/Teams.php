@@ -49,12 +49,18 @@ class Teams
      */
     private $projects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="team")
+     */
+    private $User;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->teamTasks = new ArrayCollection();
         $this->teamPoints = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->User = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,5 +214,13 @@ class Teams
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->User;
     }
 }

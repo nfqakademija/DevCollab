@@ -22,11 +22,11 @@ class App extends React.Component {
     this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
   }
 
+  //TODO -> update once backend login/registration is working
   handleSuccesfulAuth(data) {
     this.setState({
       isUserLoggedIn: true
     });
-    // TODO -> store jwt token
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("user", JSON.stringify(data));
   }

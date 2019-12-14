@@ -7,14 +7,15 @@ use App\Controller\UserProfileController;
 use App\Entity\Users;
 use App\Form\UserProfileType;
 use App\Repository\UsersRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class UserProfileUpdate
+class UserProfileUpdate extends UserProfileController
 {
     /**
      * @param UserProfileController $request
      * @return string
      */
-    public function updateUserProfileData(UserProfileController $request)
+    public function updateUserProfileData($request)
     {
         $repository = $this->getDoctrine()
             ->getRepository(Users::class)
@@ -22,15 +23,14 @@ class UserProfileUpdate
         if ($repository === null) {
             $data = "Something wrong, try again!";
         } else {
-            $user = new Users();
             $em = $this->getDoctrine()->getManager();
-            $repository->setName($data['name']);
-            $repository->setLastname($data['lastname']);
-            $repository->setLocation($data['location']);
-            $repository->setGithubUsername($data['githubUsername']);
-            $repository->setShortDescription($data['shortDescription']);
+            $repository->setName($request['name']);
+            $repository->setLastname($request['lastname']);
+            $repository->setLocation($request['location']);
+            $repository->setGithubUsername($request['githubUsername']);
+            $repository->setShortDescription($request['shortDescription']);
             $em->flush();
         }
-        return $data;
+        return $request;
     }
 }

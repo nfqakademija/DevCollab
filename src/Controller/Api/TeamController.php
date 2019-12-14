@@ -39,6 +39,20 @@ class TeamController extends AbstractFOSRestController
     }
 
     /**
+     * List all Users
+     * @Rest\Get("/users", name="get_users")
+     *
+     * @return Response
+     */
+    public function showUsers()
+    {
+        $repository = $this->getDoctrine()->getRepository(Users::class);
+        $users = $repository->getUsers();
+
+        return $this->handleView($this->view($users));
+    }
+
+    /**
      * Create a new Team
      * @Rest\Post("/team", name="post_team")
      * @param Request $request
@@ -59,6 +73,7 @@ class TeamController extends AbstractFOSRestController
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
         }
+
         return $this->handleView($this->view($form->getErrors(), Response::HTTP_BAD_REQUEST));
     }
 
@@ -125,5 +140,30 @@ class TeamController extends AbstractFOSRestController
         $array = array_merge($array, $setKey);
 
         return $this->handleView($this->view($array));
+    }
+
+    /**
+     * Join a Team
+     * @Rest\Post("/jointeam", name="get_jointeam")
+     *
+     * @return Response
+     */
+    public function teamSorter(Request $request)
+    {
+        $userId = json_decode($request->getContent());
+        $userId = $userId[0];
+        $teamsArray = $this->showTeams()->getContent();
+        $teamstoArray = json_decode($teamsArray, true);
+        $randomTeam = array_rand($teamstoArray, 1);
+        $firstTeamId = $teamstoArray[0]['id'];
+        $randomTeamConverted = $firstTeamId + $randomTeam;
+        $entityManager = $this->getDoctrine()->getManager();
+        $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
+        $user = $entityManager->getRepository(Users::class)->find($userId);
+
+        $team->addUser($user);
+        $entityManager->flush();
+
+        return $this->handleView($this->view($team->getId()));
     }
 }

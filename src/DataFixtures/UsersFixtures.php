@@ -22,6 +22,7 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
             $users->setPassword(mt_rand(10, 10000000));
             $users->setRoles('ROLES_USER');
             $users->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
+            $users->setRoles('["ROLES_USER"]');
             $manager->persist($users);
         }
         $manager->flush();

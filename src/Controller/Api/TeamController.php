@@ -152,7 +152,6 @@ class TeamController extends AbstractFOSRestController
     {
         $userId = json_decode($request->getContent());
         $userId = $userId[0];
-
         $teamsArray = $this->showTeams()->getContent();
         $teamstoArray = json_decode($teamsArray, true);
         $randomTeam = array_rand($teamstoArray, 1);
@@ -161,6 +160,7 @@ class TeamController extends AbstractFOSRestController
         $entityManager = $this->getDoctrine()->getManager();
         $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
         $user = $entityManager->getRepository(Users::class)->find($userId);
+
         $team->addUser($user);
         $entityManager->flush();
 

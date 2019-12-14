@@ -29,6 +29,7 @@ class UsersRepository extends ServiceEntityRepository
             ->select(
                 'users'
             );
+
         return $query->getQuery()->getArrayResult();
     }
 

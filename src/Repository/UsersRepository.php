@@ -27,7 +27,8 @@ class UsersRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('users');
         $query
             ->select(
-                'users'
+                'users.id', 'users.name', 'users.lastname', 'users.location', 'users.email',
+                'users.githubUsername', 'users.shortDescription', 'users.username'
             );
 
         return $query->getQuery()->getArrayResult();
@@ -38,16 +39,27 @@ class UsersRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('users');
         $query
             ->select(
-                'users.id','users.name',
-                'users.name','users.lastname','users.location','users.email',
-                'users.githubUsername','users.shortDescription','users.username'
+                'users.id', 'users.name', 'users.lastname', 'users.location', 'users.email',
+                'users.githubUsername', 'users.shortDescription', 'users.username'
             )
-            ->innerJoin('users.team','team')
+            ->innerJoin('users.team', 'team')
             ->where('users.id = :identifier')
-            ->setParameter('identifier', $id)
-        ;
+            ->setParameter('identifier', $id);
 
-      //  dd($query->getQuery()->getSQL());
+        return $query->getQuery()->getArrayResult();
+    }
+
+    public function getTeamIdOfUser($id)
+    {
+        $query = $this->createQueryBuilder('users');
+        $query
+            ->select(
+                'team.id'
+            )
+            ->innerJoin('users.team', 'team')
+            ->where('users.id = :identifier')
+            ->setParameter('identifier', $id);
+
         return $query->getQuery()->getArrayResult();
     }
 

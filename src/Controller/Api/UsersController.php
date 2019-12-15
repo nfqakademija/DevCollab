@@ -20,4 +20,21 @@ class UsersController extends AbstractFOSRestController
         $users = $repository->getUsers();
         return $this->handleView($this->view($users));
     }
+
+    /**
+     * List all users
+     * @Rest\Get("/users/{id}", name="get_userbyid")
+     * @return Response
+     */
+    public function showUserById($id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(Users::class)->getUserById($id);
+        $teamId = $entityManager->getRepository(Users::class)->getTeamIdOfUser($id);
+
+        $users['user'] = $user[0];
+        $users['teamId'] = $teamId;
+
+        return $this->handleView($this->view($users));
+    }
 }

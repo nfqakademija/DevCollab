@@ -78,7 +78,7 @@ class User
         $this->skills = new ArrayCollection();
     }
 
-    public function getId(): ?int0
+    public function getId(): ?int
     {
         return $this->id;
     }

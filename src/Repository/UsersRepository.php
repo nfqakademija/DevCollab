@@ -27,12 +27,53 @@ class UsersRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('users');
         $query
             ->select(
-                'users'
+                'users.id',
+                'users.name',
+                'users.lastname',
+                'users.location',
+                'users.email',
+                'users.githubUsername',
+                'users.shortDescription',
+                'users.username'
             );
 
         return $query->getQuery()->getArrayResult();
     }
 
+    public function getUserById($id)
+    {
+        $query = $this->createQueryBuilder('users');
+        $query
+            ->select(
+                'users.id',
+                'users.name',
+                'users.lastname',
+                'users.location',
+                'users.email',
+                'users.githubUsername',
+                'users.shortDescription',
+                'users.username'
+            )
+            ->leftJoin('users.team', 'team')
+            ->where('users.id = :identifier')
+            ->setParameter('identifier', $id);
+
+        return $query->getQuery()->getArrayResult();
+    }
+
+    public function getTeamIdOfUser($id)
+    {
+        $query = $this->createQueryBuilder('users');
+        $query
+            ->select(
+                'team.id'
+            )
+            ->leftJoin('users.team', 'team')
+            ->where('users.id = :identifier')
+            ->setParameter('identifier', $id);
+
+        return $query->getQuery()->getArrayResult();
+    }
 
     // /**
     //  * @return Users[] Returns an array of Users objects

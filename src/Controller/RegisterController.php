@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,10 +27,10 @@ class RegisterController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
-        $user = new Users();
+        $user = new User();
         $data = json_decode($request->getContent(), true);
 
-                $repository = $this->getDoctrine()->getRepository(Users::class);
+                $repository = $this->getDoctrine()->getRepository(User::class);
                 $username = $repository->findOneBy([
                     'username' => $data['username']
                 ]);
@@ -51,7 +52,7 @@ class RegisterController extends AbstractController
             $user->setUsername($data['username']);
             $user->setEmail($data['email']);
             $user->setPassword($data['password']);
-            $user->setRoles('ROLE_USER');
+            $user->setRoles('["ROLES_USER"]');
             $entityManager->persist($user);
             $entityManager->flush();
             $encoders = [new XmlEncoder(), new JsonEncoder()];

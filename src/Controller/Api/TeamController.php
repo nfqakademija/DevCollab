@@ -95,7 +95,6 @@ class TeamController extends AbstractFOSRestController
         );
         $users = $teams->getUsers();
         dd($users);
-
         $projectsArray = [];
         foreach ($users as $user) {
             $tempArray = [];
@@ -105,12 +104,11 @@ class TeamController extends AbstractFOSRestController
             array_push($tempArray, $user->getEmail());
             array_push($projectsArray, $tempArray);
         }
-
         $setKey = array('users' => $projectsArray);
         $array = array_merge($array, $setKey);
-
         $projects = $teams->getProjects();
         $projectsArray = [];
+
         foreach ($projects as $project) {
             $tempArray = [];
             array_push($tempArray, $project->getId());

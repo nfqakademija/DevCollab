@@ -37,7 +37,7 @@ const LayoutUserDashboard = ({ history, location, children }) => {
     history.push("/");
     window.location.reload();
   };
-const username = localStorage.getItem("user");
+  const username = localStorage.getItem("user");
   return (
     <div className={container}>
       <div className={header.container}>

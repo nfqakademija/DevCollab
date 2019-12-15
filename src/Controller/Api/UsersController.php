@@ -33,7 +33,7 @@ class UsersController extends AbstractFOSRestController
         $teamId = $entityManager->getRepository(Users::class)->getTeamIdOfUser($id);
 
         $users['user'] = $user[0];
-        $users['teamId'] = $teamId;
+        $users['teamId'] = $teamId[0]['id'];
 
         return $this->handleView($this->view($users));
     }

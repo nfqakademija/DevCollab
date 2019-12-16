@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -52,7 +51,7 @@ class RegisterController extends AbstractController
             $user->setUsername($data['username']);
             $user->setEmail($data['email']);
             $user->setPassword($data['password']);
-            $user->setRoles('["ROLES_USER"]');
+            $user->setRoles('["ROLE_USER"]');
             $entityManager->persist($user);
             $entityManager->flush();
             $encoders = [new XmlEncoder(), new JsonEncoder()];

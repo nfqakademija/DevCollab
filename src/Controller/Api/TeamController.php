@@ -132,7 +132,7 @@ class TeamController extends AbstractFOSRestController
     public function teamSorter(Request $request): Response
     {
         $userId = json_decode($request->getContent(), true);
-        $userId= $userId['id'];
+        $userId = $userId['id'];
         $teamsArray = $this->showTeams()->getContent();
         $teamstoArray = json_decode($teamsArray, true);
         $randomTeam = array_rand($teamstoArray, 1);
@@ -145,7 +145,6 @@ class TeamController extends AbstractFOSRestController
         $team->addUser($user);
         $entityManager->flush();
         $user = $entityManager->getRepository(User::class)->getUserById($userId);
-
 
         $user['user'] = $user[0];
         unset($user[0]);

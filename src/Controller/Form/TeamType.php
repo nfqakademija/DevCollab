@@ -21,7 +21,7 @@ class TeamType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('githubRepo', TextType::class);
+            ->add('github_repo', TextType::class);
     }
 
     /**

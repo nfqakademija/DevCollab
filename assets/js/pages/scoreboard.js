@@ -3,7 +3,6 @@ import { MyContext } from "../context";
 import { LayoutUserDashboard } from "../components";
 import { dynamicSort, capitalize } from "../utils";
 import GithubIcon from "../../img/icons/github.png";
-import { fetchTeams } from "../API";
 
 const CLASSES = {
   scoreboard: {
@@ -23,10 +22,10 @@ const { scoreboard } = CLASSES;
 
 const ScoreboardPage = ({ history, location }) => {
   const [, user] = useContext(MyContext);
-  const [teams, setTeams] = useState([]);
+  // const [teams, setTeams] = useState([]);
+    const [teams] = useState([]);
 
   useEffect(() => {
-    fetchTeams(setTeams);
   }, []);
 
   const sortedTeams = teams.sort(dynamicSort("points", "desc"));

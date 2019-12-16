@@ -49,10 +49,9 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     axios
       .post(
-        "https://jsonplaceholder.typicode.com/posts",
+        "security/registration",
         {
           username,
           email,
@@ -64,16 +63,18 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
       .then(res => {
         if (res.status === 201) {
           handleSuccesfulAuth(res.data);
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("user", JSON.stringify(res.data));
           history.push("/");
         } else {
-          setErrors("There was a prolblem with your form. Please try again.");
+          const errors = res.data;
+          setErrors(errors);
         }
       })
       .catch(err => {
         console.log(err);
       });
   };
-
   return (
     <div className={main}>
       <div className={container} style={{ zIndex: 2 }}>

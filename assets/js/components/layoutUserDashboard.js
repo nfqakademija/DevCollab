@@ -4,6 +4,7 @@ import { MyContext } from "../context";
 import IconProfile from "../../img/icons/avatar.png";
 import IconTeam from "../../img/icons/team.png";
 import IconScoreboard from "../../img/icons/scoreboard.png";
+import {capitalize} from "../utils";
 
 const CLASSES = {
   container:
@@ -37,7 +38,6 @@ const LayoutUserDashboard = ({ history, location, children }) => {
     history.push("/");
     window.location.reload();
   };
-
   return (
     <div className={container}>
       <div className={header.container}>
@@ -55,11 +55,11 @@ const LayoutUserDashboard = ({ history, location, children }) => {
         <div className="w-full h-auto my-8 items-center hidden xl:flex">
           <div className="bg-blue-500 h-12 w-12 rounded-full flex justify-center items-center">
             <span className="text-white text-2xl font-semibold">
-              {user.name.split("")[0]}
+              {user.username && capitalize(user.username[0])}
             </span>
           </div>
           <div className="ml-2 text-left text-lg font-semibold">
-            <p>{user.name}</p>
+            <p>{user.username}</p>
             <p className="text-xs text-gray-600 font-medium">{user.email}</p>
           </div>
         </div>
@@ -103,6 +103,16 @@ const LayoutUserDashboard = ({ history, location, children }) => {
           />
           <span className="xl:text-lg xl:ml-2">Scoreboard</span>
         </NavLink>
+        {/* {user.roles.includes("ROLE_USER") > 0 && (
+                  <NavLink
+                  exact
+                  to="/admin"
+                  className={`${navigation.links}`}
+                  activeClassName={`${navigation.linksActive}`}
+                >
+                  <span className="xl:text-lg xl:ml-2">Admin</span>
+                </NavLink>
+        )}  */}
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ const UserHomepage = ({ history, location }) => {
   //TODO -> once backend is ready send post req to backend to do its magic and add user to team
   const addUserToTeam = e => {
     axios
-      .post("/api/jointeam", { id: user.id })
+      .post("/api/jointeam", {id: [8]})
       .then(res => console.log(res))
       .catch(err => console.error(err));
     e.preventDefault();

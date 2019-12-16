@@ -152,5 +152,8 @@ class TeamController extends AbstractFOSRestController
         $user['teamId'] = $randomTeamConverted;
 
         return $this->handleView($this->view($user));
+
+        return new Response("betkas");
     }
+
 }

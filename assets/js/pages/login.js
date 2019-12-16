@@ -54,7 +54,7 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
     };
 
     axios
-      .post("user/login", userJson)
+      .post("security/login", userJson)
       .then(res => {
         if (res.status === 200 && res.statusText === "OK") {
           handleSuccesfulAuth(res.data);

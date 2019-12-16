@@ -55,7 +55,7 @@ const LayoutUserDashboard = ({ history, location, children }) => {
         <div className="w-full h-auto my-8 items-center hidden xl:flex">
           <div className="bg-blue-500 h-12 w-12 rounded-full flex justify-center items-center">
             <span className="text-white text-2xl font-semibold">
-              {capitalize(user.username[0])}
+              {user.username && capitalize(user.username[0])}
             </span>
           </div>
           <div className="ml-2 text-left text-lg font-semibold">
@@ -103,6 +103,16 @@ const LayoutUserDashboard = ({ history, location, children }) => {
           />
           <span className="xl:text-lg xl:ml-2">Scoreboard</span>
         </NavLink>
+        {/* {user.roles.includes("ROLE_USER") > 0 && (
+                  <NavLink
+                  exact
+                  to="/admin"
+                  className={`${navigation.links}`}
+                  activeClassName={`${navigation.linksActive}`}
+                >
+                  <span className="xl:text-lg xl:ml-2">Admin</span>
+                </NavLink>
+        )}  */}
       </div>
     </div>
   );

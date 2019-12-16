@@ -51,7 +51,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
     e.preventDefault();
     axios
       .post(
-        "/registration",
+        "api/registration",
         {
           username,
           email,

@@ -14,7 +14,7 @@ class HomeController extends AbstractController
      * @Route("/", name="home_FE")
      * @Route("/{route}",
      *     name="react_pages",
-     *     requirements={"route"="^(?!admin|user_login|user_logout|api|user/registration|api/profile).+"})
+     *     requirements={"route"="^(?!admin|user_login|user_logout|api|api/registration|api/profile).+"})
      */
     public function index(): Response
     {

@@ -7,6 +7,7 @@ use ApiPlatform\Core\Serializer\JsonEncoder;
 use App\Controller\Form\TeamType;
 use App\Entity\Projects;
 use App\Entity\Teams;
+use App\Entity\User;
 use App\Entity\Users;
 use App\Factory\TeamsFactory;
 use App\Request\TeamsRequest;
@@ -59,11 +60,12 @@ class TeamController extends AbstractFOSRestController
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
         }
+
         return $this->handleView($this->view($form->getErrors(), Response::HTTP_BAD_REQUEST));
     }
 
     /**
-     * List all Teams
+     * @param $id
      * @Rest\Get("/teams/{id}", name="get_teamsbyid")
      *
      * @return Response
@@ -73,13 +75,11 @@ class TeamController extends AbstractFOSRestController
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
             ->find($id);
-
         $array = array(
             'id' => $teams->getId(),
             'name' => $teams->getName(),
             'githubRepo' => $teams->getGithubRepo()
         );
-
         $users = $teams->getUsers();
         $projectsArray = [];
         foreach ($users as $user) {
@@ -90,12 +90,11 @@ class TeamController extends AbstractFOSRestController
             array_push($tempArray, $user->getEmail());
             array_push($projectsArray, $tempArray);
         }
-
         $setKey = array('users' => $projectsArray);
         $array = array_merge($array, $setKey);
-
         $projects = $teams->getProjects();
         $projectsArray = [];
+
         foreach ($projects as $project) {
             $tempArray = [];
             array_push($tempArray, $project->getId());
@@ -137,19 +136,18 @@ class TeamController extends AbstractFOSRestController
     {
         $userId = json_decode($request->getContent());
         $userId = $userId[0];
-
         $teamsArray = $this->showTeams()->getContent();
         $teamstoArray = json_decode($teamsArray, true);
         $randomTeam = array_rand($teamstoArray, 1);
         $firstTeamId = $teamstoArray[0]['id'];
         $randomTeamConverted = $firstTeamId + $randomTeam;
-
         $entityManager = $this->getDoctrine()->getManager();
         $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
-        $user = $entityManager->getRepository(Users::class)->find($userId);
+        $user = $entityManager->getRepository(User::class)->find($userId);
+
         $team->addUser($user);
         $entityManager->flush();
-        $user = $entityManager->getRepository(Users::class)->getUserById($userId);
+        $user = $entityManager->getRepository(User::class)->getUserById($userId);
 
 
         $user['user'] = $user[0];

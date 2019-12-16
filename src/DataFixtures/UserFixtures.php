@@ -2,19 +2,20 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class UsersFixtures extends Fixture implements DependentFixtureInterface
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public const USERS_REFERENCE = 'admin-users';
 
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i < 20; $i++) {
-            $users = new Users();
+            $users = new User();
             $users->setUsername('username-' . $i);
             $users->setName('firstname-' . $i);
             $users->setLastname('lastname-' . $i);
@@ -22,7 +23,7 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
             $users->setPassword(password_hash(123456, PASSWORD_ARGON2I));
             $users->setRoles('ROLES_USER');
             $users->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
-            $users->setRoles('["ROLES_USER"]');
+            $users->setRoles('["ROLE_USER"]');
             $manager->persist($users);
         }
         $manager->flush();

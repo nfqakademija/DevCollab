@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\User;
 use App\Entity\Users;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -16,7 +17,7 @@ class UsersController extends AbstractFOSRestController
      */
     public function showUsers(): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Users::class);
+        $repository = $this->getDoctrine()->getRepository(User::class);
         $users = $repository->getUsers();
         return $this->handleView($this->view($users));
     }
@@ -29,8 +30,8 @@ class UsersController extends AbstractFOSRestController
     public function showUserById($id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(Users::class)->getUserById($id);
-        $teamId = $entityManager->getRepository(Users::class)->getTeamIdOfUser($id);
+        $user = $entityManager->getRepository(User::class)->getUserById($id);
+        $teamId = $entityManager->getRepository(User::class)->getTeamIdOfUser($id);
 
         $users['user'] = $user[0];
         $users['teamId'] = $teamId[0]['id'];

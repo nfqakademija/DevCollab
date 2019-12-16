@@ -11,8 +11,8 @@ use App\Repository\UserRepository;
 class UserProfileUpdate extends UserProfileController
 {
     /**
-     * @param UserProfileController $request
-     * @return string
+     * @param array $request
+     * @return array
      */
     public function updateUserProfileData($request)
     {
@@ -20,7 +20,7 @@ class UserProfileUpdate extends UserProfileController
             ->getRepository(User::class)
             ->findOneBy(['username' => $request['username']]);
         if ($repository === null) {
-            $data = "Something wrong, try again!";
+            $request = "Something wrong, try again!";
         } else {
             $em = $this->getDoctrine()->getManager();
             $repository->setName($request['name']);

@@ -1,52 +1,72 @@
 import React, { useState, useContext, useEffect } from "react";
 import {
-    LayoutUserDashboard,
-    TableTeamRepo,
-    TableMyTeammates
+  LayoutUserDashboard,
+  TableTeamRepo,
+  TableMyTeammates
 } from "../components";
 import { MyContext } from "../context";
 import {
-    fetchUsers,
-    fetchTeams,
-    fetchTeamGithubRepo,
-    fetchTeamGithubRepoEvents
+  fetchUsers,
+  fetchTeams,
+  fetchTeamGithubRepo,
+  fetchTeamGithubRepoEvents,
+  fetchTeam
 } from "../API";
+import axios from "axios";
 
 const UserHomepage = ({ history, location }) => {
-    const [, user] = useContext(MyContext);
-    const [teams, setTeams] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [teamGithub, setTeamGithub] = useState([]);
-    const [githubEvents, setGithubEvents] = useState([]);
-    const [myTeammates, setMyTeammates] = useState([]);
+  const [, user] = useContext(MyContext);
+  const [team, setTeam] = useState([]);
 
-    useEffect(() => {
-        fetchUsers(setUsers);
-        fetchTeams(setTeams);
-    }, []);
+  // TODO -> Delete once backend is working
+  const [teams, setTeams] = useState([]);
+  // TODO -> Delete once backend is working
+  const [users, setUsers] = useState([]);
+  // TODO -> Update once backend is working
+  const [teamGithub, setTeamGithub] = useState([]);
+  // TODO -> Update once backend is working
+  const [githubEvents, setGithubEvents] = useState([]);
+  // TODO -> Update once backend is working
+  const [myTeammates, setMyTeammates] = useState([]);
 
+  // TODO -> Delete once backend is working
+  useEffect(() => {
+    fetchUsers(setUsers);
+    fetchTeams(setTeams);
+  }, []);
+
+  // TODO -> Delete once backend is working
   const userTeam = teams.filter(team => team.id === user.team_id);
 
-if (users.length > 0 && myTeammates.length === 0) {
+  // TODO -> Update once backend is working
+  if (users.length > 0 && myTeammates.length === 0) {
     setMyTeammates(
-        users.filter(
-            teammate => teammate.team_id === user.team_id && teammate.id !== user.id
-        )
+      users.filter(
+        teammate => teammate.team_id === user.team_id && teammate.id !== user.id
+      )
     );
-}
+  }
 
-if (userTeam.length > 0 && teamGithub.length === 0) {
+  if (userTeam.length > 0 && teamGithub.length === 0) {
     fetchTeamGithubRepo(userTeam[0].repo_id, setTeamGithub);
-}
+  }
 
-if (teamGithub.length !== 0 && githubEvents.length === 0) {
+  if (teamGithub.length !== 0 && githubEvents.length === 0) {
     fetchTeamGithubRepoEvents(teamGithub.events_url, setGithubEvents);
-}
+  }
 
   //TODO -> once backend is ready send post req to backend to do its magic and add user to team
   const addUserToTeam = e => {
+    axios
+      .post("/api/jointeam", { id: user.id })
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
     e.preventDefault();
   };
+
+  if (user.team && team.length === 0) {
+    fetchTeam(user.team, setTeam);
+  }
 
   return (
     <LayoutUserDashboard location={location} history={history}>

@@ -2,14 +2,9 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource(
- *     collectionOperations={"get", "post"},
- *     itemOperations={"get"}
- * )
  * @ORM\Entity(repositoryClass="App\Repository\TeamPointsRepository")
  */
 class TeamPoints
@@ -28,6 +23,7 @@ class TeamPoints
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="teamPoints")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $team;
 

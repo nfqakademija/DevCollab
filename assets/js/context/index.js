@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export const MyContext = React.createContext();
 
+// TODO -> update once backend is working
 const AppProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(
     localStorage.getItem("isLoggedIn")

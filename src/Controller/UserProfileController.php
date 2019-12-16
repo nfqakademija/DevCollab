@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
-use App\Repository\UsersRepository;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Form\UserProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +28,7 @@ class UserProfileController extends AbstractController
         SerializerFunction $ser
     ): Response {
         $data = $request->query->get('username');
-        $repository = $this->getDoctrine()->getRepository(Users::class);
+        $repository = $this->getDoctrine()->getRepository(User::class);
         $username = $repository->findOneBy([
             'username' => $data
         ]);

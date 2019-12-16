@@ -4,10 +4,9 @@
 namespace App\Service;
 
 use App\Controller\UserProfileController;
-use App\Entity\Users;
+use App\Entity\User;
 use App\Form\UserProfileType;
-use App\Repository\UsersRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Repository\UserRepository;
 
 class UserProfileUpdate extends UserProfileController
 {
@@ -18,7 +17,7 @@ class UserProfileUpdate extends UserProfileController
     public function updateUserProfileData($request)
     {
         $repository = $this->getDoctrine()
-            ->getRepository(Users::class)
+            ->getRepository(User::class)
             ->findOneBy(['username' => $request['username']]);
         if ($repository === null) {
             $data = "Something wrong, try again!";

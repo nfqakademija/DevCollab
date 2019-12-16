@@ -2,16 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource(
- *     collectionOperations={"get", "post"},
- *     itemOperations={"get"}
- * )
  * @ORM\Entity(repositoryClass="App\Repository\TeamsRepository")
  */
 class Teams
@@ -31,17 +26,12 @@ class Teams
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $githubRepo;
+    private $github_repo;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="team")
      */
     private $users;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\TeamTasks", mappedBy="team")
-     */
-    private $teamTasks;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\TeamPoints", mappedBy="team")
@@ -49,16 +39,20 @@ class Teams
     private $teamPoints;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Projects", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="App\Entity\TeamTasks", mappedBy="team")
+     */
+    private $teamTasks;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Projects", mappedBy="team", cascade={"persist", "remove"})
      */
     private $projects;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->teamTasks = new ArrayCollection();
         $this->teamPoints = new ArrayCollection();
-        $this->projects = new ArrayCollection();
+        $this->teamTasks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,25 +74,25 @@ class Teams
 
     public function getGithubRepo(): ?string
     {
-        return $this->githubRepo;
+        return $this->github_repo;
     }
 
-    public function setGithubRepo(?string $githubRepo): self
+    public function setGithubRepo(?string $github_repo): self
     {
-        $this->githubRepo = $githubRepo;
+        $this->github_repo = $github_repo;
 
         return $this;
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -108,44 +102,13 @@ class Teams
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
             // set the owning side to null (unless already changed)
             if ($user->getTeam() === $this) {
                 $user->setTeam(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|TeamTasks[]
-     */
-    public function getTeamTasks(): Collection
-    {
-        return $this->teamTasks;
-    }
-
-    public function addTeamTask(TeamTasks $teamTask): self
-    {
-        if (!$this->teamTasks->contains($teamTask)) {
-            $this->teamTasks[] = $teamTask;
-            $teamTask->setTeam($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeamTask(TeamTasks $teamTask): self
-    {
-        if ($this->teamTasks->contains($teamTask)) {
-            $this->teamTasks->removeElement($teamTask);
-            // set the owning side to null (unless already changed)
-            if ($teamTask->getTeam() === $this) {
-                $teamTask->setTeam(null);
             }
         }
 
@@ -184,31 +147,49 @@ class Teams
     }
 
     /**
-     * @return Collection|Projects[]
+     * @return Collection|TeamTasks[]
      */
-    public function getProjects(): Collection
+    public function getTeamTasks(): Collection
     {
-        return $this->projects;
+        return $this->teamTasks;
     }
 
-    public function addProject(Projects $project): self
+    public function addTeamTask(TeamTasks $teamTask): self
     {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->setTeam($this);
+        if (!$this->teamTasks->contains($teamTask)) {
+            $this->teamTasks[] = $teamTask;
+            $teamTask->setTeam($this);
         }
 
         return $this;
     }
 
-    public function removeProject(Projects $project): self
+    public function removeTeamTask(TeamTasks $teamTask): self
     {
-        if ($this->projects->contains($project)) {
-            $this->projects->removeElement($project);
+        if ($this->teamTasks->contains($teamTask)) {
+            $this->teamTasks->removeElement($teamTask);
             // set the owning side to null (unless already changed)
-            if ($project->getTeam() === $this) {
-                $project->setTeam(null);
+            if ($teamTask->getTeam() === $this) {
+                $teamTask->setTeam(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getProjects(): ?Projects
+    {
+        return $this->projects;
+    }
+
+    public function setProjects(?Projects $projects): self
+    {
+        $this->projects = $projects;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newTeam = $projects === null ? null : $this;
+        if ($newTeam !== $projects->getTeam()) {
+            $projects->setTeam($newTeam);
         }
 
         return $this;

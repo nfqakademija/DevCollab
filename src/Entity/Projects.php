@@ -2,14 +2,9 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource(
- *     collectionOperations={"get", "post"},
- *     itemOperations={"get"}
- * )
  * @ORM\Entity(repositoryClass="App\Repository\ProjectsRepository")
  */
 class Projects
@@ -42,7 +37,7 @@ class Projects
     private $deadline;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="projects")
+     * @ORM\OneToOne(targetEntity="App\Entity\Teams", inversedBy="projects", cascade={"persist", "remove"})
      */
     private $team;
 

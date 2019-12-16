@@ -16,7 +16,7 @@ use App\Service\UserProfileUpdate;
 class UserProfileController extends AbstractController
 {
     /**
-     * @Route("/user/profile", name="get_data_profile", methods="GET")
+     * @Route("/api/profile", name="get_data_profile", methods="GET")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param SerializerFunction $ser
@@ -46,7 +46,7 @@ class UserProfileController extends AbstractController
     }
 
     /**
-     * @Route("/user/profile", name="update_data_profile", methods="POST")
+     * @Route("/api/profile", name="update_data_profile", methods="POST")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param SerializerFunction $ser

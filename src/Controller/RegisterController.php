@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Serializer;
 class RegisterController extends AbstractController
 {
     /**
-     * @Route("/user/registration", name="registration", methods="POST")
+     * @Route("api/registration", name="registration", methods="POST")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return Response $response
@@ -51,7 +51,8 @@ class RegisterController extends AbstractController
             $user->setUsername($data['username']);
             $user->setEmail($data['email']);
             $user->setPassword($data['password']);
-            $user->setRoles('["ROLE_USER"]');
+            $roles[] = "ROLE_USER";
+            $user->setRoles($roles);
             $entityManager->persist($user);
             $entityManager->flush();
             $encoders = [new XmlEncoder(), new JsonEncoder()];

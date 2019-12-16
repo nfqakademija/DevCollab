@@ -51,7 +51,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
     e.preventDefault();
     axios
       .post(
-        "/user/registration",
+        "api/registration",
         {
           username,
           email,
@@ -64,7 +64,7 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
         if (res.status === 201) {
           handleSuccesfulAuth(res.data);
           localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("user", res.data.username);
+          localStorage.setItem("user", JSON.stringify(res.data));
           history.push("/");
         } else {
           const errors = res.data;

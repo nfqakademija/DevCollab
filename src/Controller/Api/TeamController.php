@@ -8,7 +8,6 @@ use App\Controller\Form\TeamType;
 use App\Entity\Projects;
 use App\Entity\Teams;
 use App\Entity\User;
-use App\Entity\Users;
 use App\Factory\TeamsFactory;
 use App\Request\TeamsRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -92,15 +91,13 @@ class TeamController extends AbstractFOSRestController
         }
         $setKey = array('users' => $projectsArray);
         $array = array_merge($array, $setKey);
+
         $projects = $teams->getProjects();
         $projectsArray = [];
-
-        foreach ($projects as $project) {
-            $tempArray = [];
-            array_push($tempArray, $project->getId());
-            array_push($tempArray, $project->getTitle());
-            array_push($projectsArray, $tempArray);
-        }
+        $tempArray = [];
+        array_push($tempArray, $projects->getId());
+        array_push($tempArray, $projects->getTitle());
+        array_push($projectsArray, $tempArray);
 
         $setKey = array('projects' => $projectsArray);
         $array = array_merge($array, $setKey);

@@ -17,9 +17,11 @@ const UserHomepage = ({ history, location }) => {
   const [team, setTeam] = useState([]);
 
   // TODO -> Delete once backend is working
-  const [teams, setTeams] = useState([]);
+  const [teams] = useState([]);
+  // const [teams, setTeams] = useState([]);
   // TODO -> Delete once backend is working
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const [users] = useState([]);
   // TODO -> Update once backend is working
   const [teamGithub, setTeamGithub] = useState([]);
   // TODO -> Update once backend is working

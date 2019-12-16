@@ -22,7 +22,8 @@ const { scoreboard } = CLASSES;
 
 const ScoreboardPage = ({ history, location }) => {
   const [, user] = useContext(MyContext);
-  const [teams, setTeams] = useState([]);
+  // const [teams, setTeams] = useState([]);
+    const [teams] = useState([]);
 
   useEffect(() => {
   }, []);

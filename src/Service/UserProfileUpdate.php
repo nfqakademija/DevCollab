@@ -16,6 +16,21 @@ class UserProfileUpdate extends UserProfileController
      */
     public function updateUserProfileData($request)
     {
+        if ($request['name'] == "") {
+            $request['name'] = null;
+        }
+        if ($request['lastname'] == "") {
+            $request['lastname'] = null;
+        }
+        if ($request['location'] == "") {
+            $request['location'] = null;
+        }
+        if ($request['githubUsername'] == "") {
+            $request['githubUsername'] = null;
+        }
+        if ($request['shortDescription'] == "") {
+            $request['shortDescription'] = null;
+        }
         $repository = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(['username' => $request['username']]);

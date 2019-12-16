@@ -52,7 +52,7 @@ class RegisterController extends AbstractController
             $user->setUsername($data['username']);
             $user->setEmail($data['email']);
             $user->setPassword($data['password']);
-            $user->setRoles('["ROLES_USER"]');
+            $user->setRoles('ROLE_USER');
             $entityManager->persist($user);
             $entityManager->flush();
             $encoders = [new XmlEncoder(), new JsonEncoder()];

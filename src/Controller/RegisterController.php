@@ -41,7 +41,7 @@ class RegisterController extends AbstractController
         if ($data['password'] !== $data['passwordConfirmation']) {
             $error = "Passwords are not the same!";
         } elseif (strlen($data['password']) < 6) {
-            $error = "Your password is to short. Please, try again.";
+            $error = "Your password is too short. Please, try again.";
         } elseif (isset($username)) {
             $error = "User with this username already exists. Please enter different username and try again.";
         } elseif (isset($email)) {

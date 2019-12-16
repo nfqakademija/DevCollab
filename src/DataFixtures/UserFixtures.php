@@ -20,7 +20,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $users->setName('firstname-' . $i);
             $users->setLastname('lastname-' . $i);
             $users->setEmail('email' . $i . '@gmail.com');
-            $users->setPassword(mt_rand(10, 10000000));
+            $users->setPassword(password_hash(123456, PASSWORD_ARGON2I));
+            $users->setRoles('ROLES_USER');
             $users->setTeam($this->getReference(TeamsFixtures::TEAM_REFERENCE));
             $users->setRoles('["ROLE_USER"]');
             $manager->persist($users);

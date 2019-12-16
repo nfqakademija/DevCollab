@@ -40,20 +40,6 @@ class TeamController extends AbstractFOSRestController
     }
 
     /**
-     * List all Users
-     * @Rest\Get("/users", name="get_users")
-     *
-     * @return Response
-     */
-    public function showUser()
-    {
-        $repository = $this->getDoctrine()->getRepository(User::class);
-        $users = $repository->getUsers();
-
-        return $this->handleView($this->view($users));
-    }
-
-    /**
      * Create a new Team
      * @Rest\Post("/team", name="post_team")
      * @param Request $request
@@ -81,9 +67,10 @@ class TeamController extends AbstractFOSRestController
     /**
      * @param $id
      * @Rest\Get("/teams/{id}", name="get_teamsbyid")
+     *
      * @return Response
      */
-    public function getUsersByTeamId($id): Response
+    public function getUsersByTeamId(int $id): Response
     {
         $teams = $this->getDoctrine()
             ->getRepository(Teams::class)
@@ -94,7 +81,6 @@ class TeamController extends AbstractFOSRestController
             'githubRepo' => $teams->getGithubRepo()
         );
         $users = $teams->getUsers();
-        dd($users);
         $projectsArray = [];
         foreach ($users as $user) {
             $tempArray = [];
@@ -143,10 +129,10 @@ class TeamController extends AbstractFOSRestController
     /**
      * Join a Team
      * @Rest\Post("/jointeam", name="get_jointeam")
-     *
+     * @param Request $request
      * @return Response
      */
-    public function teamSorter(Request $request)
+    public function teamSorter(Request $request): Response
     {
         $userId = json_decode($request->getContent());
         $userId = $userId[0];
@@ -161,7 +147,13 @@ class TeamController extends AbstractFOSRestController
 
         $team->addUser($user);
         $entityManager->flush();
+        $user = $entityManager->getRepository(User::class)->getUserById($userId);
 
-        return $this->handleView($this->view($team->getId()));
+
+        $user['user'] = $user[0];
+        unset($user[0]);
+        $user['teamId'] = $randomTeamConverted;
+
+        return $this->handleView($this->view($user));
     }
 }

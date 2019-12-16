@@ -8,7 +8,6 @@ use App\Controller\Form\TeamType;
 use App\Entity\Projects;
 use App\Entity\Teams;
 use App\Entity\User;
-use App\Entity\Users;
 use App\Factory\TeamsFactory;
 use App\Request\TeamsRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

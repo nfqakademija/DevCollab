@@ -16,9 +16,13 @@ security:
             security: false
         main:
             anonymous: true
-            guard:
-                authenticators:
-                    - App\Security\LoginAuthAuthenticator
+            json_login:
+                check_path: app_login
+                username_path: security.credentials.email
+                password_path: security.credentials.password
+            # guard:
+            #     authenticators:
+            #         - App\Security\LoginAuthAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -34,5 +38,5 @@ security:
     access_control:
          - { path: ^/admin_login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/security, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #  - { path: ^/api, roles: ROLE_USER }
+         - { path: ^/api, roles: ROLE_USER }
          - { path: ^/admin, roles: ROLE_ADMIN }

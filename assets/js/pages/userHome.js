@@ -6,8 +6,6 @@ import {
 } from "../components";
 import { MyContext } from "../context";
 import {
-  fetchUsers,
-  fetchTeams,
   fetchTeamGithubRepo,
   fetchTeamGithubRepoEvents,
   fetchTeam
@@ -31,8 +29,6 @@ const UserHomepage = ({ history, location }) => {
 
   // TODO -> Delete once backend is working
   useEffect(() => {
-    fetchUsers(setUsers);
-    fetchTeams(setTeams);
   }, []);
 
   // TODO -> Delete once backend is working

@@ -6,6 +6,7 @@ import IconTeam from "../../../img/icons/team.png";
 import IconScoreboard from "../../../img/icons/scoreboard.png";
 import {capitalize} from "../../utils";
 import * as ROUTES from "../../constants/routes";
+import axios from "axios"
 
 const CLASSES = {
   mainContent: "flex-1 bg-gray-100 py-16 xl:w-10/12 xl:ml-auto",
@@ -20,25 +21,34 @@ const CLASSES = {
   }
 };
 
-const { container, header, mainContent, navigation } = CLASSES;
+const { navigation } = CLASSES;
 
 const DashboardLayout = ({ history, location, children }) => {
-  // const user = useContext(UserContext);
-const user = JSON.parse(localStorage.getItem("user"))
+  const user = useContext(UserContext);
+
   const handleLogout = () => {
-    localStorage.clear();
-    history.push("/");
-    window.location.reload();
+
+
+    axios.get("/security/logout")
+        .then(res => {
+          localStorage.clear();
+          history.push("/");
+          window.location.reload(true);
+        })
+        .catch(error=> console.log(error));
+
+
   };
+
   return (
     <div className="min-h-screen w-full poppins bg-gray-100 flex flex-col justify-between relative">
       <div className="w-full h-16 bg-white flex justify-between items-center px-2 border-b border-gray-400 fixed top-0 z-20">
         <Link to={ROUTES.HOME} className="text-2xl font-bold">
           DevCollab
         </Link>
-        <Link to="/" onClick={handleLogout} className="text-md lg:text-lg text-center font-semibold text-black border-2 border-gray-800 rounded px-2 lg:px-4 py-1 mr-1 cursor-pointer hover:text-gray-100 hover:bg-gray-800">
+        <button onClick={handleLogout} className="text-md lg:text-lg text-center font-semibold text-black border-2 border-gray-800 rounded px-2 lg:px-4 py-1 mr-1 cursor-pointer hover:text-gray-100 hover:bg-gray-800">
           Logout
-        </Link>
+        </button>
       </div>
       <div className="flex-1 bg-gray-100 py-16 xl:w-10/12 xl:ml-auto">
         <div className="p-2 lg:p-8">{children}</div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import * as ROUTES from "../constants/routes"
 import { Particles } from "../components";
@@ -67,6 +67,7 @@ const RegisterPage = ({ history, handleAuth }) => {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("user", JSON.stringify(res.data));
           history.push(ROUTES.HOME);
+          window.location.reload(true);
         } else {
           const errors = res.data;
           setErrors(errors);
@@ -153,4 +154,4 @@ const RegisterPage = ({ history, handleAuth }) => {
   );
 };
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

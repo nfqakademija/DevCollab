@@ -18,13 +18,12 @@ class App extends React.Component {
     super();
     this.state = {
       isUserLoggedIn: localStorage.getItem("isLoggedIn"),
-      user: {}
+      user: JSON.parse(localStorage.getItem("user"))
     };
 
     this.handleAuth = this.handleAuth.bind(this);
   }
 
-  //TODO -> update once backend login/registration is working
   handleAuth(data) {
     this.setState({
       isUserLoggedIn: true,
@@ -41,7 +40,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path={ROUTES.LANDING} component={LandingPage} />
             <Route exact path={ROUTES.HOME} component={HomePage} />
-            <Route exact path={ROUTES.PROFILE} component={ProfilePage} />
+            <Route exact path={ROUTES.PROFILE} render={() => (<ProfilePage handleAuth={this.handleAuth}/>)} />
             <Route exact path={ROUTES.SCOREBOARD} component={ScoreboardPage} />
             <Route exact path={ROUTES.LOGIN} render={props => (<LoginPage {...props} handleAuth={this.handleAuth}/>)}/>
             <Route exact path={ROUTES.REGISTER} render={props => <RegisterPage {...props} handleAuth={this.handleAuth}/>}/>

@@ -1,60 +1,59 @@
 <?php
 
+
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-class SecurityController extends AbstractController
+
+class SecurityController extends AbstractFOSRestController
 {
     /**
-     * @Route("/security/login", name="app_login", methods={"POST"})
+     * @Rest\Post("/security/login", name="login")
+     * @return JsonResponse
      */
-      public function login(Request $request)
-      {
-          $user = $this->getUser();
-          return $this->json([
-              'email' => $user->getEmail(),
-              'roles' => $user->getRoles(),
-              'username' => $user->getUsername(),
-              
-          ]);
-      }
-    /**
-     * @Route("/api/security/logout", name="app_logout")
-     */
-    public function logout()
+    public function login(): JsonResponse
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$user) {
+            return JsonResponse::create(
+                [
+                    'errors' => 'User does not exist'
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        }
+        $res_data = [
+            'email' => $user->getEmail(),
+            'roles' => $user->getRoles(),
+            'username' => $user->getUsername(),
+            'name' => $user->getName(),
+            'lastname' => $user->getLastname(),
+            'id' => $user->getId(),
+            'location' => $user->getLocation(),
+            'github_username' => $user->getGithubUsername(),
+            '$short_description' => $user->getShortDescription(),
+            'team' => $user->getTeam(),
+            'skills' => $user->getSkills(),
+            'isLoggedIn' => true
+        ];
+        return JsonResponse::create($res_data);
+    }
+
+    /**
+     * @Rest\Get("/security/logout", name="logout", methods={"GET"})
+     * @return void
+     * @throws \RuntimeException
+     */
+    public function logout(): void
+    {
+        throw new \RuntimeException('This should not be reached!');
     }
 }
-
-// class SecurityController extends AbstractController
-// {
-//     /**
-//      * @Route("security/login", name="app_login")
-//      */
-//     public function login(AuthenticationUtils $authenticationUtils): Response
-//     {
-//         // if ($this->getUser()) {
-//         //     return $this->redirectToRoute('target_path');
-//         // }
-
-//         // get the login error if there is one
-//         $error = $authenticationUtils->getLastAuthenticationError();
-//         // last username entered by the user
-//         $lastUsername = $authenticationUtils->getLastUsername();
-
-//         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-//     }
-
-//     /**
-//      * @Route("security/logout", name="app_logout")
-//      */
-//     public function logout()
-//     {
-//         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
-//     }
-// }

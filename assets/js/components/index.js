@@ -1,15 +1,15 @@
 import Header from "./header";
 import Particles from "./particles";
-import Layout from "./layout";
-import LayoutUserDashboard from "./layoutUserDashboard";
+import MainLayout from "./layouts/main";
+import DashboardLayout from "./layouts/dashboard";
 import TableTeamRepo from "./tableTeamRepo";
 import TableMyTeammates from "./tableMyTeammates";
 
 export {
   Header,
   Particles,
-  Layout,
-  LayoutUserDashboard,
+  MainLayout,
+  DashboardLayout,
   TableTeamRepo,
   TableMyTeammates
 };

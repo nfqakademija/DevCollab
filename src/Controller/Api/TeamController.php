@@ -131,8 +131,8 @@ class TeamController extends AbstractFOSRestController
      */
     public function teamSorter(Request $request): Response
     {
-        $userId = json_decode($request->getContent());
-        $userId = $userId[0];
+        $userId = json_decode($request->getContent(), true);
+        $userId = $userId['id'];
         $teamsArray = $this->showTeams()->getContent();
         $teamstoArray = json_decode($teamsArray, true);
         $randomTeam = array_rand($teamstoArray, 1);

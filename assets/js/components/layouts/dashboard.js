@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { withRouter, NavLink, Link } from "react-router-dom";
-import { UserContext } from "../context";
-import IconProfile from "../../img/icons/avatar.png";
-import IconTeam from "../../img/icons/team.png";
-import IconScoreboard from "../../img/icons/scoreboard.png";
-import {capitalize} from "../utils";
-import * as ROUTES from "../constants/routes";
+import { UserContext } from "../../context";
+import IconProfile from "../../../img/icons/avatar.png";
+import IconTeam from "../../../img/icons/team.png";
+import IconScoreboard from "../../../img/icons/scoreboard.png";
+import {capitalize} from "../../utils";
+import * as ROUTES from "../../constants/routes";
 
 const CLASSES = {
   mainContent: "flex-1 bg-gray-100 py-16 xl:w-10/12 xl:ml-auto",

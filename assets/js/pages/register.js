@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import * as ROUTES from "../constants/routes"
 import { Particles } from "../components";
 
 const CLASSES = {
@@ -23,7 +24,7 @@ const CLASSES = {
 
 const { main, container, form, loginLink } = CLASSES;
 
-const RegisterPage = ({ history, handleSuccesfulAuth }) => {
+const RegisterPage = ({ history, handleAuth }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,10 +63,10 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
       )
       .then(res => {
         if (res.status === 201) {
-          handleSuccesfulAuth(res.data);
+          handleAuth(res.data);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("user", JSON.stringify(res.data));
-          history.push("/");
+          history.push(ROUTES.HOME);
         } else {
           const errors = res.data;
           setErrors(errors);

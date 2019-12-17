@@ -81,7 +81,7 @@ const HomePage = ({ history, location }) => {
   //TODO -> once backend is ready send post req to backend to do its magic and add user to team
   const addUserToTeam = e => {
     axios
-      .post("/api/jointeam", { "id": user.id })
+      .post("/api/jointeam", { id: user.id })
       .then(res => console.log(res))
       .catch(err => console.log(err));
     e.preventDefault();
@@ -93,7 +93,7 @@ const HomePage = ({ history, location }) => {
 
   return (
     <DashboardLayout>
-      {!user.team ? <SignTeamTable addUserToTeam={addUserToTeam} /> : (
+      {!user.team ? <SignTeamCard addUserToTeam={addUserToTeam} /> : (
         <div className="flex flex-wrap">
           <TableMyTeammates myTeammates={myTeammates} />
           <TableTeamRepo teamGithub={teamGithub} githubEvents={githubEvents} />

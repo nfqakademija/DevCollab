@@ -25,8 +25,8 @@ class SecurityController extends AbstractController
               'location' => $user->getLocation(),
               'github_username' => $user->getGithubUsername(),
               'short_description' => $user->getShortDescription(),
-              'team' => $user->getTeam(),
-              'skills' => $user->getSkills(),
+//              'team' => $user->getTeam(),
+//              'skills' => $user->getSkills(),
               'roles' => $user->getRoles(),         
           ]);
       }

@@ -103,16 +103,16 @@ const LayoutUserDashboard = ({ history, location, children }) => {
           />
           <span className="xl:text-lg xl:ml-2">Scoreboard</span>
         </NavLink>
-        {user.roles.includes("ROLE_ADMIN") && (
-          <NavLink
-            exact
-            to="/admin"
-            className={`${navigation.links}`}
-            activeClassName={`${navigation.linksActive}`}
-          >
-            <span className="xl:text-lg xl:ml-2">Admin</span>
-          </NavLink>
-        )} 
+        {/*{user && user.roles.includes("ROLE_ADMIN") && (*/}
+        {/*  <NavLink*/}
+        {/*    exact*/}
+        {/*    to="/admin"*/}
+        {/*    className={`${navigation.links}`}*/}
+        {/*    activeClassName={`${navigation.linksActive}`}*/}
+        {/*  >*/}
+        {/*    <span className="xl:text-lg xl:ml-2">Admin</span>*/}
+        {/*  </NavLink>*/}
+        {/*)} */}
       </div>
     </div>
   );

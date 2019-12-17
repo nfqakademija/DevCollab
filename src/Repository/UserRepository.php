@@ -43,7 +43,7 @@ class UserRepository extends ServiceEntityRepository
     public function getUsersData(string $username)
     {
         $qb = $this->createQueryBuilder('p')
-            ->select('p.username, p.name, p.lastname, p.location, p.githubUsername, p.shortDescription')
+            ->select('p.username, p.name, p.lastname, p.location, p.github_username, p.short_description')
             ->where('p.username = :user')
             ->setParameter('user', $username);
 

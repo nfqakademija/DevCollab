@@ -7,54 +7,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/security/login", name="app_login", methods={"POST"})
      */
-      public function login(Request $request)
-      {
-          $user = $this->getUser();
-          return $this->json([
-              'email' => $user->getEmail(),
-              'roles' => $user->getRoles(),
-              'username' => $user->getUsername(),
-              
-          ]);
-      }
+    public function login(Request $request)
+    {
+        $user = $this->getUser();
+
+        return $this->json([
+            'id' => $user->getId(),
+            'name' => $user->getName(),
+            'lastname' => $user->getLastname(),
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'location' => $user->getLocation(),
+            'github_username' => $user->getGithubUsername(),
+            'short_description' => $user->getShortDescription(),
+            'team' => $user->getTeam()->getId(),
+            'skills' => $user->getSkills(),
+            'roles' => $user->getRoles(),
+        ]);
+    }
+
     /**
-     * @Route("/api/security/logout", name="app_logout")
+     * @Route("/security/logout", name="app_logout", methods={"GET"})
      */
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 }
-
-// class SecurityController extends AbstractController
-// {
-//     /**
-//      * @Route("security/login", name="app_login")
-//      */
-//     public function login(AuthenticationUtils $authenticationUtils): Response
-//     {
-//         // if ($this->getUser()) {
-//         //     return $this->redirectToRoute('target_path');
-//         // }
-
-//         // get the login error if there is one
-//         $error = $authenticationUtils->getLastAuthenticationError();
-//         // last username entered by the user
-//         $lastUsername = $authenticationUtils->getLastUsername();
-
-//         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-//     }
-
-//     /**
-//      * @Route("security/logout", name="app_logout")
-//      */
-//     public function logout()
-//     {
-//         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
-//     }
-// }

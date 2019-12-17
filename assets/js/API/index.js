@@ -29,3 +29,4 @@ export const fetchTeamGithubRepoEvents = async (url, setGithubEvents) => {
     })
     .catch(err => console.error(err));
 };
+

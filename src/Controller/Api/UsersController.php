@@ -30,6 +30,8 @@ class UsersController extends AbstractFOSRestController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->getUserById($id);
+//        $user = $entityManager->getRepository(User::class)->find($id);
+//        dd($user->getTeam()->);
         $teamId = $entityManager->getRepository(User::class)->getTeamIdOfUser($id);
 
         $users['user'] = $user[0];

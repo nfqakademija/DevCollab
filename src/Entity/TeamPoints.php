@@ -55,4 +55,9 @@ class TeamPoints
 
         return $this;
     }
+
+//    public function getTeamId(): string
+//    {
+////        return $this->id;
+//    }
 }

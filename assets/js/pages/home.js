@@ -33,6 +33,8 @@ const SignTeamCard = ({ addUserToTeam }) => (
 const HomePage = () => {
   const user = useContext(UserContext);
 
+  console.log(user);
+
   const addUserToTeam = e => {
     axios
       .post("/api/jointeam", { id: user.id })

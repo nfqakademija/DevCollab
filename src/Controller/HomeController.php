@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     *
      * @Route("/", name="home_FE")
      * @Route("/{route}",
      *     name="react_pages",

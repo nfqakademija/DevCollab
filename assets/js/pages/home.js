@@ -11,6 +11,7 @@ import {
   fetchTeam
 } from "../API";
 import axios from "axios";
+import { withRouter } from "react-router-dom"
 
 const HomePage = ({ history, location }) => {
   const [user] = useContext(MyContext);
@@ -64,38 +65,38 @@ const HomePage = ({ history, location }) => {
 
   return (
     <LayoutUserDashboard location={location} history={history}>
-      {!user.team ? (
-        <div className="w-full p-2">
-          <div className="bg-white shadow-lg w-full p-2 xl:p-4">
-            <h1 className="text-center text-4xl font-semibold mb-4">
-              Welcome!
-            </h1>
-            <p>
-              Hi, this projects main goal is to help you to improve your
-              teamwork/coding in team skills.
-              <br />
-              <br />
-              Rules are simple:
-              <br />
-              <br /> * Be nice
-              <br /> * Have fun
-            </p>
-            <button
-              onClick={addUserToTeam}
-              className="inline-block text-md lg:text-lg font-semibold bg-teal-500 rounded px-4 py-2 text-white my-2 mr-2 hover:bg-teal-600 util-shadow-green"
-            >
-              Join team
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className="flex flex-wrap">
-          <TableMyTeammates myTeammates={myTeammates} />
-          <TableTeamRepo teamGithub={teamGithub} githubEvents={githubEvents} />
-        </div>
-      )}
+      {/*{!user.team ? (*/}
+      {/*  <div className="w-full p-2">*/}
+      {/*    <div className="bg-white shadow-lg w-full p-2 xl:p-4">*/}
+      {/*      <h1 className="text-center text-4xl font-semibold mb-4">*/}
+      {/*        Welcome!*/}
+      {/*      </h1>*/}
+      {/*      <p>*/}
+      {/*        Hi, this projects main goal is to help you to improve your*/}
+      {/*        teamwork/coding in team skills.*/}
+      {/*        <br />*/}
+      {/*        <br />*/}
+      {/*        Rules are simple:*/}
+      {/*        <br />*/}
+      {/*        <br /> * Be nice*/}
+      {/*        <br /> * Have fun*/}
+      {/*      </p>*/}
+      {/*      <button*/}
+      {/*        onClick={addUserToTeam}*/}
+      {/*        className="inline-block text-md lg:text-lg font-semibold bg-teal-500 rounded px-4 py-2 text-white my-2 mr-2 hover:bg-teal-600 util-shadow-green"*/}
+      {/*      >*/}
+      {/*        Join team*/}
+      {/*      </button>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*) : (*/}
+      {/*  <div className="flex flex-wrap">*/}
+      {/*    <TableMyTeammates myTeammates={myTeammates} />*/}
+      {/*    <TableTeamRepo teamGithub={teamGithub} githubEvents={githubEvents} />*/}
+      {/*  </div>*/}
+      {/*)}*/}
     </LayoutUserDashboard>
   );
 };
 
-export default HomePage;
+export default withRouter(HomePage);

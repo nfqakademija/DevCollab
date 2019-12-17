@@ -1,7 +1,7 @@
 import React from "react";
-import { Header } from "./index";
+import { Header } from "../index";
 
-const Layout = ({ isUserLoggedIn, children }) => {
+const MainLayout = ({ isUserLoggedIn, children }) => {
   return (
     <div className="min-h-screen flex flex-col justify-between relative">
       {!isUserLoggedIn && <Header />}
@@ -10,4 +10,4 @@ const Layout = ({ isUserLoggedIn, children }) => {
   );
 };
 
-export default Layout;
+export default MainLayout;

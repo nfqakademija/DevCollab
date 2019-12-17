@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import AppProvider from "./context";
+import { AppProvider } from "./context";
 import "../css/app.css";
 import {
   HomePage,
@@ -16,7 +16,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      isUserLoggedIn: localStorage.getItem("isLoggedIn")
+      isUserLoggedIn: localStorage.getItem("isLoggedIn"),
+      user: {}
     };
 
     this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
@@ -25,7 +26,8 @@ class App extends React.Component {
   //TODO -> update once backend login/registration is working
   handleSuccesfulAuth(data) {
     this.setState({
-      isUserLoggedIn: true
+      isUserLoggedIn: true,
+      user: data
     });
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("user", JSON.stringify(data));
@@ -33,7 +35,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppProvider>
+      <AppProvider value={user}>
         <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
           <Switch>
             {!this.state.isUserLoggedIn ? (

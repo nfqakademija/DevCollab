@@ -4,7 +4,7 @@ import {
   TableTeamRepo,
   TableMyTeammates
 } from "../components";
-import { MyContext } from "../context";
+import { UserContext } from "../context";
 import {
   fetchTeamGithubRepo,
   fetchTeamGithubRepoEvents,
@@ -13,7 +13,11 @@ import {
 import axios from "axios";
 
 const UserHomepage = ({ history, location }) => {
-  const [, user] = useContext(MyContext);
+  const [user] = useContext(UserContext);
+
+
+
+
   const [team, setTeam] = useState([]);
 
   // TODO -> Delete once backend is working

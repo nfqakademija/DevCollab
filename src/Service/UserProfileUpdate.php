@@ -25,11 +25,11 @@ class UserProfileUpdate extends UserProfileController
         if ($request['location'] == "") {
             $request['location'] = null;
         }
-        if ($request['githubUsername'] == "") {
-            $request['githubUsername'] = null;
+        if ($request['github_username'] == "") {
+            $request['github_username'] = null;
         }
-        if ($request['shortDescription'] == "") {
-            $request['shortDescription'] = null;
+        if ($request['short_description'] == "") {
+            $request['short_description'] = null;
         }
         $repository = $this->getDoctrine()
             ->getRepository(User::class)
@@ -41,8 +41,8 @@ class UserProfileUpdate extends UserProfileController
             $repository->setName($request['name']);
             $repository->setLastname($request['lastname']);
             $repository->setLocation($request['location']);
-            $repository->setGithubUsername($request['githubUsername']);
-            $repository->setShortDescription($request['shortDescription']);
+            $repository->setGithubUsername($request['github_username']);
+            $repository->setShortDescription($request['short_description']);
             $em->flush();
         }
         return $request;

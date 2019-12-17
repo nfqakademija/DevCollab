@@ -17,8 +17,8 @@ class UserProfileType extends AbstractType
             ->add('name', TextType::class)
             ->add('lastname', TextType::class)
             ->add('location', TextType::class)
-            ->add('githubUsername', TextType::class)
-            ->add('shortDescription', TextType::class)
+            ->add('github_username', TextType::class)
+            ->add('short_description', TextType::class)
         ;
     }
 

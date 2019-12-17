@@ -106,18 +106,6 @@ const DashboardLayout = ({ history, location, children }) => {
           />
           <span className="xl:text-lg xl:ml-2">Scoreboard</span>
         </NavLink>
-<<<<<<< HEAD:assets/js/components/layoutUserDashboard.js
-        {/*{user && user.roles.includes("ROLE_ADMIN") && (*/}
-        {/*  <NavLink*/}
-        {/*    exact*/}
-        {/*    to="/admin"*/}
-        {/*    className={`${navigation.links}`}*/}
-        {/*    activeClassName={`${navigation.linksActive}`}*/}
-        {/*  >*/}
-        {/*    <span className="xl:text-lg xl:ml-2">Admin</span>*/}
-        {/*  </NavLink>*/}
-        {/*)} */}
-=======
         {user.roles.includes("ROLE_ADMIN") && (
           <NavLink
             exact
@@ -128,7 +116,6 @@ const DashboardLayout = ({ history, location, children }) => {
             <span className="xl:text-lg xl:ml-2">Admin</span>
           </NavLink>
         )}
->>>>>>> fe/user-profile-update:assets/js/components/layouts/dashboard.js
       </div>
     </div>
   );

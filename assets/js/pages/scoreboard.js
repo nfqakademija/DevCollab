@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { MyContext } from "../context";
+import { UserContext } from "../context";
 import { LayoutUserDashboard } from "../components";
 import { dynamicSort, capitalize } from "../utils";
 import GithubIcon from "../../img/icons/github.png";
@@ -21,7 +21,7 @@ const CLASSES = {
 const { scoreboard } = CLASSES;
 
 const ScoreboardPage = ({ history, location }) => {
-  const [, user] = useContext(MyContext);
+  const user = useContext(UserContext);
   // const [teams, setTeams] = useState([]);
     const [teams] = useState([]);
 

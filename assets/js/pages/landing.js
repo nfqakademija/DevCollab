@@ -64,7 +64,7 @@ const RandomBubbles = ({ class1, class2 }) => {
   )
 }
 
-const { main, hiw } = CLASSES;
+const { hiw } = CLASSES;
 
 const LandingPage = () => {
 

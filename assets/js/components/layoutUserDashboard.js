@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { MyContext } from "../context";
+import { UserContext } from "../context";
 import IconProfile from "../../img/icons/avatar.png";
 import IconTeam from "../../img/icons/team.png";
 import IconScoreboard from "../../img/icons/scoreboard.png";
 import {capitalize} from "../utils";
+import * as ROUTES from "../constants/routes";
 
 const CLASSES = {
   container:
@@ -31,8 +32,8 @@ const CLASSES = {
 const { container, header, mainContent, navigation } = CLASSES;
 
 const LayoutUserDashboard = ({ history, location, children }) => {
-  const [, user] = useContext(MyContext);
-
+  // const user = useContext(UserContext);
+const user = JSON.parse(localStorage.getItem("user"))
   const handleLogout = () => {
     localStorage.clear();
     history.push("/");
@@ -65,11 +66,11 @@ const LayoutUserDashboard = ({ history, location, children }) => {
         </div>
         <NavLink
           exact
-          to="/"
+          to={ROUTES.HOME}
           className={`${navigation.links}`}
           activeClassName={`${navigation.linksActive}`}
         >
-          {location.pathname === "/" ? (
+          {location.pathname === ROUTES.HOME ? (
             <span className={navigation.greenDot}></span>
           ) : null}
           <img className="mx-auto xl:mx-0 h-6 w-6" src={IconTeam} alt="" />
@@ -77,11 +78,11 @@ const LayoutUserDashboard = ({ history, location, children }) => {
         </NavLink>
         <NavLink
           exact
-          to="/profile"
+          to={ROUTES.PROFILE}
           className={`${navigation.links}`}
           activeClassName={`${navigation.linksActive}`}
         >
-          {location.pathname === "/profile" ? (
+          {location.pathname === ROUTES.PROFILE ? (
             <span className={navigation.greenDot}></span>
           ) : null}
           <img className="mx-auto xl:mx-0  h-6 w-6" src={IconProfile} alt="" />
@@ -89,11 +90,11 @@ const LayoutUserDashboard = ({ history, location, children }) => {
         </NavLink>
         <NavLink
           exact
-          to="/scoreboard"
+          to={ROUTES.SCOREBOARD}
           className={`${navigation.links}`}
           activeClassName={`${navigation.linksActive}`}
         >
-          {location.pathname === "/scoreboard" && (
+          {location.pathname === ROUTES.SCOREBOARD && (
             <span className={navigation.greenDot}></span>
           )}
           <img
@@ -112,7 +113,7 @@ const LayoutUserDashboard = ({ history, location, children }) => {
           >
             <span className="xl:text-lg xl:ml-2">Admin</span>
           </NavLink>
-        )} 
+        )}
       </div>
     </div>
   );

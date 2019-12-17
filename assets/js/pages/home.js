@@ -11,9 +11,10 @@ import {
   fetchTeam
 } from "../API";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 const HomePage = ({ history, location }) => {
-  const [user] = useContext(UserContext);
+  const user = useContext(UserContext);
 
 
 
@@ -106,4 +107,4 @@ const HomePage = ({ history, location }) => {
   );
 };
 
-export default HomePage;
+export default withRouter(HomePage);

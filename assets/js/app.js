@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { AppProvider } from "./context";
+import { UserProvider } from "./context";
 import "../css/app.css";
 import {
   LandingPage,
@@ -21,11 +21,11 @@ class App extends React.Component {
       user: {}
     };
 
-    this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
   }
 
   //TODO -> update once backend login/registration is working
-  handleSuccesfulAuth(data) {
+  handleAuth(data) {
     this.setState({
       isUserLoggedIn: true,
       user: data
@@ -36,60 +36,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppProvider value={user}>
+      <UserProvider value={this.state.user}>
         <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
           <Switch>
             <Route exact path={ROUTES.LANDING} component={LandingPage} />
             <Route exact path={ROUTES.HOME} component={HomePage} />
-            <Route exact path={ROUTES.LOGIN} component={LoginPage} />
-            <Route exact path={ROUTES.REGISTER} component={RegisterPage} />
+            <Route exact path={ROUTES.LOGIN} render={props => (<LoginPage {...props} handleAuth={this.handleAuth}/>)}/>
+            <Route exact path={ROUTES.REGISTER} render={props => <RegisterPage {...props} handleAuth={this.handleAuth}/>}
+            />
             <Route exact path={ROUTES.PROFILE} component={ProfilePage} />
             <Route exact path={ROUTES.SCOREBOARD} component={ScoreboardPage} />
-
-
-
-            {/* {!this.state.isUserLoggedIn ? (
-              <Route exact path="/" component={HomePage} />
-            ) : (
-              <Route
-                exact
-                path="/"
-                render={props => <UserHomepage {...props} />}
-              />
-            )}
-            <Route
-              exact
-              path="/login"
-              render={props => (
-                <LoginPage
-                  {...props}
-                  handleSuccesfulAuth={this.handleSuccesfulAuth}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/register"
-              render={props => (
-                <RegisterPage
-                  {...props}
-                  handleSuccesfulAuth={this.handleSuccesfulAuth}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/profile"
-              render={props => <ProfilePage {...props} />}
-            />
-            <Route
-              exact
-              path="/scoreboard"
-              render={props => <ScoreboardPage {...props} />}
-            /> */}
           </Switch>
         </Layout>
-      </AppProvider>
+      </UserProvider>
     );
   }
 }

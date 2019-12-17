@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { LayoutUserDashboard } from "../components";
 import { UserContext } from "../context"
 import axios from "axios";
 
 const ProfilePage = ({ history, location }) => {
-  const [user] = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"))
   const [profile, setProfile] = useState(FAKE_PROFILE);
 
   //TODO -> delete later
@@ -38,8 +38,8 @@ const ProfilePage = ({ history, location }) => {
       <h1>GITHUB USERNAME: {profile ? profile.github_username : "not set"}</h1>
       <h1>SHORT DESCRIPTION: {profile ? profile.short_description : "not set"}</h1>
       <h1>TEAM: {profile ? profile.team : "not set"}</h1>
-      <h1>SKILLS: {profile ? profile.skills.map(skill => `${skill}, `) : "not set"}</h1>
-      <h1>ROLES: {profile ? profile.roles.map(role => `${role}, `) : "not set"}</h1>
+      {/*<h1>SKILLS: {profile ? profile.skills.map(skill => `${skill}, `) : "not set"}</h1>*/}
+      {/*<h1>ROLES: {profile ? profile.roles.map(role => `${role}, `) : "not set"}</h1>*/}
     </LayoutUserDashboard>
   );
 };

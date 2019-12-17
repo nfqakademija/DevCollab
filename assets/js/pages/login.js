@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Particles } from "../components";
 import axios from "axios";
 
@@ -23,7 +23,7 @@ const CLASSES = {
 
 const { main, container, form } = CLASSES;
 
-const LoginPage = ({ history, handleSuccesfulAuth }) => {
+const LoginPage = ({ history, handleAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
@@ -57,13 +57,13 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
       .post("security/login", userJson)
       .then(res => {
         if (res.status === 200 && res.statusText === "OK") {
-          handleSuccesfulAuth(res.data);
-          history.push("/");
+          handleAuth(res.data);
+          history.push("/home");
         }
       })
       .catch(err => {
         setErrors("There was a problem with login details. Try again");
-        console.err(err);
+        console.log(err);
       });
   };
 
@@ -125,4 +125,4 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);1

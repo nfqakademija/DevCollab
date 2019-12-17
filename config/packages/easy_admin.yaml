@@ -2,53 +2,40 @@ easy_admin:
     entities:
         User:
             class: App\Entity\User
-            label: 'User'
+            name_property_path: "email"
+            label: 'Users'
             list:
-                filters: ['name','lastname','location']
+                filters: ['name','lastname','username','location']
                 title: "%%entity_label%% List"
-                action:
+                actions:
                     - { name: edit, icon: pencil, label: ''}
                     - { name: show, icon: eye, label: '' }
                     - { name: delete, icon: eraser, label: '' }
+                fields:
+                    - id
+                    - { property: 'name', label: 'First Name'}
+                    - { property: 'lastname', label: 'Last Name'}
+                    - { property: 'email', type: 'email'}
+                    - { property: 'username', label: 'Username'}
+                    - location
+                    - { property: 'github_username',label: "GitHub" }
+            form:
+                title: "Create User"
+                fields:
+                    - { property: 'name', type: 'text', label: 'First Name', type_options: { required: true } }
+                    - { property: 'lastname', type: 'text', label: 'Last Name' }
+                    - { property: 'email', type: 'email', label: 'Email', type_options: { required: true } }
+                    - location
+                    - password
+                    - { property: 'github_username', type: 'text', label: 'GitHub Username' }
+                    - short_description
+                    - { property: 'teamfk', type: 'text', label: 'Team Name' }
+
+#easy_admin:
 #    user:
 #        name_property_path: "email"
 #    entities:
-#
-##        # List the entity class name you want to manage
-##        - App\Entity\Product
-##        - App\Entity\Category
+#        #        # List the entity class name you want to manage
+#        #        - App\Entity\Product
+#        #        - App\Entity\Category
 #        - App\Entity\User
-#        - label: 'User'
-#
-
-#easy_admin:
-#    entities:
-#        Users:
-#            class: App\Entity\User
-#            label: 'Users'
-#            list:
-#                filters: ['name','lastname','location']
-#                title: "%%entity_label%% List"
-#                actions:
-#                    - { name: edit, icon: pencil, label: ''}
-#                    - { name: show, icon: eye, label: '' }
-#                    - { name: delete, icon: eraser, label: '' }
-#                fields:
-#                    - id
-#                    - { property: 'name', label: 'First Name'}
-#                    - { property: 'lastname', label: 'Last Name'}
-#                    - { property: 'email', type: 'email'}
-#                    - { property: 'username', label: 'Username'}
-#                    - location
-#                    - { property: 'github_username',label: "GitHub" }
-#            form:
-#                title: "Create User"
-#                fields:
-#                    - { property: 'name', type: 'text', label: 'First Name', type_options: { required: true } }
-#                    - { property: 'lastname', type: 'text', label: 'Last Name' }
-#                    - { property: 'email', type: 'email', label: 'Email', type_options: { required: true } }
-#                    - location
-#                    - password
-#                    - { property: 'github_username', type: 'text', label: 'GitHub Username' }
-#                    - short_description
-#                    - { property: 'teamfk', type: 'text', label: 'Team Name' }

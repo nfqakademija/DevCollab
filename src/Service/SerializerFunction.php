@@ -16,7 +16,6 @@ class SerializerFunction
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $objektas = $serializer->serialize($objektas, 'json');
-
         return $objektas;
     }
 }

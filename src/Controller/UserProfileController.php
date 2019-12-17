@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use App\Form\UserProfileType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +16,11 @@ class UserProfileController extends AbstractController
     /**
      * @Route("/api/profile", name="get_data_profile", methods="GET")
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @param SerializerFunction $ser
      * @return Response $response
      */
     public function getUserData(
         Request $request,
-        EntityManagerInterface $entityManager,
         SerializerFunction $ser
     ): Response {
         $data = $request->query->get('username');
@@ -34,28 +30,25 @@ class UserProfileController extends AbstractController
         ]);
         if ($username !== null) {
             $username = $repository->getUsersData($data);
-            $username = $ser->serializeris($username);
+            $username =  json_encode($username, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         } else {
             $username = "User do not exists.";
         }
         $response = new Response();
             $response->setContent($username);
             $response->setStatusCode(Response::HTTP_OK);
-        $response->headers->set('Content-Type', 'text/plain');
         $response->send();
     }
 
     /**
      * @Route("/api/profile", name="update_data_profile", methods="POST")
      * @param Request $request
-     * @param EntityManagerInterface $em
      * @param SerializerFunction $ser
      * @param UserProfileUpdate $usr
      * @return Response $response
      */
     public function updateUserData(
         Request $request,
-        EntityManagerInterface $em,
         SerializerFunction $ser,
         UserProfileUpdate $usr
     ): Response {
@@ -71,6 +64,7 @@ class UserProfileController extends AbstractController
         $data = $ser->serializeris($data);
         $response = new Response();
         $response->setContent($data);
+        $response->headers->set('Content-Type', 'application/json');
         $response->setStatusCode(Response::HTTP_OK);
         $response->send();
     }

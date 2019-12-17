@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { withRouter, NavLink, Link } from "react-router-dom";
 import { UserContext } from "../context";
 import IconProfile from "../../img/icons/avatar.png";
 import IconTeam from "../../img/icons/team.png";
@@ -8,15 +8,6 @@ import {capitalize} from "../utils";
 import * as ROUTES from "../constants/routes";
 
 const CLASSES = {
-  container:
-    "min-h-screen w-full poppins bg-gray-100 flex flex-col justify-between relative",
-  header: {
-    container:
-      "w-full h-16 bg-white flex justify-between items-center px-2 border-b border-gray-400 fixed top-0 z-20",
-    logo: "text-2xl font-bold",
-    logoutBtn:
-      "text-md lg:text-lg text-center font-semibold text-black border-2 border-gray-800 rounded px-2 lg:px-4 py-1 mr-1 cursor-pointer hover:text-gray-100 hover:bg-gray-800 "
-  },
   mainContent: "flex-1 bg-gray-100 py-16 xl:w-10/12 xl:ml-auto",
   navigation: {
     container:
@@ -31,7 +22,7 @@ const CLASSES = {
 
 const { container, header, mainContent, navigation } = CLASSES;
 
-const LayoutUserDashboard = ({ history, location, children }) => {
+const DashboardLayout = ({ history, location, children }) => {
   // const user = useContext(UserContext);
 const user = JSON.parse(localStorage.getItem("user"))
   const handleLogout = () => {
@@ -40,19 +31,19 @@ const user = JSON.parse(localStorage.getItem("user"))
     window.location.reload();
   };
   return (
-    <div className={container}>
-      <div className={header.container}>
-        <Link to="/" className={header.logo}>
+    <div className="min-h-screen w-full poppins bg-gray-100 flex flex-col justify-between relative">
+      <div className="w-full h-16 bg-white flex justify-between items-center px-2 border-b border-gray-400 fixed top-0 z-20">
+        <Link to={ROUTES.HOME} className="text-2xl font-bold">
           DevCollab
         </Link>
-        <Link to="/" onClick={handleLogout} className={header.logoutBtn}>
+        <Link to="/" onClick={handleLogout} className="text-md lg:text-lg text-center font-semibold text-black border-2 border-gray-800 rounded px-2 lg:px-4 py-1 mr-1 cursor-pointer hover:text-gray-100 hover:bg-gray-800">
           Logout
         </Link>
       </div>
-      <div className={mainContent}>
+      <div className="flex-1 bg-gray-100 py-16 xl:w-10/12 xl:ml-auto">
         <div className="p-2 lg:p-8">{children}</div>
       </div>
-      <div className={navigation.container}>
+      <div className="w-full h-16 border-t border-gray-400 flex justify-around px-2 items-center text-sm fixed bottom-0 z-10 bg-white text-center xl:w-2/12 xl:justify-start xl:items-start xl:pt-20 xl:h-screen xl:flex-col xl:px-4">
         <div className="w-full h-auto my-8 items-center hidden xl:flex">
           <div className="bg-blue-500 h-12 w-12 rounded-full flex justify-center items-center">
             <span className="text-white text-2xl font-semibold">
@@ -119,4 +110,4 @@ const user = JSON.parse(localStorage.getItem("user"))
   );
 };
 
-export default LayoutUserDashboard;
+export default withRouter(DashboardLayout);

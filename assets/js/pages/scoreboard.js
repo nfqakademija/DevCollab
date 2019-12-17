@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context";
-import { LayoutUserDashboard } from "../components";
+import { DashboardLayout } from "../components";
 import { dynamicSort, capitalize } from "../utils";
 import GithubIcon from "../../img/icons/github.png";
 
@@ -22,16 +22,10 @@ const { scoreboard } = CLASSES;
 
 const ScoreboardPage = ({ history, location }) => {
   const user = useContext(UserContext);
-  // const [teams, setTeams] = useState([]);
-    const [teams] = useState([]);
-
-  useEffect(() => {
-  }, []);
-
   const sortedTeams = teams.sort(dynamicSort("points", "desc"));
 
   return (
-    <LayoutUserDashboard location={location} history={history}>
+    <DashboardLayout location={location} history={history}>
       <div className={scoreboard.container}>
         <h1 className={scoreboard.title}>
           Score<span className="text-blue-500">Board</span>
@@ -65,7 +59,7 @@ const ScoreboardPage = ({ history, location }) => {
           );
         })}
       </div>
-    </LayoutUserDashboard>
+    </DashboardLayout>
   );
 };
 

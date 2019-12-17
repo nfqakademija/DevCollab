@@ -10,7 +10,7 @@ import {
   ProfilePage,
   ScoreboardPage
 } from "./pages";
-import { Layout } from "./components";
+import { MainLayout } from "./components";
 import * as ROUTES from "./constants/routes"
 
 class App extends React.Component {
@@ -37,17 +37,16 @@ class App extends React.Component {
   render() {
     return (
       <UserProvider value={this.state.user}>
-        <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
+        <MainLayout isUserLoggedIn={this.state.isUserLoggedIn}>
           <Switch>
             <Route exact path={ROUTES.LANDING} component={LandingPage} />
             <Route exact path={ROUTES.HOME} component={HomePage} />
-            <Route exact path={ROUTES.LOGIN} render={props => (<LoginPage {...props} handleAuth={this.handleAuth}/>)}/>
-            <Route exact path={ROUTES.REGISTER} render={props => <RegisterPage {...props} handleAuth={this.handleAuth}/>}
-            />
             <Route exact path={ROUTES.PROFILE} component={ProfilePage} />
             <Route exact path={ROUTES.SCOREBOARD} component={ScoreboardPage} />
+            <Route exact path={ROUTES.LOGIN} render={props => (<LoginPage {...props} handleAuth={this.handleAuth}/>)}/>
+            <Route exact path={ROUTES.REGISTER} render={props => <RegisterPage {...props} handleAuth={this.handleAuth}/>}/>
           </Switch>
-        </Layout>
+        </MainLayout>
       </UserProvider>
     );
   }

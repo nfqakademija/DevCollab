@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { LayoutUserDashboard } from "../components";
+import { DashboardLayout } from "../components";
 import { UserContext } from "../context"
 import axios from "axios";
 
@@ -29,7 +29,7 @@ const ProfilePage = ({ history, location }) => {
   }, [])
 
   return (
-    <LayoutUserDashboard location={location} history={history}>
+    <DashboardLayout location={location} history={history}>
       <h1>ID: {profile ? profile : "not set"}</h1>
       <h1>NAME: {profile ? profile.name : "not set"}</h1>
       <h1>LASTNAME: {profile ? profile.lastname : "not set"}</h1>
@@ -40,7 +40,7 @@ const ProfilePage = ({ history, location }) => {
       <h1>TEAM: {profile ? profile.team : "not set"}</h1>
       {/*<h1>SKILLS: {profile ? profile.skills.map(skill => `${skill}, `) : "not set"}</h1>*/}
       {/*<h1>ROLES: {profile ? profile.roles.map(role => `${role}, `) : "not set"}</h1>*/}
-    </LayoutUserDashboard>
+    </DashboardLayout>
   );
 };
 

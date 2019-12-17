@@ -146,12 +146,10 @@ class TeamController extends AbstractFOSRestController
         $entityManager->flush();
         $user = $entityManager->getRepository(User::class)->getUserById($userId);
 
-
         $user['user'] = $user[0];
         unset($user[0]);
         $user['teamId'] = $randomTeamConverted;
 
         return $this->handleView($this->view($user));
     }
-
 }

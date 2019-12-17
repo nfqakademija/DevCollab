@@ -33,6 +33,7 @@ const DashboardLayout = ({ history, location, children }) => {
         .then(res => {
           localStorage.clear();
           history.push("/");
+          console.log(res);
           window.location.reload(true);
         })
         .catch(error=> console.log(error));

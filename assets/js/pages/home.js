@@ -1,16 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
-  LayoutUserDashboard,
-  TableTeamRepo,
-  TableMyTeammates,
   DashboardLayout
 } from "../components";
 import { UserContext } from "../context";
-import {
-  fetchTeamGithubRepo,
-  fetchTeamGithubRepoEvents,
-  fetchTeam
-} from "../API";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 
@@ -38,47 +30,9 @@ const SignTeamCard = ({ addUserToTeam }) => (
   </div>
 )
 
-const HomePage = ({ history, location }) => {
+const HomePage = () => {
   const user = useContext(UserContext);
-  const [team, setTeam] = useState([]);
 
-
-  // const [teams, setTeams] = useState([]);
-  // TODO -> Delete once backend is working
-  // const [users, setUsers] = useState([]);
-  // const [users] = useState([]);
-  // TODO -> Update once backend is working
-  // const [teamGithub, setTeamGithub] = useState([]);
-  // TODO -> Update once backend is working
-  // const [githubEvents, setGithubEvents] = useState([]);
-  // TODO -> Update once backend is working
-  // const [myTeammates, setMyTeammates] = useState([]);
-
-  // TODO -> Delete once backend is working
-  // useEffect(() => {
-  // }, []);
-
-  // TODO -> Delete once backend is working
-  // const userTeam = teams.filter(team => team.id === user.team_id);
-
-  // TODO -> Update once backend is working
-  // if (users.length > 0 && myTeammates.length === 0) {
-    // setMyTeammates(
-      // users.filter(
-        // teammate => teammate.team_id === user.team_id && teammate.id !== user.id
-      // )
-    // );
-  // }
-
-  // if (userTeam.length > 0 && teamGithub.length === 0) {
-    // fetchTeamGithubRepo(userTeam[0].repo_id, setTeamGithub);
-  // }
-
-  // if (teamGithub.length !== 0 && githubEvents.length === 0) {
-    // fetchTeamGithubRepoEvents(teamGithub.events_url, setGithubEvents);
-  // }
-
-  //TODO -> once backend is ready send post req to backend to do its magic and add user to team
   const addUserToTeam = e => {
     axios
       .post("/api/jointeam", { id: user.id })
@@ -87,16 +41,10 @@ const HomePage = ({ history, location }) => {
     e.preventDefault();
   };
 
-  if (user.team && team.length === 0) {
-    fetchTeam(user.team, setTeam);
-  }
-
   return (
     <DashboardLayout>
       {!user.team ? <SignTeamCard addUserToTeam={addUserToTeam} /> : (
         <div className="flex flex-wrap">
-          <TableMyTeammates myTeammates={myTeammates} />
-          <TableTeamRepo teamGithub={teamGithub} githubEvents={githubEvents} />
         </div>
       )}
     </DashboardLayout>

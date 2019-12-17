@@ -31,7 +31,7 @@ const HeroSection = () => (
     <div className="hero-content w-full lg:w-2/5 text-center lg:text-left">
       <h1 className="text-5xl xl:text-6xl font-bold tracking-tight leading-tight mb-2 lg:mb-4">Let's build teamwork skills together</h1>
       <p className="text-md lg:text-xl mb-8 md:px-16 lg:px-0">
-        Coding skills are just part of what makes developer great. Let’s
+        Coding skills are just part of what makes developer great. Let&apos;s
         work on the other part together.
           </p>
       <div>

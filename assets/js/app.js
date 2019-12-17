@@ -3,14 +3,15 @@ import { Route, Switch } from "react-router-dom";
 import { AppProvider } from "./context";
 import "../css/app.css";
 import {
-  HomePage,
+  LandingPage,
   LoginPage,
   RegisterPage,
-  UserHomepage,
+  HomePage,
   ProfilePage,
   ScoreboardPage
 } from "./pages";
 import { Layout } from "./components";
+import * as ROUTES from "./constants/routes"
 
 class App extends React.Component {
   constructor() {
@@ -38,7 +39,16 @@ class App extends React.Component {
       <AppProvider value={user}>
         <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
           <Switch>
-            {!this.state.isUserLoggedIn ? (
+            <Route exact path={ROUTES.LANDING} component={LandingPage} />
+            <Route exact path={ROUTES.HOME} component={HomePage} />
+            <Route exact path={ROUTES.LOGIN} component={LoginPage} />
+            <Route exact path={ROUTES.REGISTER} component={RegisterPage} />
+            <Route exact path={ROUTES.PROFILE} component={ProfilePage} />
+            <Route exact path={ROUTES.SCOREBOARD} component={ScoreboardPage} />
+
+
+
+            {/* {!this.state.isUserLoggedIn ? (
               <Route exact path="/" component={HomePage} />
             ) : (
               <Route
@@ -76,7 +86,7 @@ class App extends React.Component {
               exact
               path="/scoreboard"
               render={props => <ScoreboardPage {...props} />}
-            />
+            /> */}
           </Switch>
         </Layout>
       </AppProvider>

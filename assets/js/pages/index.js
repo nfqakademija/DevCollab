@@ -1,15 +1,15 @@
-import HomePage from "./home";
+import LandingPage from "./landing";
 import LoginPage from "./login";
 import RegisterPage from "./register";
-import UserHomepage from "./userHome";
+import HomePage from "./home";
 import ProfilePage from "./profile";
 import ScoreboardPage from "./scoreboard";
 
 export {
-  HomePage,
+  LandingPage,
   LoginPage,
   RegisterPage,
-  UserHomepage,
+  HomePage,
   ProfilePage,
   ScoreboardPage
 };

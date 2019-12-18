@@ -66,8 +66,13 @@ const RegisterPage = ({ history, handleAuth }) => {
           handleAuth(res.data);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("user", JSON.stringify(res.data));
+<<<<<<< HEAD
           // alert("Registration successful, Login now");
           history.push(ROUTES.HOME);
+=======
+          history.push(ROUTES.HOME);
+          window.location.reload(true);
+>>>>>>> 4c3567ba60bcf0f76a29a8e9bc0503558565e23d
         } else {
           const errors = res.data;
           setErrors(errors);

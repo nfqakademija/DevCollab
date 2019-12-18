@@ -36,7 +36,7 @@ class UserProfileController extends AbstractController
             $username = $repository->getUsersData($data);
             $username = $ser->serializeris($username);
         } else {
-            $username = "User do not exists.";
+            $username = "User does not exist.";
         }
         $response = new Response();
             $response->setContent($username);

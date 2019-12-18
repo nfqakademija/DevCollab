@@ -63,11 +63,11 @@ const RegisterPage = ({ history, handleAuth }) => {
       )
       .then(res => {
         if (res.status === 201) {
-          // handleAuth(res.data);
-          // localStorage.setItem("isLoggedIn", true);
-          // localStorage.setItem("user", JSON.stringify(res.data));
-          alert("Registration successful, Login now");
-          history.push(ROUTES.LOGIN);
+          handleAuth(res.data);
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("user", JSON.stringify(res.data));
+          history.push(ROUTES.HOME);
+          window.location.reload(true);
         } else {
           const errors = res.data;
           setErrors(errors);

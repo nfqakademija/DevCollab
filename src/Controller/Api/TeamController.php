@@ -126,32 +126,4 @@ class TeamController extends AbstractFOSRestController
 
         return $this->handleView($this->view($array));
     }
-
-    /**
-     * Join a Team
-     * @Rest\Post("/jointeam", name="get_jointeam")
-     * @param Request $request
-     * @return Response
-     */
-    public function teamSorter(Request $request): Response
-    {
-        $userId = json_decode($request->getContent(), true);
-        $userId = $userId['id'];
-        $teamsArray = $this->showTeams()->getContent();
-        $teamstoArray = json_decode($teamsArray, true);
-        $randomTeam = array_rand($teamstoArray, 1);
-        $firstTeamId = $teamstoArray[0]['id'];
-        $randomTeamConverted = $firstTeamId + $randomTeam;
-        $entityManager = $this->getDoctrine()->getManager();
-        $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);
-        $user = $entityManager->getRepository(User::class)->find($userId);
-
-        $team->addUser($user);
-        $entityManager->flush();
-        $user = $entityManager->getRepository(User::class)->getUserById($userId);
-        $user = $user[0];
-        $user['teamId'] = $randomTeamConverted;
-
-        return $this->handleView($this->view($user));
-    }
 }

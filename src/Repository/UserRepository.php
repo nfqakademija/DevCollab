@@ -87,6 +87,18 @@ class UserRepository extends ServiceEntityRepository
         return $query->getQuery()->getArrayResult();
     }
 
+    public function getTeamIdOfAllUsers()
+    {
+        $query = $this->createQueryBuilder('users');
+        $query
+            ->select(
+                'team.id'
+            )
+            ->leftJoin('users.team', 'team');
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

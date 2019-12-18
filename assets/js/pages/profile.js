@@ -64,12 +64,12 @@ const ProfilePage = ({ handleAuth }) => {
 
     const handleSubmit = e => {
         const UserJson = {
-            username: user.username,
-            name,
-            lastname,
-            location,
-            github_username: githubUsername,
-            short_descripion: shortDescription,
+            "name": name,
+            "lastname": lastname,
+            "location": location,
+            "github_username": githubUsername,
+            "short_description": shortDescription,
+            "username": user.username
         }
 
         axios.post("/api/profile", UserJson)

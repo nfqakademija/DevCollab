@@ -1,0 +1,32 @@
+easy_admin:
+  entities:
+    User:
+      class: App\Entity\User
+      name_property_path: "email"
+      label: 'Users'
+      list:
+        filters: ['name','lastname','username','location']
+        title: "%%entity_label%% List"
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        max_results: 15
+        fields:
+          - id
+          - { property: 'name', label: 'First Name'}
+          - { property: 'lastname', label: 'Last Name'}
+          - { property: 'email', type: 'email'}
+          - { property: 'username', label: 'Username'}
+          - location
+          - { property: 'github_username',label: "GitHub" }
+      form:
+        title: "Create User"
+        fields:
+          - { property: 'name', type: 'text', label: 'First Name', type_options: { required: true } }
+          - { property: 'lastname', type: 'text', label: 'Last Name' }
+          - { property: 'email', type: 'email', label: 'Email', type_options: { required: true } }
+          - location
+          - password
+          - { property: 'github_username', type: 'text', label: 'GitHub Username' }
+          - short_description

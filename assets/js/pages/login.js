@@ -1,29 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Particles } from "../components";
 import axios from "axios";
 
-const CLASSES = {
-  main:
-    "poppins container h-auto w-full mx-auto flex justify-center items-center mt-4 md:mt-24",
-  container: "w-full max-w-xs md:max-w-md md:z-10",
-  form: {
-    wrapper: "bg-white shadow-lg rounded px-8 py-10 mb-2",
-    divider: "mb-6",
-    label: "block text-gray-900 text-md font-semibold mb-2",
-    input:
-      "shadow-md appearance-none border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:shadow-xl",
-    button:
-      "bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-md hover:shadow-xl",
-    error: "text-xs text-red-500 mb-4",
-    forgotPasswordLink:
-      "inline-block align-baseline font-bold text-md text-gray-600 hover:text-gray-700"
-  }
-};
-
-const { main, container, form } = CLASSES;
-
-const LoginPage = ({ history, handleSuccesfulAuth }) => {
+const LoginPage = ({ history, handleAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
@@ -54,29 +34,30 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
     };
 
     axios
-      .post("user/login", userJson)
+      .post("security/login", userJson)
       .then(res => {
         if (res.status === 200 && res.statusText === "OK") {
-          handleSuccesfulAuth(res.data);
-          history.push("/");
+          handleAuth(res.data);
+          history.push("/home");
+          window.location.reload(true);
         }
       })
       .catch(err => {
         setErrors("There was a problem with login details. Try again");
-        console.err(err);
+        console.log(err);
       });
   };
 
   return (
-    <div className={main}>
-      <div className={container} style={{ zIndex: 2 }}>
-        <form className={form.wrapper}>
-          <div className={form.divider}>
-            <label className={form.label} htmlFor="email">
+    <div className="poppins container h-auto w-full mx-auto flex justify-center items-center mt-4 md:mt-24">
+      <div className="w-full max-w-xs md:max-w-md md:z-10" style={{ zIndex: 2 }}>
+        <form className="bg-white shadow-lg rounded px-8 py-10 mb-2">
+          <div className="mb-6">
+            <label className="block text-gray-900 text-md font-semibold mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className={form.input}
+              className="shadow-md appearance-none border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:shadow-xl"
               type="email"
               name="email"
               placeholder="email"
@@ -84,12 +65,12 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
               value={email}
             />
           </div>
-          <div className={form.divider}>
-            <label className={form.label} htmlFor="password">
+          <div className="mb-6">
+            <label className="block text-gray-900 text-md font-semibold mb-2" htmlFor="password">
               Password
             </label>
             <input
-              className={form.input}
+              className="shadow-md appearance-none border-1 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:shadow-xl"
               type="password"
               name="password"
               placeholder="******************"
@@ -97,10 +78,10 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
               value={password}
             />
           </div>
-          {errors !== "" ? <p className={form.error}>{errors}</p> : null}
+          {errors !== "" ? <p className="text-xs text-red-500 mb-4">{errors}</p> : null}
           <div className="flex items-center justify-between">
             <button
-              className={form.button}
+              className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-md hover:shadow-xl"
               type="submit"
               onClick={handleSubmit}
             >
@@ -125,4 +106,4 @@ const LoginPage = ({ history, handleSuccesfulAuth }) => {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);

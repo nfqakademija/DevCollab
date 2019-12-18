@@ -1,0 +1,25 @@
+easy_admin:
+  entities:
+    Projects:
+      class: App\Entity\Projects
+      label: 'Projects'
+      list:
+        filters: ['repository','created','deadline']
+        title: "%%entity_label%% List"
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        fields:
+          - id
+          - { property: 'title', label: 'Title' }
+          - { property: 'repository', label: 'Repository' }
+          - { property: 'created', label: 'Create' }
+          - { property: 'deadline', label: 'Deadline' }
+      form:
+        title: "Create Project"
+        fields:
+          - { property: 'title', label: 'Title' }
+          - { property: 'repository', label: 'Repository' }
+          - { property: 'created', label: 'Create' }
+          - { property: 'deadline', label: 'Deadline' } 

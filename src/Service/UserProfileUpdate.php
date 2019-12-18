@@ -45,6 +45,12 @@ class UserProfileUpdate extends UserProfileController
             $repository->setShortDescription($request['short_description']);
             $em->flush();
         }
-        return $request;
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user = $repository->getUsersData($request['username']);
+        $user = $user[0];
+        $teamId = $repository->getUsersId($request['username']);
+        $teamId = $teamId[0];
+        $user['teamId'] = $teamId['id'];
+        return $user;
     }
 }

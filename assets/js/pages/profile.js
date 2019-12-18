@@ -78,6 +78,7 @@ const ProfilePage = ({ handleAuth }) => {
                 setSuccess(true);
                 setErrors(false);
                 handleAuth(res.data);
+                console.log(res.data);
             })
             .catch(error => {
                 console.log(error);

@@ -18,6 +18,7 @@ fos_rest:
     rules:
       - { path: '^/admin', priorities: [ 'html', '*/*'], fallback_format: ~, prefer_extension: true }
       - { path: '^/api', priorities: ['json', 'html'], fallback_format: html, prefer_extension: true }
+      - { path: '^/security', priorities: ['json', 'html'], fallback_format: html, prefer_extension: true }
       - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: ~, prefer_extension: true }
   param_fetcher_listener: true
   access_denied_listener:

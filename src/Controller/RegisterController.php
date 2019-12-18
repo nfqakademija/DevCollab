@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Serializer;
 class RegisterController extends AbstractController
 {
     /**
-     * @Route("api/registration", name="registration", methods="POST")
+     * @Route("security/registration", name="registration", methods="POST")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return Response $response

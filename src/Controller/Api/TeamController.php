@@ -83,21 +83,25 @@ class TeamController extends AbstractFOSRestController
         $projectsArray = [];
         foreach ($users as $user) {
             $tempArray = [];
-            array_push($tempArray, $user->getId());
-            array_push($tempArray, $user->getName());
-            array_push($tempArray, $user->getLastname());
-            array_push($tempArray, $user->getEmail());
+            $tempArray['id'] = $user->getId();
+            $tempArray['name'] = $user->getName();
+            $tempArray['lastname'] = $user->getLastname();
+            $tempArray['email'] = $user->getEmail();
             array_push($projectsArray, $tempArray);
         }
+
         $setKey = array('users' => $projectsArray);
         $array = array_merge($array, $setKey);
 
         $projects = $teams->getProjects();
         $projectsArray = [];
         $tempArray = [];
-        array_push($tempArray, $projects->getId());
-        array_push($tempArray, $projects->getTitle());
-        array_push($projectsArray, $tempArray);
+
+        if ($projects !== null) {
+            array_push($tempArray, $projects->getId());
+            array_push($tempArray, $projects->getTitle());
+            array_push($projectsArray, $tempArray);
+        }
 
         $setKey = array('projects' => $projectsArray);
         $array = array_merge($array, $setKey);
@@ -131,8 +135,8 @@ class TeamController extends AbstractFOSRestController
      */
     public function teamSorter(Request $request): Response
     {
-        $userId = json_decode($request->getContent());
-        $userId = $userId[0];
+        $userId = json_decode($request->getContent(), true);
+        $userId = $userId['id'];
         $teamsArray = $this->showTeams()->getContent();
         $teamstoArray = json_decode($teamsArray, true);
         $randomTeam = array_rand($teamstoArray, 1);
@@ -145,10 +149,7 @@ class TeamController extends AbstractFOSRestController
         $team->addUser($user);
         $entityManager->flush();
         $user = $entityManager->getRepository(User::class)->getUserById($userId);
-
-
-        $user['user'] = $user[0];
-        unset($user[0]);
+        $user = $user[0];
         $user['teamId'] = $randomTeamConverted;
 
         return $this->handleView($this->view($user));

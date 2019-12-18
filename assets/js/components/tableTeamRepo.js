@@ -45,7 +45,7 @@ const TableTeamRepository = ({ teamGithub, githubEvents }) => (
           <div className="w-full px-2 my-2 h-auto">
             <div className={section.inner}>
               <p className={section.title}>Last 10 events</p>
-              {githubEvents.length === 0 && <p>Loading ...</p>}
+              {githubEvents.length === 0 && <p>Loading ....</p>}
               {githubEvents.slice(0, 10).map(event => (
                 <p className="text-left" key={event.id}>
                   {event.type} by{" "}

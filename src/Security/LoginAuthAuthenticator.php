@@ -19,7 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class AdminAuthAuthenticator extends AbstractFormLoginAuthenticator
+class LoginAuthAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -64,13 +64,12 @@ class AdminAuthAuthenticator extends AbstractFormLoginAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -92,7 +91,7 @@ class AdminAuthAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
     }
 
     protected function getLoginUrl()

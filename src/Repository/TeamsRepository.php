@@ -19,6 +19,35 @@ class TeamsRepository extends ServiceEntityRepository
         parent::__construct($registry, Teams::class);
     }
 
+    /**
+     * @return array
+     */
+    public function getTeams(): array
+    {
+        $query = $this->createQueryBuilder('teams');
+        $query
+            ->select(
+                'teams'
+            );
+
+        return $query->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+
+    public function getTeamById(int $id): array
+    {
+        $query = $this->createQueryBuilder('teams');
+        $query
+            ->select('teams')
+            ->where($query->expr()->orX($query->expr()->eq('teams.id', $id)));
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     // /**
     //  * @return Teams[] Returns an array of Teams objects
     //  */

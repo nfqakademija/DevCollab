@@ -19,6 +19,20 @@ class TeamPointsRepository extends ServiceEntityRepository
         parent::__construct($registry, TeamPoints::class);
     }
 
+    public function getTopTen()
+    {
+        $query = $this->createQueryBuilder('p');
+        $query
+            ->select(
+                'p.points',
+                'name'
+            )
+            ->join('p.team', 'name')
+            ->setMaxResults(5)
+            ->orderBy('p.points', 'ASC');
+
+        return $query->getQuery()->getArrayResult();
+    }
     // /**
     //  * @return TeamPoints[] Returns an array of TeamPoints objects
     //  */

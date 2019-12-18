@@ -1,0 +1,21 @@
+easy_admin:
+  entities:
+    Teams:
+      class: App\Entity\Teams
+      label: 'Teams'
+      list:
+        title: "%%entity_label%% List"
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        fields:
+          - id
+          - { property: 'id', label: 'ID' }
+          - { property: 'name', label: 'Team Name' }
+          - { property: 'github_repo', label: 'Github Repository' }
+      form:
+        title: "Create Project"
+        fields:
+          - { property: 'name', label: 'Team Name' }
+          - { property: 'github_repo', label: 'Github Repository' }

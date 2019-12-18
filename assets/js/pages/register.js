@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
+import * as ROUTES from "../constants/routes"
 import { Particles } from "../components";
 
 const CLASSES = {
@@ -23,7 +24,7 @@ const CLASSES = {
 
 const { main, container, form, loginLink } = CLASSES;
 
-const RegisterPage = ({ history, handleSuccesfulAuth }) => {
+const RegisterPage = ({ history, handleAuth }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,34 +50,33 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    let userJson = {
-      security: {
-        credentials: {
+    axios
+      .post(
+        "security/registration",
+        {
           username,
           email,
           password,
           passwordConfirmation
-        }
-      }
-    };
-
-    axios
-      .post("/user/register", userJson)
+        },
+        { withCredentials: true }
+      )
       .then(res => {
-        if (res.status === 201 && res.statusText === "CREATED") {
-          handleSuccesfulAuth(res.data);
-          history.push("/");
+        if (res.status === 201) {
+          handleAuth(res.data);
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("user", JSON.stringify(res.data));
+          history.push(ROUTES.HOME);
+          window.location.reload(true);
         } else {
-          setErrors("There was a prolblem with your form. Please try again.");
+          const errors = res.data;
+          setErrors(errors);
         }
       })
       .catch(err => {
-        setErrors("There was a prolblem with your form. Please try again.");
         console.log(err);
       });
   };
-
   return (
     <div className={main}>
       <div className={container} style={{ zIndex: 2 }}>
@@ -154,4 +154,4 @@ const RegisterPage = ({ history, handleSuccesfulAuth }) => {
   );
 };
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

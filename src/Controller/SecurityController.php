@@ -17,6 +17,12 @@ class SecurityController extends AbstractController
     {
         $user = $this->getUser();
 
+        if ($user->getTeam() === null) {
+            $team = $user->getTeam();
+        } else {
+            $team = $user->getTeam()->getId();
+        }
+
         return $this->json([
             'id' => $user->getId(),
             'name' => $user->getName(),
@@ -26,7 +32,7 @@ class SecurityController extends AbstractController
             'location' => $user->getLocation(),
             'github_username' => $user->getGithubUsername(),
             'short_description' => $user->getShortDescription(),
-            'team' => $user->getTeam()->getId(),
+            'team' => $team,
             'skills' => $user->getSkills(),
             'roles' => $user->getRoles(),
         ]);

@@ -1,0 +1,19 @@
+easy_admin:
+  entities:
+    TeamsPoints:
+      class: App\Entity\teamPoints
+      label: 'Teams Points'
+      list:
+        title: "%%entity_label%%"
+        actions:
+          - { name: edit, icon: pencil, label: ''}
+          - { name: show, icon: eye, label: '' }
+          - { name: delete, icon: eraser, label: '' }
+        fields:
+          - id
+          - { property: 'team_id', label: 'Team ID' }
+          - { property: 'points', label: 'Points' }
+      form:
+        title: "Add Teams"
+        fields:
+          - { property: 'points', label: 'Points' }

@@ -1,31 +1,33 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import AppProvider from "./context";
+import { UserProvider } from "./context";
 import "../css/app.css";
 import {
-  HomePage,
+  LandingPage,
   LoginPage,
   RegisterPage,
-  UserHomepage,
+  HomePage,
   ProfilePage,
   ScoreboardPage
 } from "./pages";
-import { Layout } from "./components";
+import { MainLayout } from "./components";
+import * as ROUTES from "./constants/routes"
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      isUserLoggedIn: localStorage.getItem("isLoggedIn")
+      isUserLoggedIn: localStorage.getItem("isLoggedIn"),
+      user: JSON.parse(localStorage.getItem("user"))
     };
 
-    this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
   }
 
-  //TODO -> update once backend login/registration is working
-  handleSuccesfulAuth(data) {
+  handleAuth(data) {
     this.setState({
-      isUserLoggedIn: true
+      isUserLoggedIn: true,
+      user: data
     });
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("user", JSON.stringify(data));
@@ -33,51 +35,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppProvider>
-        <Layout isUserLoggedIn={this.state.isUserLoggedIn}>
+      <UserProvider value={this.state.user}>
+        <MainLayout isUserLoggedIn={this.state.isUserLoggedIn}>
           <Switch>
-            {!this.state.isUserLoggedIn ? (
-              <Route exact path="/" component={HomePage} />
-            ) : (
-              <Route
-                exact
-                path="/"
-                render={props => <UserHomepage {...props} />}
-              />
-            )}
-            <Route
-              exact
-              path="/login"
-              render={props => (
-                <LoginPage
-                  {...props}
-                  handleSuccesfulAuth={this.handleSuccesfulAuth}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/register"
-              render={props => (
-                <RegisterPage
-                  {...props}
-                  handleSuccesfulAuth={this.handleSuccesfulAuth}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/profile"
-              render={props => <ProfilePage {...props} />}
-            />
-            <Route
-              exact
-              path="/scoreboard"
-              render={props => <ScoreboardPage {...props} />}
-            />
+            <Route exact path={ROUTES.LANDING} component={LandingPage} />
+            <Route exact path={ROUTES.HOME} component={HomePage} />
+            <Route exact path={ROUTES.PROFILE} render={() => (<ProfilePage handleAuth={this.handleAuth}/>)} />
+            <Route exact path={ROUTES.SCOREBOARD} component={ScoreboardPage} />
+            <Route exact path={ROUTES.LOGIN} render={props => (<LoginPage {...props} handleAuth={this.handleAuth}/>)}/>
+            <Route exact path={ROUTES.REGISTER} render={props => <RegisterPage {...props} handleAuth={this.handleAuth}/>}/>
           </Switch>
-        </Layout>
-      </AppProvider>
+        </MainLayout>
+      </UserProvider>
     );
   }
 }

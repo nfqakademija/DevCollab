@@ -52,7 +52,7 @@ const RegisterPage = ({ history, handleAuth }) => {
     e.preventDefault();
     axios
       .post(
-        "/security/registration",
+        "security/registration",
         {
           username,
           email,
@@ -63,11 +63,11 @@ const RegisterPage = ({ history, handleAuth }) => {
       )
       .then(res => {
         if (res.status === 201) {
-          handleAuth(res.data);
-          localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("user", JSON.stringify(res.data));
-          history.push(ROUTES.HOME);
-          window.location.reload(true);
+          // handleAuth(res.data);
+          // localStorage.setItem("isLoggedIn", true);
+          // localStorage.setItem("user", JSON.stringify(res.data));
+          alert("Registration successful, Login now");
+          history.push(ROUTES.LOGIN);
         } else {
           const errors = res.data;
           setErrors(errors);

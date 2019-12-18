@@ -137,10 +137,31 @@ class TeamController extends AbstractFOSRestController
     {
         $userId = json_decode($request->getContent(), true);
         $userId = $userId['id'];
-        $teamsArray = $this->showTeams()->getContent();
-        $teamstoArray = json_decode($teamsArray, true);
-        $randomTeam = array_rand($teamstoArray, 1);
-        $firstTeamId = $teamstoArray[0]['id'];
+        $teams = $this->getDoctrine()->getRepository(User::class)->getTeamIdOfAllUsers();
+
+        $userTeam = [];
+        foreach ($teams as $key => $value) {
+            $userTeam[$key] = $value['id'];
+        }
+
+        $userCountInTeams = array_count_values($userTeam);
+
+        $fullTeams = [];
+        foreach ($userCountInTeams as $key => $value) {
+            if ($value >= 4) {
+                array_push($fullTeams, $key);
+            }
+        }
+
+        $allTeams = $this->getDoctrine()->getRepository(Teams::class)->getTeams();
+        foreach ($allTeams as $key => $value) {
+            if(in_array($value['id'], $fullTeams)){
+            unset($allTeams[$key]);
+            }
+        }
+
+        $randomTeam = array_rand($allTeams, 1);
+        $firstTeamId = $teams[0]['id'];
         $randomTeamConverted = $firstTeamId + $randomTeam;
         $entityManager = $this->getDoctrine()->getManager();
         $team = $entityManager->getRepository(Teams::class)->find($randomTeamConverted);

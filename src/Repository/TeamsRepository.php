@@ -28,7 +28,25 @@ class TeamsRepository extends ServiceEntityRepository
         $query
             ->select(
                 'teams'
-            );
+            )
+        ;
+
+        return $query->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsersOfEachTeam(): array
+    {
+        $query = $this->createQueryBuilder('teams');
+        $query
+            ->select(
+                'teams.id',
+                'users.username'
+            )
+            ->leftJoin('teams.users', 'users')
+        ;
 
         return $query->getQuery()->getArrayResult();
     }

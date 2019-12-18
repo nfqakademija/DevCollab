@@ -12,7 +12,7 @@ class TeamsFixtures extends Fixture
     public const TEAM_REFERENCE = 'admin-teams';
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $teams = new Teams();
             $teams->setName('teamName-'.$i);
             $teams->setGithubRepo('githurepository-'.$i);

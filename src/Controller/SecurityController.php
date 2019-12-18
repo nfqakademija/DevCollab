@@ -17,14 +17,13 @@ class SecurityController extends AbstractController
     {
         $user = $this->getUser();
 
-        if($user->getTeam() === null)
-        {
-            $team =  $user->getTeam();
-        }   else {
-            $team =  $user->getTeam()->getId();
+        if ($user->getTeam() === null) {
+            $team = $user->getTeam();
+        } else {
+            $team = $user->getTeam()->getId();
         }
 
-            return $this->json([
+        return $this->json([
             'id' => $user->getId(),
             'name' => $user->getName(),
             'lastname' => $user->getLastname(),

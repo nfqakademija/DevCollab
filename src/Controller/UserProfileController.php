@@ -63,15 +63,16 @@ class UserProfileController extends AbstractController
         $form = $this->createForm(UserProfileType::class);
         $form->handleRequest($request);
         $form->submit($request->request->all());
+        $response = new Response();
         if ($form->isSubmitted() && $form->isValid()) {
+            $response->setStatusCode(Response::HTTP_OK);
             $data = $usr->updateUserProfileData($data);
         } else {
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
             $data = "Something went wrong, please try again.";
         }
         $data = $ser->serializeris($data);
-        $response = new Response();
         $response->setContent($data);
-        $response->setStatusCode(Response::HTTP_OK);
         $response->send();
     }
 }

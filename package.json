@@ -37,7 +37,7 @@
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-transform-runtime": "^7.6.2",
-        "axios": "^0.19.0",
+        "axios": "^0.21.1",
         "react-particles-js": "^2.7.0",
         "react-router-dom": "^5.1.2",
         "prop-types": "^15.7.2",

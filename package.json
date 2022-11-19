@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "@babel/preset-react": "^7.6.3",
-        "@symfony/webpack-encore": "^0.28.0",
+        "@symfony/webpack-encore": "^4.1.1",
         "autoprefixer": "^9.7.0",
         "core-js": "^3.0.0",
         "eslint-config-prettier": "^6.5.0",
